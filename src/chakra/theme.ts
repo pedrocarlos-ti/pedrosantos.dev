@@ -6,6 +6,9 @@ const theme = extendTheme({
     body: `'Red Hat Display', sans-serif`,
   },
   colors: {
+    bg: {
+      canvas: "#fcfdfe",
+    },
     melro: {
       100: "#212227",
       200: "#262626",
