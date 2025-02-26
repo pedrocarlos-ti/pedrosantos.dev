@@ -1,86 +1,166 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
+import { ProjectCard, Project } from "@/components/sections/ProjectCard";
 
 // Sample project data
-const projects = [
+const projects: Project[] = [
   {
     id: 1,
     title: "Modern E-commerce Platform",
     description:
       "A full-featured e-commerce platform built with Next.js, React, and a headless CMS. Includes product filtering, cart functionality, and secure checkout.",
+    longDescription:
+      "This e-commerce platform provides businesses with a modern, responsive online store that focuses on user experience and conversion optimization. The application is built with performance and SEO in mind, ensuring fast load times and high search engine rankings.",
     image: "/images/placeholder.svg",
-    tags: ["Next.js", "React", "TailwindCSS", "Headless CMS"],
+    tags: ["Next.js", "React", "TailwindCSS", "Headless CMS", "Stripe"],
     category: "web",
     demoUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/project",
+    features: [
+      "Advanced product filtering and search",
+      "Shopping cart with persistent storage",
+      "Secure checkout with Stripe integration",
+      "User accounts and order history",
+      "Admin dashboard for product management",
+      "SEO optimization with Next.js"
+    ],
+    techDetails: "Built with Next.js App Router, React Server Components, TailwindCSS, and integrated with a headless CMS for content management. Payment processing is handled through Stripe API.",
+    screenshots: [
+      "/images/placeholder.svg",
+      "/images/placeholder.svg"
+    ]
   },
   {
     id: 2,
     title: "AI-Powered Content Generator",
     description:
       "An application that uses AI to generate content for blogs, social media, and marketing materials. Built with React and integrated with OpenAI's API.",
+    longDescription:
+      "This tool helps content creators and marketers generate high-quality content quickly using artificial intelligence. It provides various templates and customization options to ensure the generated content matches the user's brand voice and requirements.",
     image: "/images/placeholder.svg",
-    tags: ["React", "AI", "TypeScript", "API Integration"],
+    tags: ["React", "AI", "TypeScript", "API Integration", "Node.js"],
     category: "ai",
     demoUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/project",
+    features: [
+      "Multiple content types (blog posts, social media, emails)",
+      "Customizable templates and tone settings",
+      "Content editing and refinement tools",
+      "Export to various formats (Markdown, HTML, plain text)",
+      "User history and saved templates"
+    ],
+    techDetails: "Frontend built with React and TypeScript. Backend uses Node.js with Express. Integrates with OpenAI's GPT API for content generation. User data stored in MongoDB.",
+    screenshots: [
+      "/images/placeholder.svg",
+      "/images/placeholder.svg"
+    ]
   },
   {
     id: 3,
     title: "Real-time Dashboard",
     description:
       "A real-time analytics dashboard for monitoring business metrics. Features interactive charts, data filtering, and customizable widgets.",
+    longDescription:
+      "This dashboard provides businesses with real-time insights into their key performance indicators. Users can customize their view with drag-and-drop widgets, set up alerts for important metrics, and share reports with team members.",
     image: "/images/placeholder.svg",
-    tags: ["React", "D3.js", "WebSockets", "TailwindCSS"],
+    tags: ["React", "D3.js", "WebSockets", "TailwindCSS", "Firebase"],
     category: "web",
     demoUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/project",
+    features: [
+      "Real-time data updates via WebSockets",
+      "Interactive charts and visualizations with D3.js",
+      "Customizable dashboard layouts",
+      "Data export and reporting features",
+      "User permission management",
+      "Alert system for metric thresholds"
+    ],
+    techDetails: "Frontend built with React and TailwindCSS. Data visualization using D3.js. Real-time updates via WebSockets. Authentication and data storage with Firebase.",
+    screenshots: [
+      "/images/placeholder.svg",
+      "/images/placeholder.svg"
+    ]
   },
   {
     id: 4,
     title: "Mobile Task Manager",
     description:
       "A cross-platform mobile app for task management with features like reminders, categories, and progress tracking.",
+    longDescription:
+      "This mobile application helps users organize their tasks and increase productivity. It includes features like task categorization, priority levels, reminders, and progress tracking to help users stay on top of their responsibilities.",
     image: "/images/placeholder.svg",
-    tags: ["React Native", "TypeScript", "Firebase"],
+    tags: ["React Native", "TypeScript", "Firebase", "Redux"],
     category: "mobile",
     demoUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/project",
+    features: [
+      "Task creation with categories and priority levels",
+      "Push notifications for reminders",
+      "Progress tracking and statistics",
+      "Calendar integration",
+      "Dark/light mode support",
+      "Offline functionality with data sync"
+    ],
+    techDetails: "Built with React Native and TypeScript for cross-platform compatibility. State management with Redux. Backend and authentication services provided by Firebase.",
+    screenshots: [
+      "/images/placeholder.svg",
+      "/images/placeholder.svg"
+    ]
   },
   {
     id: 5,
     title: "AI Image Recognition Tool",
     description:
       "A tool that uses machine learning to identify objects in images and provide detailed information about them.",
+    longDescription:
+      "This application leverages machine learning to analyze images and identify objects, people, scenes, and text within them. It provides detailed information about the recognized elements and allows users to search their image library based on content.",
     image: "/images/placeholder.svg",
-    tags: ["React", "TensorFlow.js", "AI", "Next.js"],
+    tags: ["React", "TensorFlow.js", "AI", "Next.js", "WebAssembly"],
     category: "ai",
     demoUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/project",
+    features: [
+      "Object and scene recognition in images",
+      "Face detection and recognition",
+      "Text extraction from images (OCR)",
+      "Content-based image search",
+      "Batch processing capabilities",
+      "Privacy-focused (processing happens client-side)"
+    ],
+    techDetails: "Built with Next.js and React. Image processing and recognition powered by TensorFlow.js running in the browser. Performance optimizations with WebAssembly for compute-intensive tasks.",
+    screenshots: [
+      "/images/placeholder.svg",
+      "/images/placeholder.svg"
+    ]
   },
   {
     id: 6,
     title: "Personal Finance Tracker",
     description:
       "A web application for tracking personal finances, including expense categorization, budget planning, and visual reports.",
+    longDescription:
+      "This finance tracker helps users manage their personal finances by tracking income, expenses, and investments. It provides visual reports and insights to help users understand their spending habits and make better financial decisions.",
     image: "/images/placeholder.svg",
-    tags: ["React", "Chart.js", "Firebase", "TailwindCSS"],
+    tags: ["React", "Chart.js", "Firebase", "TailwindCSS", "PWA"],
     category: "web",
     demoUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/project",
+    features: [
+      "Income and expense tracking with categories",
+      "Budget planning and monitoring",
+      "Visual reports and spending analysis",
+      "Financial goal setting and tracking",
+      "Recurring transaction management",
+      "Data import/export capabilities"
+    ],
+    techDetails: "Frontend built with React and TailwindCSS. Data visualization with Chart.js. Backend and authentication with Firebase. Implemented as a Progressive Web App (PWA) for offline capabilities.",
+    screenshots: [
+      "/images/placeholder.svg",
+      "/images/placeholder.svg"
+    ]
   },
 ];
 
@@ -138,72 +218,7 @@ export default function ProjectsPage() {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         {filteredProjects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 * index }}
-            whileHover={{ y: -5 }}
-            className="group"
-          >
-            <Card className="h-full overflow-hidden border shadow-sm transition-all hover:shadow-md">
-              <div className="relative aspect-video w-full overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <CardHeader className="pb-2">
-                <CardTitle className="line-clamp-1 text-xl">
-                  {project.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-between gap-4 pt-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  asChild
-                  className="rounded-full"
-                >
-                  <Link
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Github className="mr-2 h-4 w-4" />
-                    Code
-                  </Link>
-                </Button>
-                <Button size="sm" asChild className="rounded-full">
-                  <Link
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Live Demo
-                    <ArrowUpRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          </motion.div>
+          <ProjectCard key={project.id} project={project} index={index} />
         ))}
       </motion.div>
     </div>

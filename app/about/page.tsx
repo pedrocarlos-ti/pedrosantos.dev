@@ -9,6 +9,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { TechStack } from "@/components/sections/TechStack";
+import { Timeline } from "@/components/sections/Timeline";
+import { Briefcase, GraduationCap, Award } from "lucide-react";
 
 const skills = [
   { name: "React", icon: "⚛️", level: 90 },
@@ -42,6 +45,54 @@ const experiences = [
     period: "2016 - 2018",
     description:
       "Started my career building websites and learning modern frontend technologies.",
+  },
+];
+
+const timelineItems = [
+  {
+    title: "Senior Frontend Developer",
+    subtitle: "Tech Company",
+    date: "2021 - Present",
+    description:
+      "Leading frontend development for multiple projects, implementing modern React applications with Next.js, TypeScript, and TailwindCSS. Mentoring junior developers and establishing best practices for the team.",
+    tags: ["React", "Next.js", "TypeScript", "TailwindCSS", "Team Leadership"],
+    icon: <Briefcase className="h-4 w-4 text-primary" />,
+  },
+  {
+    title: "Frontend Developer",
+    subtitle: "Digital Agency",
+    date: "2018 - 2021",
+    description:
+      "Developed responsive web applications and collaborated with designers to create engaging user experiences. Worked on projects for clients in various industries including e-commerce, finance, and healthcare.",
+    tags: ["React", "JavaScript", "CSS", "UI/UX", "Client Projects"],
+    icon: <Briefcase className="h-4 w-4 text-primary" />,
+  },
+  {
+    title: "Junior Web Developer",
+    subtitle: "Startup",
+    date: "2016 - 2018",
+    description:
+      "Started my career building websites and learning modern frontend technologies. Contributed to the development of the company's main product and gained experience in agile methodologies.",
+    tags: ["HTML", "CSS", "JavaScript", "jQuery", "Responsive Design"],
+    icon: <Briefcase className="h-4 w-4 text-primary" />,
+  },
+  {
+    title: "Bachelor's Degree in Computer Science",
+    subtitle: "University Name",
+    date: "2012 - 2016",
+    description:
+      "Studied computer science with a focus on web development and user interface design. Participated in various hackathons and coding competitions.",
+    tags: ["Computer Science", "Web Development", "UI Design"],
+    icon: <GraduationCap className="h-4 w-4 text-primary" />,
+  },
+  {
+    title: "Web Development Certification",
+    subtitle: "Online Learning Platform",
+    date: "2015",
+    description:
+      "Completed an intensive web development bootcamp, learning modern frontend and backend technologies.",
+    tags: ["Full Stack", "Certification", "Bootcamp"],
+    icon: <Award className="h-4 w-4 text-primary" />,
   },
 ];
 
@@ -129,6 +180,16 @@ export default function AboutPage() {
           </div>
         </motion.div>
       </div>
+
+      {/* Career Timeline Section */}
+      <Timeline 
+        items={timelineItems} 
+        title="My Journey" 
+        subtitle="A timeline of my professional career and education" 
+      />
+
+      {/* Tech Stack Section */}
+      <TechStack />
 
       <motion.div
         className="mt-20"
