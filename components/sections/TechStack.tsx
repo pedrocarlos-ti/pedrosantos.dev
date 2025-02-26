@@ -112,7 +112,7 @@ export function TechStack() {
 
   return (
     <section className="py-12">
-      <div className="container">
+      <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
