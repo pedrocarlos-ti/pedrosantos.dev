@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="container px-4 py-12 md:py-20">
+    <div className="container px-4 py-12 md:py-20 mx-auto">
       {/* Hero Section */}
       <motion.div
         className="mx-auto mb-16 flex max-w-3xl flex-col items-center text-center"
