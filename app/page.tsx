@@ -8,53 +8,55 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="container flex flex-col items-center justify-center px-4 py-16 md:py-24">
+    <div className="container px-4 py-12 md:py-20">
+      {/* Hero Section */}
       <motion.div
-        className="flex max-w-3xl flex-col items-center text-center"
+        className="mx-auto mb-16 flex max-w-3xl flex-col items-center text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <motion.h1
-          className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+          className="mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl md:text-6xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Frontend Developer specializing in{" "}
-          <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-            React and AI
-          </span>
+          Frontend Developer specializing in React and AI
         </motion.h1>
 
         <motion.p
-          className="mb-8 text-xl text-muted-foreground"
+          className="mb-8 text-lg text-muted-foreground md:text-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           Hello, I&apos;m Pedro Santos 👋, a frontend developer with a passion
           for creating modern, responsive, and user-friendly web applications
-          with cutting-edge technologies. Let&apos;s bring your ideas to life
-          with clean code and beautiful design.
+          with cutting-edge technologies.
         </motion.p>
 
         <motion.div
-          className="mb-8 flex flex-col justify-center gap-4 sm:flex-row"
+          className="mb-10 flex flex-col justify-center gap-4 sm:flex-row"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="rounded-full px-6">
             <Link href="/projects">View Projects</Link>
           </Button>
-          <Button variant="outline" asChild size="lg">
+          <Button
+            variant="outline"
+            asChild
+            size="lg"
+            className="rounded-full px-6"
+          >
             <Link href="/contact">Contact Me</Link>
           </Button>
         </motion.div>
 
         <motion.div
-          className="flex justify-center space-x-4"
+          className="flex justify-center space-x-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
@@ -63,7 +65,7 @@ export default function Home() {
             href="https://github.com/yourusername"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            className="rounded-full bg-muted p-3 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
           >
             <Github className="h-5 w-5" />
             <span className="sr-only">GitHub</span>
@@ -72,7 +74,7 @@ export default function Home() {
             href="https://linkedin.com/in/yourusername"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            className="rounded-full bg-muted p-3 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
           >
             <Linkedin className="h-5 w-5" />
             <span className="sr-only">LinkedIn</span>
@@ -81,7 +83,7 @@ export default function Home() {
             href="https://twitter.com/yourusername"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            className="rounded-full bg-muted p-3 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
           >
             <Twitter className="h-5 w-5" />
             <span className="sr-only">Twitter</span>
@@ -89,20 +91,21 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
+      {/* Projects Section */}
       <motion.div
-        className="mt-24 w-full max-w-5xl"
+        className="mx-auto mt-16 w-full max-w-6xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
-        <h2 className="mb-8 text-center text-3xl font-bold">
+        <h2 className="mb-10 text-center text-3xl font-bold">
           Featured Projects
         </h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (
             <motion.div
               key={i}
-              className="group relative overflow-hidden rounded-lg border bg-card text-card-foreground shadow transition-all hover:shadow-lg"
+              className="group relative overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md"
               whileHover={{ y: -5 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -117,24 +120,24 @@ export default function Home() {
                 />
               </div>
               <div className="p-6">
-                <h3 className="mb-2 text-xl font-bold">Project {i}</h3>
+                <h3 className="mb-2 text-xl font-semibold">Project {i}</h3>
                 <p className="mb-4 text-sm text-muted-foreground">
                   A brief description of this amazing project and the
                   technologies used.
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="flex space-x-2">
-                    <div className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-100">
+                  <div className="flex flex-wrap gap-2">
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                       React
-                    </div>
-                    <div className="rounded-full bg-purple-100 px-2 py-1 text-xs font-medium text-purple-800 dark:bg-purple-900 dark:text-purple-100">
+                    </span>
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                       Next.js
-                    </div>
+                    </span>
                   </div>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="group-hover:translate-x-1 transition-transform"
+                    className="transition-transform group-hover:translate-x-1"
                   >
                     View <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
@@ -143,8 +146,8 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
-        <div className="mt-8 text-center">
-          <Button variant="outline" asChild>
+        <div className="mt-10 text-center">
+          <Button variant="outline" asChild className="rounded-full px-6">
             <Link href="/projects">
               View All Projects <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

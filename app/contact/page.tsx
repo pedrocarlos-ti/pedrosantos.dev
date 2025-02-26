@@ -55,12 +55,12 @@ export default function ContactPage() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // In a real application, you would send this data to your server
     console.log(values);
-    toast.success("Message sent successfully! I&apos;ll get back to you soon.");
+    toast.success("Message sent successfully! I'll get back to you soon.");
     form.reset();
   }
 
   return (
-    <div className="container py-12 md:py-16">
+    <div className="container py-12 md:py-20">
       <motion.div
         className="mb-16 text-center"
         initial={{ opacity: 0, y: 20 }}
@@ -68,20 +68,20 @@ export default function ContactPage() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="mb-4 text-4xl font-bold">Contact Me</h1>
-        <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
           Have a project in mind or want to chat? Feel free to reach out!
         </p>
       </motion.div>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Card>
+          <Card className="h-full border shadow-sm">
             <CardHeader>
-              <CardTitle>Send Me a Message</CardTitle>
+              <CardTitle className="text-2xl">Send Me a Message</CardTitle>
               <CardDescription>
                 Fill out the form below and I&apos;ll get back to you as soon as
                 possible.
@@ -100,7 +100,11 @@ export default function ContactPage() {
                       <FormItem>
                         <FormLabel>Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your name" {...field} />
+                          <Input
+                            placeholder="Your name"
+                            {...field}
+                            className="rounded-md"
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -116,6 +120,7 @@ export default function ContactPage() {
                           <Input
                             placeholder="your.email@example.com"
                             {...field}
+                            className="rounded-md"
                           />
                         </FormControl>
                         <FormMessage />
@@ -132,6 +137,7 @@ export default function ContactPage() {
                           <Input
                             placeholder="What is this regarding?"
                             {...field}
+                            className="rounded-md"
                           />
                         </FormControl>
                         <FormMessage />
@@ -147,7 +153,7 @@ export default function ContactPage() {
                         <FormControl>
                           <Textarea
                             placeholder="Your message here..."
-                            className="min-h-32 resize-none"
+                            className="min-h-32 resize-none rounded-md"
                             {...field}
                           />
                         </FormControl>
@@ -155,7 +161,7 @@ export default function ContactPage() {
                       </FormItem>
                     )}
                   />
-                  <Button type="submit" className="w-full">
+                  <Button type="submit" className="w-full rounded-full">
                     Send Message
                   </Button>
                 </form>
@@ -170,16 +176,18 @@ export default function ContactPage() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col gap-6"
         >
-          <Card>
+          <Card className="border shadow-sm">
             <CardHeader>
-              <CardTitle>Contact Information</CardTitle>
+              <CardTitle className="text-xl">Contact Information</CardTitle>
               <CardDescription>
                 Here are the ways you can reach me directly.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-primary" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                  <Mail className="h-5 w-5 text-primary" />
+                </div>
                 <a
                   href="mailto:your.email@example.com"
                   className="text-muted-foreground hover:text-foreground hover:underline"
@@ -188,11 +196,15 @@ export default function ContactPage() {
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-primary" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                  <Phone className="h-5 w-5 text-primary" />
+                </div>
                 <span className="text-muted-foreground">+1 (555) 123-4567</span>
               </div>
               <div className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-primary" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                  <MapPin className="h-5 w-5 text-primary" />
+                </div>
                 <span className="text-muted-foreground">
                   San Francisco, CA, USA
                 </span>
@@ -200,20 +212,20 @@ export default function ContactPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border shadow-sm">
             <CardHeader>
-              <CardTitle>Connect With Me</CardTitle>
+              <CardTitle className="text-xl">Connect With Me</CardTitle>
               <CardDescription>
                 Follow me on social media or check out my work.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-wrap gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <Link
                   href="https://github.com/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-lg border p-3 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                  className="flex items-center gap-3 rounded-lg border p-4 text-muted-foreground transition-colors hover:border-primary/50 hover:bg-primary/5 hover:text-primary"
                 >
                   <Github className="h-5 w-5" />
                   <span>GitHub</span>
@@ -222,7 +234,7 @@ export default function ContactPage() {
                   href="https://linkedin.com/in/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-lg border p-3 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                  className="flex items-center gap-3 rounded-lg border p-4 text-muted-foreground transition-colors hover:border-primary/50 hover:bg-primary/5 hover:text-primary"
                 >
                   <Linkedin className="h-5 w-5" />
                   <span>LinkedIn</span>
@@ -231,7 +243,7 @@ export default function ContactPage() {
                   href="https://twitter.com/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-lg border p-3 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                  className="flex items-center gap-3 rounded-lg border p-4 text-muted-foreground transition-colors hover:border-primary/50 hover:bg-primary/5 hover:text-primary"
                 >
                   <Twitter className="h-5 w-5" />
                   <span>Twitter</span>

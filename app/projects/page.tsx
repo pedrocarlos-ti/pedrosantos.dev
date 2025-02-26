@@ -100,7 +100,7 @@ export default function ProjectsPage() {
       : projects.filter((project) => project.category === activeCategory);
 
   return (
-    <div className="container py-12 md:py-16">
+    <div className="container py-12 md:py-20">
       <motion.div
         className="mb-16 text-center"
         initial={{ opacity: 0, y: 20 }}
@@ -108,13 +108,13 @@ export default function ProjectsPage() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="mb-4 text-4xl font-bold">My Projects</h1>
-        <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
           A showcase of my recent work, side projects, and experiments
         </p>
       </motion.div>
 
       <motion.div
-        className="mb-12 flex flex-wrap justify-center gap-2"
+        className="mb-12 flex flex-wrap justify-center gap-3"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
@@ -124,7 +124,7 @@ export default function ProjectsPage() {
             key={category.id}
             variant={activeCategory === category.id ? "default" : "outline"}
             onClick={() => setActiveCategory(category.id)}
-            className="min-w-24"
+            className="min-w-24 rounded-full px-6"
           >
             {category.name}
           </Button>
@@ -146,7 +146,7 @@ export default function ProjectsPage() {
             whileHover={{ y: -5 }}
             className="group"
           >
-            <Card className="h-full overflow-hidden transition-all hover:shadow-lg">
+            <Card className="h-full overflow-hidden border shadow-sm transition-all hover:shadow-md">
               <div className="relative aspect-video w-full overflow-hidden">
                 <Image
                   src={project.image}
@@ -155,11 +155,13 @@ export default function ProjectsPage() {
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <CardHeader>
-                <CardTitle>{project.title}</CardTitle>
+              <CardHeader className="pb-2">
+                <CardTitle className="line-clamp-1 text-xl">
+                  {project.title}
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 text-muted-foreground">
+                <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -173,8 +175,13 @@ export default function ProjectsPage() {
                   ))}
                 </div>
               </CardContent>
-              <CardFooter className="flex justify-between">
-                <Button variant="outline" size="sm" asChild>
+              <CardFooter className="flex justify-between gap-4 pt-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="rounded-full"
+                >
                   <Link
                     href={project.githubUrl}
                     target="_blank"
@@ -184,7 +191,7 @@ export default function ProjectsPage() {
                     Code
                   </Link>
                 </Button>
-                <Button size="sm" asChild>
+                <Button size="sm" asChild className="rounded-full">
                   <Link
                     href={project.demoUrl}
                     target="_blank"
