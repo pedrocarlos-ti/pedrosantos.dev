@@ -1,101 +1,156 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="container flex flex-col items-center justify-center px-4 py-16 md:py-24">
+      <motion.div
+        className="flex max-w-3xl flex-col items-center text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.h1
+          className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Frontend Developer specializing in{" "}
+          <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            React and AI
+          </span>
+        </motion.h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+        <motion.p
+          className="mb-8 text-xl text-muted-foreground"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          Hello, I&apos;m Pedro Santos 👋, a frontend developer with a passion
+          for creating modern, responsive, and user-friendly web applications
+          with cutting-edge technologies. Let&apos;s bring your ideas to life
+          with clean code and beautiful design.
+        </motion.p>
+
+        <motion.div
+          className="mb-8 flex flex-col justify-center gap-4 sm:flex-row"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <Button asChild size="lg">
+            <Link href="/projects">View Projects</Link>
+          </Button>
+          <Button variant="outline" asChild size="lg">
+            <Link href="/contact">Contact Me</Link>
+          </Button>
+        </motion.div>
+
+        <motion.div
+          className="flex justify-center space-x-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <Link
+            href="https://github.com/yourusername"
             target="_blank"
             rel="noopener noreferrer"
+            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            <Github className="h-5 w-5" />
+            <span className="sr-only">GitHub</span>
+          </Link>
+          <Link
+            href="https://linkedin.com/in/yourusername"
             target="_blank"
             rel="noopener noreferrer"
+            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
           >
-            Read our docs
-          </a>
+            <Linkedin className="h-5 w-5" />
+            <span className="sr-only">LinkedIn</span>
+          </Link>
+          <Link
+            href="https://twitter.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            <Twitter className="h-5 w-5" />
+            <span className="sr-only">Twitter</span>
+          </Link>
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        className="mt-24 w-full max-w-5xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+      >
+        <h2 className="mb-8 text-center text-3xl font-bold">
+          Featured Projects
+        </h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3].map((i) => (
+            <motion.div
+              key={i}
+              className="group relative overflow-hidden rounded-lg border bg-card text-card-foreground shadow transition-all hover:shadow-lg"
+              whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 * i }}
+            >
+              <div className="relative aspect-video w-full overflow-hidden">
+                <Image
+                  src="/images/placeholder.svg"
+                  alt={`Project ${i}`}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="mb-2 text-xl font-bold">Project {i}</h3>
+                <p className="mb-4 text-sm text-muted-foreground">
+                  A brief description of this amazing project and the
+                  technologies used.
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex space-x-2">
+                    <div className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-100">
+                      React
+                    </div>
+                    <div className="rounded-full bg-purple-100 px-2 py-1 text-xs font-medium text-purple-800 dark:bg-purple-900 dark:text-purple-100">
+                      Next.js
+                    </div>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="group-hover:translate-x-1 transition-transform"
+                  >
+                    View <ArrowRight className="ml-1 h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="mt-8 text-center">
+          <Button variant="outline" asChild>
+            <Link href="/projects">
+              View All Projects <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </motion.div>
     </div>
   );
 }
