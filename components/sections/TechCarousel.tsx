@@ -154,15 +154,7 @@ export function TechCarousel() {
   }
 
   // Item component to reuse for each tech item
-  const TechItem = ({
-    item,
-    index,
-    isSecondRow = false,
-  }: {
-    item: TechItem;
-    index: number;
-    isSecondRow?: boolean;
-  }) => (
+  const TechItem = ({ item, index }: { item: TechItem; index: number }) => (
     <motion.div
       key={`${item.name}-${index}`}
       className="flex flex-col items-center mx-4"
@@ -237,7 +229,6 @@ export function TechCarousel() {
               key={`row2-${tech.name}-${index}`}
               item={tech}
               index={index}
-              isSecondRow
             />
           ))}
         </motion.div>

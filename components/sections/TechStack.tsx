@@ -3,7 +3,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 type TechItem = {
   name: string;
@@ -17,49 +21,56 @@ const techStack: TechItem[] = [
   {
     name: "React",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    description: "Building interactive UIs with React and its ecosystem including hooks, context, and state management solutions.",
+    description:
+      "Building interactive UIs with React and its ecosystem including hooks, context, and state management solutions.",
     proficiency: 95,
     category: "frontend",
   },
   {
     name: "Next.js",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    description: "Creating performant, SEO-friendly applications with server-side rendering and static site generation.",
+    description:
+      "Creating performant, SEO-friendly applications with server-side rendering and static site generation.",
     proficiency: 90,
     category: "frontend",
   },
   {
     name: "JavaScript",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-    description: "Extensive experience with modern JavaScript (ES6+) features and patterns.",
+    description:
+      "Extensive experience with modern JavaScript (ES6+) features and patterns.",
     proficiency: 95,
     category: "frontend",
   },
   {
     name: "TypeScript",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-    description: "Building type-safe applications with TypeScript to improve code quality and developer experience.",
+    description:
+      "Building type-safe applications with TypeScript to improve code quality and developer experience.",
     proficiency: 90,
     category: "frontend",
   },
   {
     name: "HTML",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-    description: "Crafting semantic, accessible HTML markup for better SEO and user experience.",
+    description:
+      "Crafting semantic, accessible HTML markup for better SEO and user experience.",
     proficiency: 95,
     category: "frontend",
   },
   {
     name: "CSS",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-    description: "Creating responsive layouts and animations with modern CSS techniques.",
+    description:
+      "Creating responsive layouts and animations with modern CSS techniques.",
     proficiency: 90,
     category: "frontend",
   },
   {
     name: "Tailwind CSS",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
-    description: "Rapidly building custom designs with utility-first CSS framework.",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+    description:
+      "Rapidly building custom designs with utility-first CSS framework.",
     proficiency: 95,
     category: "frontend",
   },
@@ -73,13 +84,14 @@ const techStack: TechItem[] = [
   {
     name: "React Native",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    description: "Developing cross-platform mobile applications with React Native.",
+    description:
+      "Developing cross-platform mobile applications with React Native.",
     proficiency: 80,
     category: "mobile",
   },
   {
     name: "Framer Motion",
-    icon: "https://seeklogo.com/images/F/framer-motion-logo-DA1E33CAA1-seeklogo.com.png",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
     description: "Creating fluid animations and interactive UI components.",
     proficiency: 85,
     category: "design",
@@ -121,7 +133,8 @@ export function TechStack() {
         >
           <h2 className="mb-4 text-3xl font-bold">Technical Expertise</h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
-            Technologies and tools I work with to build modern, responsive, and user-friendly applications
+            Technologies and tools I work with to build modern, responsive, and
+            user-friendly applications
           </p>
         </motion.div>
 
@@ -172,17 +185,23 @@ export function TechStack() {
                         className="h-full w-full object-contain"
                       />
                     </div>
-                    <h3 className="text-center text-sm font-medium">{tech.name}</h3>
+                    <h3 className="text-center text-sm font-medium">
+                      {tech.name}
+                    </h3>
                   </div>
                 </HoverCardTrigger>
                 <HoverCardContent className="w-80">
                   <div className="space-y-2">
                     <h4 className="text-lg font-semibold">{tech.name}</h4>
-                    <p className="text-sm text-muted-foreground">{tech.description}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {tech.description}
+                    </p>
                     <div className="pt-2">
                       <div className="mb-1 flex items-center justify-between">
                         <span className="text-xs font-medium">Proficiency</span>
-                        <span className="text-xs font-medium">{tech.proficiency}%</span>
+                        <span className="text-xs font-medium">
+                          {tech.proficiency}%
+                        </span>
                       </div>
                       <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
                         <div
