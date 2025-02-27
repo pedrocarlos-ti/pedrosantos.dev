@@ -119,7 +119,7 @@ export function BlogPreview({
           </motion.div>
         )}
 
-        <div className={`grid gap-8 ${layout === "grid" ? "sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}>
+        <div className={`grid gap-4 md:gap-8 ${layout === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}>
           {displayPosts.map((post, index) => (
             <motion.div
               key={post.id}
@@ -136,7 +136,7 @@ export function BlogPreview({
                     fill
                     className="object-cover transition-transform duration-300 hover:scale-105"
                   />
-                  <div className="absolute right-3 top-3 rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">
+                  <div className="absolute right-3 top-3 rounded-full bg-primary px-2 py-1 text-xs font-medium text-primary-foreground">
                     {post.category}
                   </div>
                 </div>

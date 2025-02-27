@@ -172,43 +172,55 @@ export default function BlogPage() {
       : blogPosts.filter((post) => post.category === activeCategory);
 
   return (
-    <div className="container py-12 md:py-20">
-      <motion.div
-        className="mb-16 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="mb-4 text-4xl font-bold">Blog</h1>
-        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-          Thoughts, tutorials, and insights on web development, design, and technology
-        </p>
-      </motion.div>
+    <div className="relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-muted/50 to-transparent opacity-30" />
+      
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-20">
+        <motion.div
+          className="mb-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="mb-4 text-4xl font-bold">Blog</h1>
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            Thoughts, tutorials, and insights on web development, design, and technology
+          </p>
+        </motion.div>
 
-      <motion.div
-        className="mb-12 flex flex-wrap justify-center gap-3"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        {categories.map((category) => (
-          <Button
-            key={category.id}
-            variant={activeCategory === category.id ? "default" : "outline"}
-            onClick={() => setActiveCategory(category.id)}
-            className="min-w-24 rounded-full px-6"
-          >
-            {category.name}
-          </Button>
-        ))}
-      </motion.div>
+        <motion.div
+          className="mb-12 flex flex-wrap justify-center gap-2 md:gap-3"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          {categories.map((category) => (
+            <Button
+              key={category.id}
+              variant={activeCategory === category.id ? "default" : "outline"}
+              onClick={() => setActiveCategory(category.id)}
+              className="min-w-[90px] text-sm md:min-w-24 md:text-base rounded-full px-3 md:px-6"
+            >
+              {category.name}
+            </Button>
+          ))}
+        </motion.div>
 
-      <BlogPreview 
-        posts={filteredPosts} 
-        showHeading={false} 
-        showViewAllButton={false} 
-        layout="grid"
-      />
+        <motion.div
+          className="mb-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <BlogPreview 
+            posts={filteredPosts} 
+            showHeading={false} 
+            showViewAllButton={false} 
+            layout="grid"
+          />
+        </motion.div>
+      </div>
     </div>
   );
 }

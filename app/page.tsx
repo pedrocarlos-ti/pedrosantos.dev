@@ -8,14 +8,15 @@ import Link from "next/link";
 import { AnimatedSphere } from "@/components/three/AnimatedSphere";
 import { TechStack } from "@/components/sections/TechStack";
 import { BlogPreview } from "@/components/sections/BlogPreview";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 
 // Sample project data
 const featuredProjects = [
   {
     id: 1,
     title: "E-commerce Platform",
-    description: "A modern e-commerce platform with product filtering, cart functionality, and payment integration.",
+    description:
+      "A modern e-commerce platform with product filtering, cart functionality, and payment integration.",
     image: "/images/placeholder.svg",
     tags: ["React", "Next.js", "TailwindCSS", "Stripe"],
     link: "/projects/e-commerce-platform",
@@ -23,7 +24,8 @@ const featuredProjects = [
   {
     id: 2,
     title: "AI Content Generator",
-    description: "An AI-powered application that generates content based on user prompts using OpenAI's GPT models.",
+    description:
+      "An AI-powered application that generates content based on user prompts using OpenAI's GPT models.",
     image: "/images/placeholder.svg",
     tags: ["React", "TypeScript", "OpenAI API", "Node.js"],
     link: "/projects/ai-content-generator",
@@ -31,7 +33,8 @@ const featuredProjects = [
   {
     id: 3,
     title: "Dashboard Analytics",
-    description: "Interactive dashboard with real-time analytics, data visualization, and customizable widgets.",
+    description:
+      "Interactive dashboard with real-time analytics, data visualization, and customizable widgets.",
     image: "/images/placeholder.svg",
     tags: ["React", "D3.js", "WebSockets", "Firebase"],
     link: "/projects/dashboard-analytics",
@@ -42,9 +45,9 @@ export default function Home() {
   return (
     <div className="relative">
       <AnimatedSphere />
-      
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden pb-20 pt-32">
+      <section className="relative overflow-hidden pb-20 pt-32 mb-20">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
             className="mx-auto flex max-w-4xl flex-col items-center text-center"
@@ -53,7 +56,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             <motion.h1
-              className="mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl"
+              className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -67,9 +70,11 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              Hello, I&apos;m <span className="font-semibold text-primary">Pedro Santos</span> 👋, a frontend developer with a passion
-              for creating modern, responsive, and user-friendly web applications
-              with cutting-edge technologies.
+              Hello, I&apos;m{" "}
+              <span className="font-semibold text-primary">Pedro Santos</span>{" "}
+              👋, a frontend developer with a passion for creating modern,
+              responsive, and user-friendly web applications with cutting-edge
+              technologies.
             </motion.p>
 
             <motion.div
@@ -78,7 +83,11 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <Button asChild size="lg" className="rounded-full px-8 py-6 text-base">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full px-8 py-6 text-base"
+              >
                 <Link href="/projects">View Projects</Link>
               </Button>
               <Button
@@ -141,7 +150,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="bg-muted/30 py-20">
+      <section className="bg-gradient-to-b from-muted/50 to-transparent py-20">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
             className="mx-auto max-w-4xl text-center"
@@ -152,9 +161,10 @@ export default function Home() {
           >
             <h2 className="mb-6 text-3xl font-bold md:text-4xl">About Me</h2>
             <p className="mb-8 text-lg text-muted-foreground">
-              I'm a frontend developer with expertise in building modern web applications
-              using React, Next.js, and TypeScript. I focus on creating intuitive user
-              interfaces and seamless user experiences with clean, maintainable code.
+              I&apos;m a frontend developer with expertise in building modern
+              web applications using React, Next.js, and TypeScript. I focus on
+              creating intuitive user interfaces and seamless user experiences
+              with clean, maintainable code.
             </p>
             <div className="flex justify-center">
               <Button asChild variant="outline" className="rounded-full">
@@ -168,14 +178,14 @@ export default function Home() {
       </section>
 
       {/* Tech Stack Section */}
-      <section className="py-20">
+      <section className="py-20 mb-20">
         <div className="container mx-auto px-4 md:px-6">
           <TechStack />
         </div>
       </section>
 
       {/* Projects Section */}
-      <section className="bg-muted/30 py-20">
+      <section className="bg-gradient-to-b from-muted/50 to-transparent py-20 mb-20">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
             className="mx-auto w-full max-w-6xl"
@@ -188,9 +198,11 @@ export default function Home() {
               Featured Projects
             </h2>
             <p className="mx-auto mb-12 max-w-2xl text-center text-muted-foreground">
-              Here are some of my recent projects. Each one was carefully crafted to solve specific problems and deliver exceptional user experiences.
+              Here are some of my recent projects. Each one was carefully
+              crafted to solve specific problems and deliver exceptional user
+              experiences.
             </p>
-            
+
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {featuredProjects.map((project, i) => (
                 <motion.div
@@ -211,7 +223,9 @@ export default function Home() {
                     />
                   </div>
                   <CardContent className="p-6">
-                    <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
+                    <h3 className="mb-2 text-xl font-semibold">
+                      {project.title}
+                    </h3>
                     <p className="mb-4 text-sm text-muted-foreground">
                       {project.description}
                     </p>
@@ -256,7 +270,7 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-        
+
       {/* Blog Preview Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">

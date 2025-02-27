@@ -6,7 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "analyze": "ANALYZE=true next build",
+    "clean": "rm -rf .next && rm -rf node_modules/.cache"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",

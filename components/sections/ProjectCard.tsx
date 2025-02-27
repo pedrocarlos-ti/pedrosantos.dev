@@ -13,7 +13,14 @@ import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export type Project = {
   id: number;
@@ -37,7 +44,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
     <>
       <motion.div
@@ -65,33 +72,39 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
               {project.description}
             </p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1 md:gap-2">
               {project.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+                  className="rounded-full bg-primary/10 px-2 md:px-3 py-1 text-xs font-medium text-primary"
                 >
                   {tag}
                 </span>
               ))}
               {project.tags.length > 3 && (
-                <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium">
+                <span className="rounded-full bg-muted px-2 md:px-3 py-1 text-xs font-medium">
                   +{project.tags.length - 3}
                 </span>
               )}
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between gap-4 pt-2">
+          <CardFooter className="flex justify-between gap-2 md:gap-4 pt-2">
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
               <DialogTrigger asChild>
-                <Button variant="ghost" size="sm" className="transition-transform">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="transition-transform"
+                >
                   Details
                   <ExternalLink className="ml-1 h-4 w-4" />
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[700px]">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl">{project.title}</DialogTitle>
+                  <DialogTitle className="text-xl md:text-2xl">
+                    {project.title}
+                  </DialogTitle>
                   <DialogDescription className="text-muted-foreground">
                     {project.description}
                   </DialogDescription>
@@ -99,11 +112,15 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 <div className="mt-4 space-y-6">
                   {project.longDescription && (
                     <div>
-                      <h3 className="mb-2 text-lg font-medium">About this project</h3>
-                      <p className="text-muted-foreground">{project.longDescription}</p>
+                      <h3 className="mb-2 text-lg font-medium">
+                        About this project
+                      </h3>
+                      <p className="text-muted-foreground">
+                        {project.longDescription}
+                      </p>
                     </div>
                   )}
-                  
+
                   {project.features && project.features.length > 0 && (
                     <div>
                       <h3 className="mb-2 text-lg font-medium">Key Features</h3>
@@ -114,14 +131,18 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                       </ul>
                     </div>
                   )}
-                  
+
                   {project.techDetails && (
                     <div>
-                      <h3 className="mb-2 text-lg font-medium">Technical Details</h3>
-                      <p className="text-muted-foreground">{project.techDetails}</p>
+                      <h3 className="mb-2 text-lg font-medium">
+                        Technical Details
+                      </h3>
+                      <p className="text-muted-foreground">
+                        {project.techDetails}
+                      </p>
                     </div>
                   )}
-                  
+
                   <div>
                     <h3 className="mb-2 text-lg font-medium">Technologies</h3>
                     <div className="flex flex-wrap gap-2">
@@ -135,13 +156,16 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                       ))}
                     </div>
                   </div>
-                  
+
                   {project.screenshots && project.screenshots.length > 0 && (
                     <div>
                       <h3 className="mb-3 text-lg font-medium">Screenshots</h3>
                       <div className="grid gap-4 sm:grid-cols-2">
                         {project.screenshots.map((screenshot, i) => (
-                          <div key={i} className="relative aspect-video overflow-hidden rounded-md border">
+                          <div
+                            key={i}
+                            className="relative aspect-video overflow-hidden rounded-md border"
+                          >
                             <Image
                               src={screenshot}
                               alt={`${project.title} screenshot ${i + 1}`}
@@ -153,16 +177,24 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                       </div>
                     </div>
                   )}
-                  
+
                   <div className="flex justify-center gap-4 pt-4">
                     <Button asChild variant="outline" className="rounded-full">
-                      <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <Link
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Github className="mr-2 h-4 w-4" />
                         View Code
                       </Link>
                     </Button>
                     <Button asChild className="rounded-full">
-                      <Link href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                      <Link
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         Live Demo
                         <ArrowUpRight className="ml-2 h-4 w-4" />
                       </Link>
@@ -171,7 +203,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 </div>
               </DialogContent>
             </Dialog>
-            
+
             <div className="flex gap-2">
               <Button
                 variant="outline"

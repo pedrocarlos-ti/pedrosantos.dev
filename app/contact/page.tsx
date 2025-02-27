@@ -102,7 +102,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="mb-4 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
+            <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
               Get in Touch
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
@@ -111,7 +111,7 @@ export default function ContactPage() {
             </p>
           </motion.div>
 
-          <div className="grid gap-12 md:grid-cols-12">
+          <div className="grid gap-8 md:gap-12 md:grid-cols-12">
             {/* Contact Information */}
             <motion.div
               className="md:col-span-5"
@@ -136,7 +136,7 @@ export default function ContactPage() {
                         transition={{ duration: 0.3, delay: 0.1 * index }}
                         className="flex items-center gap-4"
                       >
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                        <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-primary/10">
                           {item.icon}
                         </div>
                         <div>
@@ -254,7 +254,7 @@ export default function ContactPage() {
                       />
                       <Button 
                         type="submit" 
-                        className="w-full rounded-full px-8 py-6 text-base"
+                        className="w-full rounded-full px-6 py-5 md:px-8 md:py-6 text-sm md:text-base"
                         size="lg"
                         disabled={isSubmitting}
                       >
@@ -295,7 +295,7 @@ export default function ContactPage() {
       </section>
       
       {/* Map Section */}
-      <section className="py-16">
+      <section className="py-12 md:py-16 mb-20">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
             className="overflow-hidden rounded-xl border shadow-sm"

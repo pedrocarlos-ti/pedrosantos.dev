@@ -4,18 +4,19 @@ A modern, responsive portfolio website built with Next.js 15, TailwindCSS, and S
 
 ## Features
 
-- 🌓 Dark/Light mode toggle
-- 🎨 Modern, minimalist design with smooth animations
-- 📱 Fully responsive for all device sizes
-- ⚡ Fast performance with Next.js App Router
-- 🧩 Modular component architecture
-- 🔍 SEO optimized
+- Dark/Light mode toggle
+- Modern, minimalist design with smooth animations
+- Fully responsive for all device sizes
+- Fast performance with Next.js App Router
+- Modular component architecture
+- SEO optimized
 
 ## Pages
 
 - **Home** - Introduction and featured projects
 - **About** - Personal information, skills, and experience
 - **Projects** - Showcase of projects with filtering
+- **Blog** - Articles and tutorials
 - **Contact** - Contact form and information
 
 ## Tech Stack
@@ -50,7 +51,7 @@ A modern, responsive portfolio website built with Next.js 15, TailwindCSS, and S
    bun install
    ```
 
-3. Run the development server:
+3. Start the development server:
 
    ```bash
    bun dev
@@ -58,29 +59,96 @@ A modern, responsive portfolio website built with Next.js 15, TailwindCSS, and S
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deployment
+## Project Structure
 
-The easiest way to deploy this website is using [Vercel](https://vercel.com/):
-
-```bash
-bun i -g vercel
-vercel
 ```
+pedrosantos.dev/
+├── app/                  # Next.js App Router pages
+│   ├── about/            # About page
+│   ├── blog/             # Blog pages
+│   ├── contact/          # Contact page
+│   ├── projects/         # Projects page
+│   ├── globals.css       # Global styles
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Home page
+├── components/           # Reusable components
+│   ├── layout/           # Layout components (header, footer)
+│   ├── sections/         # Page section components
+│   ├── three/            # Three.js/canvas components
+│   └── ui/               # UI components from shadcn/ui
+├── lib/                  # Utility functions and helpers
+├── public/               # Static assets
+└── ...                   # Config files
+```
+
+## Component Organization
+
+The project follows a modular component architecture:
+
+- **Layout Components**: Header, footer, and other layout elements
+- **Section Components**: Reusable page sections like TechStack, BlogPreview
+- **UI Components**: Shadcn UI components with custom styling
+- **Page Components**: Main page components in the app directory
+
+## Scripts
+
+- `bun dev` - Start the development server
+- `bun build` - Build the production application
+- `bun start` - Start the production server
+- `bun lint` - Run ESLint
+- `bun format` - Format code with Prettier
+- `bun typecheck` - Run TypeScript type checking
+- `bun analyze` - Analyze bundle size
+- `bun clean` - Clean build cache
+
+## Styling Conventions
+
+- Use TailwindCSS for styling
+- Follow consistent container styling with `mx-auto` and proper padding (`px-4 md:px-6`)
+- Use proper spacing between sections (`mb-20`)
+- Use background gradients for visual interest (`from-muted/50 to-transparent`)
+- Use clean, bold headings without gradient text effects
+- Use card-based layouts for skills and projects
+- Use Framer Motion for hover animations
 
 ## Customization
 
-- Update personal information in the page files
-- Replace placeholder images with your own in the `public/images` directory
-- Modify project data in the `app/projects/page.tsx` file
-- Update social links in the header and footer components
+### Themes
+
+The site uses next-themes for theme management. You can customize the theme colors in `tailwind.config.ts`.
+
+### Content
+
+Update your personal information, projects, and blog posts in their respective components:
+
+- Update personal info in `app/page.tsx` and `app/about/page.tsx`
+- Update projects in the `featuredProjects` array in `app/page.tsx`
+- Update blog posts in the `defaultPosts` array in `components/sections/BlogPreview.tsx`
+
+## Deployment
+
+The site is configured for deployment on Vercel:
+
+```bash
+vercel
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add some amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgements
+## Acknowledgments
 
-- [ShadCN UI](https://ui.shadcn.com/) for the beautiful UI components
-- [Lucide Icons](https://lucide.dev/) for the icon set
-- [TailwindCSS](https://tailwindcss.com/) for the utility-first CSS framework
-- [Next.js](https://nextjs.org/) for the React framework
+- [Next.js](https://nextjs.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Bun](https://bun.sh/)

@@ -129,7 +129,10 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Removed About Me heading and subtext as requested */}
+          <h1 className="mb-4 text-4xl font-bold">About Me</h1>
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            Software Engineer specializing in React, Next.js, and AI integration
+          </p>
         </motion.div>
 
         <motion.div
@@ -146,7 +149,7 @@ export default function AboutPage() {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="absolute -inset-0.5 rounded-full bg-primary/20 blur-sm"></div>
-                <Avatar className="h-64 w-64 border-4 border-background shadow-xl relative">
+                <Avatar className="h-48 w-48 md:h-64 md:w-64 border-4 border-background shadow-xl relative">
                   <AvatarImage
                     src="https://avatars.githubusercontent.com/u/18473317?v=4"
                     alt="Pedro Santos"
@@ -199,7 +202,7 @@ export default function AboutPage() {
               </div>
               
               <div className="space-y-4 text-muted-foreground">
-                <p className="text-lg">
+                <p className="text-base md:text-lg">
                   I&apos;m a passionate Software Engineer with over a decade of experience in the tech industry, 
                   specializing in React, Next.js, and AI integration. Currently, I&apos;m developing 
                   innovative applications at <span className="font-medium text-foreground">Melro.io</span> 🐦‍⬛.
