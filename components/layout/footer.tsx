@@ -3,13 +3,14 @@
 import { motion } from "framer-motion";
 import { Mail, XIcon, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
+  { name: "About", href: "/#about" },
+  // { name: "Projects", href: "/projects" },
+  // { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 const socialLinks = [
@@ -36,6 +37,27 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+
+  const handleScrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (href.startsWith("/#") && pathname === "/") {
+      e.preventDefault();
+      const targetId = href.split("#")[1];
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerHeight = 64; // Adjust based on your header height
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
+
   return (
     <motion.footer
       className="border-t bg-background/80 backdrop-blur-sm"
@@ -49,6 +71,7 @@ export function Footer() {
             <Link
               href="/"
               className="text-xl font-bold transition-colors hover:text-primary"
+              onClick={(e) => handleScrollToSection(e, "/")}
             >
               Pedro Santos
             </Link>
@@ -75,6 +98,7 @@ export function Footer() {
                   key={link.href}
                   href={link.href}
                   className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  onClick={(e) => handleScrollToSection(e, link.href)}
                 >
                   {link.name}
                 </Link>
