@@ -177,7 +177,7 @@ export function HeroSection() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -189,10 +189,19 @@ export function HeroSection() {
         }}
       >
         <div className="flex flex-col items-center">
-          <span className="text-sm font-medium text-muted-foreground mb-2">
+          <span className="text-xs md:text-sm font-medium text-muted-foreground/70 mb-2">
             Scroll
           </span>
-          <div className="h-6 w-1 rounded-full bg-muted-foreground/30" />
+          <motion.div 
+            className="h-10 w-[2px] rounded-full bg-muted-foreground/20"
+            initial={{ height: "10px" }}
+            animate={{ height: "24px" }}
+            transition={{
+              duration: 1.2,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
         </div>
       </motion.div>
     </section>
