@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
 // Initialize Resend with your API key
 // You will need to add your API key to your environment variables
@@ -12,17 +12,17 @@ export async function POST(request: NextRequest) {
     // Validate form data
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Contact Form <onboarding@resend.dev>', // You should update this to your verified domain
-      to: ['pedrocarlos.ti@gmail.com'], // Your email address
+      from: "Contact Form <onboarding@resend.dev>", // You should update this to your verified domain
+      to: ["pedrocarlos.ti@gmail.com"], // Your email address
       subject: `Contact Form: ${subject}`,
-      reply_to: email,
+      replyTo: email,
       text: `
 Name: ${name}
 Email: ${email}
@@ -44,18 +44,18 @@ ${message}
     });
 
     if (error) {
-      console.error('Error sending email:', error);
+      console.error("Error sending email:", error);
       return NextResponse.json(
-        { error: 'Failed to send email' },
+        { error: "Failed to send email" },
         { status: 500 }
       );
     }
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
-    console.error('Error in email sending route:', error);
+    console.error("Error in email sending route:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }
