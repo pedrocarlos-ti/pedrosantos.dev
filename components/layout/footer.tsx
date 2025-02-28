@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Mail, XIcon, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 
 const navLinks = [
@@ -15,22 +15,22 @@ const navLinks = [
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/yourusername",
+    href: "https://github.com/pedrocarlos-ti",
     icon: <Github className="h-5 w-5" />,
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/yourusername",
+    href: "https://linkedin.com/in/pedro-santos",
     icon: <Linkedin className="h-5 w-5" />,
   },
   {
-    name: "Twitter",
-    href: "https://twitter.com/yourusername",
-    icon: <Twitter className="h-5 w-5" />,
+    name: "X",
+    href: "https://x.com/pedrocarlos_ti",
+    icon: <XIcon className="h-5 w-5" />,
   },
   {
     name: "Email",
-    href: "mailto:hello@pedrosantos.dev",
+    href: "mailto:pedrocarlos.ti@gmail.com",
     icon: <Mail className="h-5 w-5" />,
   },
 ];
@@ -53,9 +53,17 @@ export function Footer() {
               Pedro Santos
             </Link>
             <p className="max-w-md text-sm text-muted-foreground">
-              Frontend Developer specializing in React, Next.js, and AI. 
-              Founder of <a href="https://melro.io" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Melro.io</a>, 
-              delivering AI-powered solutions and custom software development.
+              Frontend Developer specializing in React, Next.js, and AI. Founder
+              of{" "}
+              <a
+                href="https://melro.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                Melro.io
+              </a>
+              , delivering AI-powered solutions and custom software development.
             </p>
           </div>
 
@@ -115,13 +123,18 @@ export function Footer() {
               ))}
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
-              Available for select consulting and AI integration projects through Melro.io.
+              Available for select consulting and AI integration projects
+              through Melro.io.
             </p>
           </div>
         </div>
 
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p> {new Date().getFullYear()} Pedro Santos & Melro.io. All rights reserved.</p>
+          <p>
+            {" "}
+            {new Date().getFullYear()} Pedro Santos & Melro.io. All rights
+            reserved.
+          </p>
           <p className="mt-2">
             Built with{" "}
             <Link

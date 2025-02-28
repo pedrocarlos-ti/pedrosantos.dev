@@ -43,22 +43,22 @@ const featuredProjects = [
 // Animation variants for staggered children
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { 
+  visible: {
     opacity: 1,
-    transition: { 
+    transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.3
-    }
-  }
+      delayChildren: 0.3,
+    },
+  },
 };
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
+  visible: {
+    y: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 300, damping: 24 }
-  }
+    transition: { type: "spring", stiffness: 300, damping: 24 },
+  },
 };
 
 export default function Home() {
@@ -78,9 +78,9 @@ export default function Home() {
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ 
-                duration: 0.6, 
-                ease: [0.215, 0.61, 0.355, 1.0]
+              transition={{
+                duration: 0.6,
+                ease: [0.215, 0.61, 0.355, 1.0],
               }}
               className="mb-6"
             >
@@ -98,11 +98,16 @@ export default function Home() {
             >
               Hello, I&apos;m{" "}
               <span className="font-semibold text-primary">Pedro Santos</span>{" "}
-              👋, a frontend developer and founder of{" "}
-              <Link href="https://melro.io" target="_blank" className="font-semibold text-primary hover:underline">
+              👋, a frontend developer specializing in React, Next.js, and AI
+              integration. I'm also the founder of{" "}
+              <Link
+                href="https://melro.io"
+                target="_blank"
+                className="font-semibold text-primary hover:underline"
+              >
                 Melro.io
               </Link>
-              , specializing in React, Next.js, and AI integration.
+              , where we build innovative AI-powered solutions.
             </motion.p>
 
             <motion.div
@@ -169,7 +174,7 @@ export default function Home() {
                 <span className="sr-only">Twitter</span>
               </Link>
               <Link
-                href="mailto:hello@pedrosantos.dev"
+                href="mailto:pedrocarlos.ti@gmail.com"
                 className="group flex items-center justify-center rounded-full bg-card/80 p-2.5 text-muted-foreground shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-primary/10 hover:text-primary hover:scale-110 hover:shadow-md"
                 aria-label="Email"
               >
@@ -179,29 +184,31 @@ export default function Home() {
             </motion.div>
           </motion.div>
         </div>
-        
+
         {/* Scroll indicator */}
-        <motion.div 
+        <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.6, 
+          transition={{
+            duration: 0.6,
             delay: 1,
             repeat: Infinity,
             repeatType: "reverse",
-            repeatDelay: 0.5
+            repeatDelay: 0.5,
           }}
         >
           <div className="flex flex-col items-center">
-            <span className="text-sm font-medium text-muted-foreground mb-2">Scroll</span>
+            <span className="text-sm font-medium text-muted-foreground mb-2">
+              Scroll
+            </span>
             <div className="h-6 w-1 rounded-full bg-muted-foreground/30" />
           </div>
         </motion.div>
       </section>
 
       {/* Tech Carousel Section */}
-      <motion.section 
+      <motion.section
         className="py-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -216,14 +223,16 @@ export default function Home() {
             viewport={{ once: true }}
             className="mb-8 text-center"
           >
-            <h2 className="text-2xl font-bold md:text-3xl lg:text-4xl">Technical Expertise</h2>
+            <h2 className="text-2xl font-bold md:text-3xl lg:text-4xl">
+              Technical Expertise
+            </h2>
           </motion.div>
           <TechCarousel />
         </div>
       </motion.section>
 
       {/* Featured Projects Section */}
-      <motion.section 
+      <motion.section
         className="bg-gradient-to-b from-muted/50 to-transparent py-20 mb-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -242,7 +251,8 @@ export default function Home() {
               Featured Projects
             </h2>
             <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">
-              A selection of my recent open source work using React, TypeScript, and advanced web technologies
+              A selection of my recent open source work using React, TypeScript,
+              and advanced web technologies
             </p>
 
             <div className="grid gap-8 md:grid-cols-3">
@@ -254,9 +264,9 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 * i }}
-                  whileHover={{ 
+                  whileHover={{
                     y: -8,
-                    transition: { duration: 0.2, ease: "easeOut" } 
+                    transition: { duration: 0.2, ease: "easeOut" },
                   }}
                 >
                   <div className="relative aspect-video w-full overflow-hidden">
@@ -301,16 +311,16 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
-            <motion.div 
+            <motion.div
               className="mt-10 text-center"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <Button 
-                variant="outline" 
-                asChild 
+              <Button
+                variant="outline"
+                asChild
                 className="rounded-full px-6 py-6 shadow-sm hover:shadow-md transition-all duration-300"
               >
                 <Link href="/projects">
@@ -323,7 +333,7 @@ export default function Home() {
       </motion.section>
 
       {/* Melro.io Section */}
-      <motion.section 
+      <motion.section
         className="py-20 mb-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -352,9 +362,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                whileHover={{ 
+                whileHover={{
                   y: -8,
-                  transition: { duration: 0.2, ease: "easeOut" } 
+                  transition: { duration: 0.2, ease: "easeOut" },
                 }}
               >
                 <h3 className="text-2xl font-bold mb-4">What We Do</h3>
@@ -391,17 +401,21 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                whileHover={{ 
+                whileHover={{
                   y: -8,
-                  transition: { duration: 0.2, ease: "easeOut" } 
+                  transition: { duration: 0.2, ease: "easeOut" },
                 }}
               >
                 <h3 className="text-2xl font-bold mb-4">My Role</h3>
                 <p className="mb-4 text-muted-foreground">
-                  As the founder of Melro.io, I lead our technical direction and work closely with clients to build solutions that solve real business problems.
+                  As the founder of Melro.io, I lead our technical direction and
+                  work closely with clients to build solutions that solve real
+                  business problems.
                 </p>
                 <p className="text-muted-foreground">
-                  My expertise in React, Next.js, and AI integration allows me to create cutting-edge applications that deliver exceptional user experiences.
+                  My expertise in React, Next.js, and AI integration allows me
+                  to create cutting-edge applications that deliver exceptional
+                  user experiences.
                 </p>
               </motion.div>
             </div>
@@ -410,7 +424,7 @@ export default function Home() {
       </motion.section>
 
       {/* About Me CTA Section */}
-      <motion.section 
+      <motion.section
         className="py-16 mb-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -424,18 +438,21 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            whileHover={{ 
+            whileHover={{
               boxShadow: "0 10px 30px -15px rgba(0, 0, 0, 0.1)",
               y: -5,
-              transition: { duration: 0.2 }
+              transition: { duration: 0.2 },
             }}
           >
-            <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">Want to know more about me?</h2>
+            <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
+              Want to know more about me?
+            </h2>
             <p className="mb-8 text-muted-foreground md:text-lg">
-              Check out my about page to learn more about my experience, skills, journey as a developer, and my work with Melro.io.
+              Check out my about page to learn more about my experience, skills,
+              journey as a developer, and my work with Melro.io.
             </p>
-            <Button 
-              asChild 
+            <Button
+              asChild
               className="rounded-full px-8 py-6 shadow-md hover:shadow-lg transition-all duration-300"
               size="lg"
             >

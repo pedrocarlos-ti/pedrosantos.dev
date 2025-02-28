@@ -44,6 +44,10 @@ const formSchema = z.object({
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,36 +59,92 @@ export default function ContactPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      console.log(values);
-      setIsSubmitting(false);
+    setFormStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send email");
+      }
+
+      // Success
+      setFormStatus({
+        type: "success",
+        message:
+          "Your message has been sent successfully! I'll get back to you soon.",
+      });
       form.reset();
-      toast.success("Message sent successfully! I'll get back to you soon.");
-    }, 1500);
+    } catch (error) {
+      // Error
+      setFormStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   const contactInfo = [
     {
       icon: <AtSign className="h-5 w-5 text-primary" />,
       title: "Email",
-      value: "hello@pedrosantos.dev",
-      link: "mailto:hello@pedrosantos.dev",
+      value: "pedrocarlos.ti@gmail.com",
+      link: "mailto:pedrocarlos.ti@gmail.com",
     },
     {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-5 w-5 text-primary"
+        >
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+          <rect x="2" y="9" width="4" height="12"></rect>
+          <circle cx="4" cy="4" r="2"></circle>
+        </svg>
+      ),
       title: "LinkedIn",
       value: "Connect with me",
-      link: "https://linkedin.com/in/your-profile",
+      link: "https://linkedin.com/in/pedro-santos",
     },
     {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-5 w-5 text-primary"
+        >
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+      ),
       title: "GitHub",
       value: "See my projects",
-      link: "https://github.com/your-username",
+      link: "https://github.com/pedrocarlos-ti",
     },
   ];
 
@@ -92,7 +152,7 @@ export default function ContactPage() {
     <div className="relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-muted/50 to-transparent opacity-30" />
-      
+
       {/* Hero Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
@@ -106,9 +166,17 @@ export default function ContactPage() {
               Get in Touch
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Whether you're interested in my personal work, looking to collaborate, or inquiring about 
-              <a href="https://melro.io" target="_blank" rel="noopener noreferrer" className="mx-1 font-medium text-primary hover:underline">Melro.io</a>
-              services, I'd love to hear from you.
+              Whether you&apos;re interested in my personal work, looking to
+              collaborate, or inquiring about
+              <a
+                href="https://melro.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-1 font-medium text-primary hover:underline"
+              >
+                Melro.io
+              </a>
+              services, I&apos;d love to hear from you.
             </p>
           </motion.div>
 
@@ -122,7 +190,9 @@ export default function ContactPage() {
             >
               <Card className="h-full border bg-card/50 shadow-sm backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="text-2xl">Contact Information</CardTitle>
+                  <CardTitle className="text-2xl">
+                    Contact Information
+                  </CardTitle>
                   <CardDescription>
                     Reach out through any of these channels
                   </CardDescription>
@@ -156,17 +226,27 @@ export default function ContactPage() {
                   </div>
 
                   <div className="rounded-lg bg-muted/50 p-6">
-                    <h3 className="mb-3 text-lg font-medium">Founder of Melro.io</h3>
+                    <h3 className="mb-3 text-lg font-medium">
+                      Founder of Melro.io
+                    </h3>
                     <p className="text-sm text-muted-foreground mb-3">
-                      I'm the founder of Melro.io, where we provide AI-powered MVPs, custom software development, 
-                      and technology consulting for businesses looking to innovate and grow in the digital space.
+                      I&apos;m the founder of Melro.io, where we provide
+                      AI-powered MVPs, custom software development, and
+                      technology consulting for businesses looking to innovate
+                      and grow in the digital space.
                     </p>
                     <p className="text-sm text-muted-foreground mb-3">
-                      For business inquiries related to Melro.io services, you can also reach out at:
-                      <a href="mailto:hello@melro.io" className="block mt-1 text-primary hover:underline">hello@melro.io</a>
+                      For business inquiries related to Melro.io services, you
+                      can also reach out at:
+                      <a
+                        href="mailto:developer@melro.io"
+                        className="block mt-1 text-primary hover:underline"
+                      >
+                        developer@melro.io
+                      </a>
                     </p>
-                    <a 
-                      href="https://www.melro.io" 
+                    <a
+                      href="https://www.melro.io"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm text-primary hover:underline"
@@ -190,12 +270,16 @@ export default function ContactPage() {
                 <CardHeader>
                   <CardTitle className="text-2xl">Send Me a Message</CardTitle>
                   <CardDescription>
-                    Fill out the form below and I'll get back to you as soon as possible
+                    Fill out the form below and I&apos;ll get back to you as
+                    soon as possible
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <form
+                      onSubmit={form.handleSubmit(onSubmit)}
+                      className="space-y-6"
+                    >
                       <div className="grid gap-6 md:grid-cols-2">
                         <FormField
                           control={form.control}
@@ -217,7 +301,10 @@ export default function ContactPage() {
                             <FormItem>
                               <FormLabel>Email</FormLabel>
                               <FormControl>
-                                <Input placeholder="your.email@example.com" {...field} />
+                                <Input
+                                  placeholder="your.email@example.com"
+                                  {...field}
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -231,7 +318,10 @@ export default function ContactPage() {
                           <FormItem>
                             <FormLabel>Subject</FormLabel>
                             <FormControl>
-                              <Input placeholder="What is this regarding?" {...field} />
+                              <Input
+                                placeholder="What is this regarding?"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -239,8 +329,24 @@ export default function ContactPage() {
                       />
                       <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
                         <p className="flex items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-primary"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                          For Melro.io business inquiries, please mention "Melro.io" in your subject.
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-4 w-4 text-primary"
+                          >
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                          For Melro.io business inquiries, please mention
+                          &quot;Melro.io&quot; in your subject.
                         </p>
                       </div>
                       <FormField
@@ -263,15 +369,18 @@ export default function ContactPage() {
                           </FormItem>
                         )}
                       />
-                      <Button 
-                        type="submit" 
+                      <Button
+                        type="submit"
                         className="w-full rounded-full px-6 py-5 md:px-8 md:py-6 text-sm md:text-base"
                         size="lg"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
                           <span className="flex items-center gap-2">
-                            <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24">
+                            <svg
+                              className="h-4 w-4 animate-spin"
+                              viewBox="0 0 24 24"
+                            >
                               <circle
                                 className="opacity-25"
                                 cx="12"
@@ -298,15 +407,65 @@ export default function ContactPage() {
                       </Button>
                     </form>
                   </Form>
+
+                  {/* Form submission status */}
+                  {formStatus.type && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`mt-6 p-4 rounded-lg ${
+                        formStatus.type === "success"
+                          ? "bg-green-50 text-green-800 border border-green-200"
+                          : "bg-red-50 text-red-800 border border-red-200"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        {formStatus.type === "success" ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-5 w-5"
+                          >
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-5 w-5"
+                          >
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        )}
+                        {formStatus.message}
+                      </div>
+                    </motion.div>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
           </div>
         </div>
       </section>
-      
+
       {/* My Company Section with gradient background */}
-      <motion.section 
+      <motion.section
         className="bg-gradient-to-b from-muted/50 to-transparent py-20 mb-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -325,50 +484,121 @@ export default function ContactPage() {
               About Melro.io
             </h2>
             <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">
-              As the founder of Melro.io, I lead a team dedicated to creating innovative AI-powered solutions that help businesses leverage cutting-edge technology to solve real-world problems.
+              As the founder of Melro.io, I lead a team dedicated to creating
+              innovative AI-powered solutions that help businesses leverage
+              cutting-edge technology to solve real-world problems.
             </p>
-            
+
             <Card className="border bg-card/50 shadow-sm backdrop-blur-sm">
               <CardContent className="p-6 md:p-8">
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-4">
-                    <h3 className="text-xl font-medium">What We Do at Melro.io</h3>
+                    <h3 className="text-xl font-medium">
+                      What We Do at Melro.io
+                    </h3>
                     <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-5 w-5 text-primary"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                         AI-Powered MVPs in 10 Days
                       </li>
                       <li className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-5 w-5 text-primary"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                         Custom Software Development
                       </li>
                       <li className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-5 w-5 text-primary"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                         AI Integration & Strategy
                       </li>
                       <li className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-5 w-5 text-primary"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                         Digital Growth Solutions
                       </li>
                     </ul>
                     <p className="text-muted-foreground mt-4">
-                      For business inquiries specific to Melro.io services, please contact us directly:
+                      For business inquiries specific to Melro.io services,
+                      please contact us directly:
                     </p>
                     <div className="flex flex-col gap-2 mt-2">
-                      <a 
-                        href="mailto:hello@melro.io" 
+                      <a
+                        href="mailto:developer@melro.io"
                         className="inline-flex items-center gap-2 text-primary hover:underline"
                       >
                         <AtSign className="h-4 w-4" />
-                        hello@melro.io
+                        developer@melro.io
                       </a>
-                      <a 
-                        href="https://www.melro.io" 
+                      <a
+                        href="https://www.melro.io"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-primary hover:underline"
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-4 w-4"
+                        >
+                          <rect
+                            x="2"
+                            y="3"
+                            width="20"
+                            height="14"
+                            rx="2"
+                            ry="2"
+                          ></rect>
+                          <line x1="8" y1="21" x2="16" y2="21"></line>
+                          <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
                         www.melro.io
                       </a>
                     </div>
@@ -376,26 +606,72 @@ export default function ContactPage() {
                   <div className="space-y-4">
                     <h3 className="text-xl font-medium">My Role as Founder</h3>
                     <p className="text-muted-foreground">
-                      At Melro.io, I combine my technical expertise in AI and software development with my passion for helping businesses innovate through technology.
+                      At Melro.io, I combine my technical expertise in AI and
+                      software development with my passion for helping
+                      businesses innovate through technology.
                     </p>
                     <p className="text-muted-foreground">
                       My experience building Melro.io has enhanced my skills in:
                     </p>
                     <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-5 w-5 text-primary"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                         AI strategy and implementation
                       </li>
                       <li className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-5 w-5 text-primary"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                         Rapid MVP development
                       </li>
                       <li className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-5 w-5 text-primary"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                         Technical team leadership
                       </li>
                       <li className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-5 w-5 text-primary"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                         Business technology consulting
                       </li>
                     </ul>

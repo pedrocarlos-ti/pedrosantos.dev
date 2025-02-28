@@ -26,7 +26,7 @@ const navItems = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
+  // { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -126,7 +126,9 @@ export function Header() {
                       className="flex items-center gap-1 rounded-full border border-border px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <span className="rounded-full bg-primary/10 p-1">🐦‍⬛</span>
+                      <span className="rounded-full bg-primary/10 p-1">
+                        🐦‍⬛
+                      </span>
                       <span>Melro.io</span>
                     </a>
                   </motion.div>

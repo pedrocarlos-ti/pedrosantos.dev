@@ -26,6 +26,7 @@ A modern, responsive portfolio website built with Next.js 15, TailwindCSS, and S
 - **UI Components**: [ShadCN UI](https://ui.shadcn.com/)
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Forms**: [React Hook Form](https://react-hook-form.com/) with [Zod](https://zod.dev/) validation
+- **Email**: [Resend](https://resend.com/) for contact form submissions
 - **Package Manager**: [Bun](https://bun.sh/)
 - **Deployment**: [Vercel](https://vercel.com/)
 
@@ -51,13 +52,21 @@ A modern, responsive portfolio website built with Next.js 15, TailwindCSS, and S
    bun install
    ```
 
-3. Start the development server:
+3. Create a `.env.local` file in the root directory with your Resend API key:
+
+   ```
+   RESEND_API_KEY=your_resend_api_key
+   ```
+
+   You can get an API key by signing up at [Resend.com](https://resend.com)
+
+4. Start the development server:
 
    ```bash
    bun dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
@@ -152,3 +161,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Shadcn UI](https://ui.shadcn.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [Bun](https://bun.sh/)
+- [Resend](https://resend.com/)
