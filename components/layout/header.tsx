@@ -41,7 +41,7 @@ export function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container flex h-16 items-center px-4">
+      <div className="container flex h-16 items-center px-4 md:px-6 max-w-7xl mx-auto">
         <div className="flex w-full justify-between items-center">
           <Link
             href="/"
@@ -65,16 +65,16 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-4">
+          <div className="hidden md:flex md:items-center md:space-x-6">
             <NavigationMenu>
-              <NavigationMenuList className="flex space-x-1">
+              <NavigationMenuList className="flex space-x-2">
                 {navItems.map((item) => (
                   <NavigationMenuItem key={item.href}>
                     <Link href={item.href} legacyBehavior passHref>
                       <NavigationMenuLink
                         className={cn(
                           navigationMenuTriggerStyle(),
-                          "rounded-full px-4",
+                          "rounded-full px-4 py-2 text-sm font-medium",
                           pathname === item.href
                             ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
                             : ""
@@ -118,7 +118,7 @@ export function Header() {
           </div>
 
           {/* Mobile Navigation */}
-          <div className="lg:hidden">
+          <div className="md:hidden">
             <div className="flex items-center">
               <ThemeToggle />
               <Sheet open={isOpen} onOpenChange={setIsOpen}>

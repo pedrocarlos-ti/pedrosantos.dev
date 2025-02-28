@@ -272,12 +272,12 @@ export function ContactSection() {
     },
     {
       title: "Twitter",
-      value: "@pcsantos_dev",
+      value: "@pedrocarlos-ti",
       href: "https://twitter.com/pcsantos_dev",
     },
     {
       title: "Location",
-      value: "Lisbon, Portugal",
+      value: "Covilhã, Portugal",
     },
   ];
 

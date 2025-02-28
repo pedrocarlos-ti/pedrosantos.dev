@@ -157,7 +157,7 @@ export function TechCarousel() {
   const TechItem = ({ item, index }: { item: TechItem; index: number }) => (
     <motion.div
       key={`${item.name}-${index}`}
-      className="flex flex-col items-center mx-4 relative"
+      className="flex flex-col items-center mx-2 md:mx-4 relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{
         opacity: 1,
@@ -166,7 +166,7 @@ export function TechCarousel() {
       }}
     >
       <motion.div
-        className="relative flex h-24 w-24 items-center justify-center rounded-xl bg-black/10 dark:bg-white/10 p-3 backdrop-blur-sm transition-all"
+        className="relative flex h-16 w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 items-center justify-center rounded-xl bg-black/10 dark:bg-white/10 p-2 md:p-3 backdrop-blur-sm transition-all"
         style={{
           boxShadow: `0 10px 30px -15px ${item.color || "rgba(0, 0, 0, 0.3)"}`,
           border: `1px solid ${item.color || "rgba(255, 255, 255, 0.1)"}20`,
@@ -182,27 +182,34 @@ export function TechCarousel() {
         <Image
           src={item.icon}
           alt={item.name}
-          width={64}
-          height={64}
-          className="h-auto w-auto"
+          width={48}
+          height={48}
+          className="h-auto w-auto max-w-full max-h-full"
         />
       </motion.div>
-      <p className="mt-3 text-sm font-medium">{item.name}</p>
+      <p className="mt-2 text-xs md:text-sm font-medium">{item.name}</p>
     </motion.div>
   );
 
   return (
-    <div className="relative overflow-hidden py-10">
+    <div
+      className="relative w-full max-w-full mx-auto"
+      style={{ overflowX: "clip" }}
+    >
       {/* Gradient overlays for smooth fade effect */}
-      <div className="absolute inset-y-0 left-0 w-40 z-10 bg-gradient-to-r from-background via-background/90 to-transparent pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-40 z-10 bg-gradient-to-l from-background via-background/90 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-20 md:w-40 z-10 bg-gradient-to-r from-background via-background/90 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-20 md:w-40 z-10 bg-gradient-to-l from-background via-background/90 to-transparent pointer-events-none" />
 
       {/* First row - right to left */}
-      <div className="mb-12 overflow-hidden py-4">
+      <div
+        className="mb-8 md:mb-12 relative overflow-hidden w-full py-2 md:py-4"
+        style={{ overflowX: "clip" }}
+      >
         <motion.div
           ref={containerRefFirst}
           className="flex"
           animate={controlsFirst}
+          style={{ width: "auto" }}
         >
           {firstRow.map((tech, index) => (
             <TechItem
@@ -215,11 +222,15 @@ export function TechCarousel() {
       </div>
 
       {/* Second row - left to right */}
-      <div className="overflow-hidden py-4">
+      <div
+        className="relative overflow-hidden w-full py-2 md:py-4"
+        style={{ overflowX: "clip" }}
+      >
         <motion.div
           ref={containerRefSecond}
           className="flex"
           animate={controlsSecond}
+          style={{ width: "auto" }}
         >
           {secondRow.map((tech, index) => (
             <TechItem

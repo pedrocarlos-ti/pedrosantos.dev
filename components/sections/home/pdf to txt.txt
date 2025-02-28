@@ -1,0 +1,147 @@
+Contato
+pedrocarlos.ti@gmail.com
+www.linkedin.com/in/pedro-santos
+(LinkedIn)
+Pedro Santos
+Frontend Developer at Aubay
+Lisboa, Lisboa, Portugal
+Principais competências
+Controle de versão
+UI
+React
+Resumo
+Graduado em Sistemas de Informação e Pós graduado Engenharia
+de Software trabalho a mais de 08 anos na área de tecnologia, onde
+ao longo da minha carreira tive a oportunidade de migrar por várias
+áreas, desde suporte até desenvolvimento de software onde estou
+hoje.
+Languages
+Português (Native or Bilingual)
+Inglês (Professional Working)
+Atualmente atuo em todo o ciclo de desenvolvimento de software, da
+idéia a solução final utilizando metodologia ágil para criar aplicações
+escaláveis e solucionar problemas de negócio.
+Certifications
+Scrum Foundation Professional
+Certificate (SFPC)
+ADVPL Avançado
+COBIT 4.1 FOUNDATION
+CS50's Mobile App Development
+with React Native
+ADVPL Fundamental
+Algumas das tecnologias que trabalho são:
+- Frontend: HTML, CSS, SASS, JavaScript, ReactJS
+- Backend: NodeJS + TypeScript, ExpressJS, AdonisJS, Socket.IO
+Publications
+Certificações
+- Mobile: React Native, Styled Components, Redux (Redux Persist,
+Redux Saga), MapBox, RealmDB
+- Banco de Dados Relacional: MSSQL, Oracle, Postgres, MySQL,
+MariaDB
+- Banco de Dados NoSQL: MongoDB, Cloudant, RethinkDB
+- DevOps: Docker, Kubernetes, Jenkins, AppCenter(CodePush)
+- Cloud: IBM Cloud e serviços (Cloud Foundry, Continuous Delivery,
+Watson Studio, Watson Assistant, Watson Text to Speech, Watson
+Speech to Text)
+- Controle de versão: Git
+- Metodologias de Desenvolvimento de Software: Scrum, Kanban,
+XP
+Page 1 of 4
+Experiência
+Aubay Portugal
+Frontend Developer
+novembro de 2021 - Present (3 anos 4 meses)
+Lisboa, Portugal
+Trabalhando como parte de um time ágil, desenvolvo novas funcionalidades
+e otimizo a base de código utilizando as tecnologias mais utilizadas como
+JavaScript, React, GraphQL, React Testing Library para testes e Storybook for
+docs.
+N3urons
+Engenheiro de software
+agosto de 2018 - outubro de 2021 (3 anos 3 meses)
+Recife e Região, Brasil
+Planejamento, arquitetura e desenvolvimento de softwares escaláveis para
+solucionar problemas de negócio.
+Algumas das tecnologias utilizadas:
+- ReactJS
+- React Native
+- NodeJS
+- MongoDB / OracleDB
+- Socket.IO
+- IBM Cloud e Watson Services
+TOTVS
+5 anos 1 mês
+Analista de negócios - Fluig
+janeiro de 2018 - agosto de 2018 (8 meses)
+Recife e Região, Brasil
+Consultoria e implantação do Fluig, uma solução desenvolvida pela TOTVS
+que centraliza e registra dados da organização em um único local, por meio
+de uma comunicação colaborativa, no qual realizei as seguintes atividades:
+Mapeamento da operação da empresa;
+Identificação das necessidades do negócio;
+Implantação dos módulos Identity, Analytics, ESB, Social, WCM, ECM e BPM;
+Page 2 of 4
+Integração entre sistemas (ERP x Fluig);
+Adaptação dos profissionais para o novo cenário da organização;
+Treinamento das equipes;
+Manutenção e atualização dos módulos.
+Também tive a oportunidade de trabalhar com o desenvolvimento e integração
+de formulários com fluxos BPM utilizando várias tecnologias, entre elas o
+HTML5, CSS3, JS, JQUERY, MustacheJS, RestFul API.
+Analista de BI
+junho de 2016 - dezembro de 2017 (1 ano 7 meses)
+Recife e Região, Brasil
+Consultoria e implantação no GoodData, uma solução de Business
+Intelligence da TOTVS, no qual realizei as seguintes atividades:
+Levantamento e Análise de Requisitos;
+Extração, Transformação e Carregamento dos dados (ETL) a partir de fontes
+internas como ERP ou externas como Cloud e Serviços REST;
+Criação e customização do Data Warehouse;
+Criação e customização do Datamart, serviço que contém todos os dados e
+metadados carregados (métricas, relatórios e painéis).
+Criação e customização das Analytical Engine, consultas no formato MAQL
+que oferecem processamento de consultas de alto desempenho em escala.
+Criação e customização no Portal GoodData, uma camada de apresentação
+da plataforma web intuitiva para criar e revisar métricas e relatórios.
+Analista de negócios
+setembro de 2014 - junho de 2016 (1 ano 10 meses)
+Recife e Região, Brasil
+Consultoria em implantação e treinamento dos módulos Compras, Financeiro,
+Faturamento, Estoque, PCP além dos módulos específicos de Logística OMS,
+WMS e ACD do sistema Microsiga Protheus - TOTVS.
+Desenvolvimento e Integração com o ERP Microsiga Protheus - TOTVS.
+Estagiário de Implantação
+Page 3 of 4
+agosto de 2013 - agosto de 2014 (1 ano 1 mês)
+Recife, Brasil
+Implantação e treinamento do BackOffice (Compras, Financeiro, Faturamento
+e Estoque) do sistema ERP – PROTHEUS, além de instalação e configuração
+do TSS – TOTVS Service SPED.
+NEWSUPRI
+Técnico de suporte
+janeiro de 2013 - julho de 2013 (7 meses)
+Recife e Região, Brasil
+Alocado no cliente Netuno S/A atuei como Suporte Técnico / Help Desk por
+telefone, chat, e-mail, campo e remoto para (Sistemas de gestão, Hardware
+e Software) realizando manutenção em microcomputadores e notebooks
+(Formatação, Instalação e Configuração de Sistemas Operacionais,
+Aplicativos e outros Programas, Rede e Dispositivos). Utilização e auxilio em
+microinformática (Pacote Office, Outlook, Anti Vírus, Aplicativos Diversos,
+Internet, Multimídia).
+Lanlink Informática Ltda.
+Técnico de suporte
+agosto de 2011 - agosto de 2012 (1 ano 1 mês)
+Suporte Técnico / Help Desk por telefone, chat, e-mail, campo e remoto
+para (Sistemas de gestão, Hardware e Software). Manutenção em
+Microcomputadores e Notebooks (Formatação, Instalação e Configuração de
+Sistemas Operacionais, Aplicativos e outros Programas, Rede e Dispositivos).
+Utilização e auxilio em microinformática (Pacote Office, Outlook, Anti Vírus,
+Aplicativos Diversos, Internet, Multimídia).
+Formação acadêmica
+Unibratec
+Especialização em Engenharia de Software, Engenharia de
+Software · (2016 - 2018)
+Faculdade Joaquim Nabuco
+Bacharelado em Sistemas de Informação, Tecnologia em Tecnologia da
+Informação/Sistemas da Informação · (2010 - 2015)
+Page 4 of 4
