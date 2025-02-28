@@ -14,6 +14,7 @@ type TechItem = {
   icon: string;
   description: string;
   proficiency: number;
+  css?: string;
   category: "frontend" | "backend" | "mobile" | "design" | "tools";
 };
 
@@ -82,6 +83,30 @@ const techStack: TechItem[] = [
     category: "backend",
   },
   {
+    name: "Bun",
+    icon: "https://user-images.githubusercontent.com/709451/182802334-d9c42afe-f35d-4a7b-86ea-9985f73f20c3.png",
+    description:
+      "Leveraging Bun as a fast JavaScript runtime, bundler, test runner and package manager.",
+    proficiency: 80,
+    category: "backend",
+  },
+  {
+    name: "Appwrite",
+    icon: "https://avatars.githubusercontent.com/u/25003669?s=200&v=4",
+    description:
+      "Building applications with Appwrite's backend-as-a-service platform for authentication, databases, and storage.",
+    proficiency: 85,
+    category: "backend",
+  },
+  {
+    name: "Electron",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg",
+    description:
+      "Creating cross-platform desktop applications using web technologies.",
+    proficiency: 80,
+    category: "frontend",
+  },
+  {
     name: "React Native",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
     description:
@@ -94,6 +119,7 @@ const techStack: TechItem[] = [
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
     description: "Creating fluid animations and interactive UI components.",
     proficiency: 85,
+    css: "dark:invert",
     category: "design",
   },
   {
@@ -182,7 +208,7 @@ export function TechStack() {
                         alt={tech.name}
                         width={64}
                         height={64}
-                        className="h-full w-full object-contain"
+                        className={`h-full w-full object-contain ${tech.css}`}
                       />
                     </div>
                     <h3 className="text-center text-sm font-medium">

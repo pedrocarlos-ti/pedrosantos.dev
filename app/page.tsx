@@ -393,12 +393,16 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <Button
-                variant="outline"
                 asChild
-                className="rounded-full px-6 py-6 shadow-sm hover:shadow-md transition-all duration-300"
+                variant="outline"
+                className="gap-2 rounded-full"
               >
-                <Link href="/projects">
-                  View All Projects <ArrowRight className="ml-2 h-4 w-4" />
+                <Link
+                  href="https://github.com/pedrocarlos-ti"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View All Projects <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
             </motion.div>

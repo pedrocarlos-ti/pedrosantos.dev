@@ -20,7 +20,7 @@ const techItems: TechItem[] = [
   {
     name: "Next.js",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    color: "#000000",
+    color: "#fff",
   },
   {
     name: "TypeScript",
@@ -58,8 +58,8 @@ const techItems: TechItem[] = [
     color: "#F05032",
   },
   {
-    name: "Firebase",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+    name: "Appwrite",
+    icon: "https://avatars.githubusercontent.com/u/25003669?s=200&v=4",
     color: "#FFCA28",
   },
   {
@@ -157,12 +157,7 @@ export function TechCarousel() {
   const TechItem = ({ item, index }: { item: TechItem; index: number }) => (
     <motion.div
       key={`${item.name}-${index}`}
-      className="flex flex-col items-center mx-4"
-      whileHover={{
-        y: -8,
-        scale: 1.1,
-        transition: { duration: 0.2 },
-      }}
+      className="flex flex-col items-center mx-4 relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{
         opacity: 1,
@@ -177,8 +172,10 @@ export function TechCarousel() {
           border: `1px solid ${item.color || "rgba(255, 255, 255, 0.1)"}20`,
         }}
         whileHover={{
+          y: -8,
           boxShadow: `0 15px 30px -10px ${item.color || "rgba(0, 0, 0, 0.4)"}`,
           border: `1px solid ${item.color || "rgba(255, 255, 255, 0.2)"}40`,
+          transition: { duration: 0.2 },
         }}
       >
         <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-transparent to-black/5 dark:to-white/5" />
@@ -201,7 +198,7 @@ export function TechCarousel() {
       <div className="absolute inset-y-0 right-0 w-40 z-10 bg-gradient-to-l from-background via-background/90 to-transparent pointer-events-none" />
 
       {/* First row - right to left */}
-      <div className="mb-12 overflow-hidden">
+      <div className="mb-12 overflow-hidden py-4">
         <motion.div
           ref={containerRefFirst}
           className="flex"
@@ -218,7 +215,7 @@ export function TechCarousel() {
       </div>
 
       {/* Second row - left to right */}
-      <div className="overflow-hidden">
+      <div className="overflow-hidden py-4">
         <motion.div
           ref={containerRefSecond}
           className="flex"
