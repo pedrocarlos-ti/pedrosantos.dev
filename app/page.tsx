@@ -13,30 +13,30 @@ import { CardContent } from "@/components/ui/card";
 const featuredProjects = [
   {
     id: 1,
-    title: "E-commerce Platform",
+    title: "Select Script",
     description:
-      "A modern e-commerce platform with product filtering, cart functionality, and payment integration.",
+      "A VS Code extension providing a quick and intuitive dropdown selector for your package.json scripts.",
     image: "/images/placeholder.svg",
-    tags: ["React", "Next.js", "TailwindCSS", "Stripe"],
-    link: "/projects/e-commerce-platform",
+    tags: ["TypeScript", "VS Code Extension", "Developer Tools"],
+    link: "/projects",
   },
   {
     id: 2,
-    title: "AI Content Generator",
+    title: "AI Tree",
     description:
-      "An AI-powered application that generates content based on user prompts using OpenAI's GPT models.",
+      "A platform for learning and sharing knowledge about AI with interactive visualizations and community features.",
     image: "/images/placeholder.svg",
-    tags: ["React", "TypeScript", "OpenAI API", "Node.js"],
-    link: "/projects/ai-content-generator",
+    tags: ["Next.js", "React", "TypeScript", "Supabase"],
+    link: "/projects",
   },
   {
     id: 3,
-    title: "Dashboard Analytics",
+    title: "Electron Draw",
     description:
-      "Interactive dashboard with real-time analytics, data visualization, and customizable widgets.",
+      "Professional screen annotation tool built with Electron featuring transparent window overlay and drawing tools.",
     image: "/images/placeholder.svg",
-    tags: ["React", "D3.js", "WebSockets", "Firebase"],
-    link: "/projects/dashboard-analytics",
+    tags: ["Electron", "TypeScript", "Desktop App", "UI/UX"],
+    link: "/projects",
   },
 ];
 
@@ -98,8 +98,11 @@ export default function Home() {
             >
               Hello, I&apos;m{" "}
               <span className="font-semibold text-primary">Pedro Santos</span>{" "}
-              👋, a frontend developer with expertise in building modern web applications 
-              using React, Next.js, and TypeScript.
+              👋, a frontend developer and founder of{" "}
+              <Link href="https://melro.io" target="_blank" className="font-semibold text-primary hover:underline">
+                Melro.io
+              </Link>
+              , specializing in React, Next.js, and AI integration.
             </motion.p>
 
             <motion.div
@@ -136,7 +139,7 @@ export default function Home() {
               transition={{ delay: 0.7, duration: 0.5 }}
             >
               <Link
-                href="https://github.com/yourusername"
+                href="https://github.com/pedrocarlos-ti"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center justify-center rounded-full bg-card/80 p-2.5 text-muted-foreground shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-primary/10 hover:text-primary hover:scale-110 hover:shadow-md"
@@ -239,7 +242,7 @@ export default function Home() {
               Featured Projects
             </h2>
             <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">
-              Here are some of my recent projects
+              A selection of my recent open source work using React, TypeScript, and advanced web technologies
             </p>
 
             <div className="grid gap-8 md:grid-cols-3">
@@ -319,6 +322,93 @@ export default function Home() {
         </div>
       </motion.section>
 
+      {/* Melro.io Section */}
+      <motion.section 
+        className="py-20 mb-16"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <div className="container mx-auto px-4 md:px-6">
+          <motion.div
+            className="mx-auto w-full max-w-6xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="mb-4 text-center text-2xl font-bold md:text-3xl lg:text-4xl">
+              Founder of Melro.io
+            </h2>
+            <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">
+              Providing innovative AI-powered solutions for businesses
+            </p>
+
+            <div className="grid gap-8 md:grid-cols-2">
+              <motion.div
+                className="rounded-xl overflow-hidden bg-gradient-to-br from-muted/50 to-transparent p-8 backdrop-blur-sm"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                whileHover={{ 
+                  y: -8,
+                  transition: { duration: 0.2, ease: "easeOut" } 
+                }}
+              >
+                <h3 className="text-2xl font-bold mb-4">What We Do</h3>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start">
+                    <div className="mr-2 mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary/20">
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                    </div>
+                    <span>AI-powered MVPs for startups</span>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="mr-2 mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary/20">
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                    </div>
+                    <span>Custom software development</span>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="mr-2 mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary/20">
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                    </div>
+                    <span>Technology consulting</span>
+                  </li>
+                </ul>
+                <Button asChild className="rounded-full">
+                  <Link href="https://melro.io" target="_blank">
+                    Visit Melro.io
+                  </Link>
+                </Button>
+              </motion.div>
+
+              <motion.div
+                className="rounded-xl overflow-hidden bg-gradient-to-br from-muted/50 to-transparent p-8 backdrop-blur-sm"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                whileHover={{ 
+                  y: -8,
+                  transition: { duration: 0.2, ease: "easeOut" } 
+                }}
+              >
+                <h3 className="text-2xl font-bold mb-4">My Role</h3>
+                <p className="mb-4 text-muted-foreground">
+                  As the founder of Melro.io, I lead our technical direction and work closely with clients to build solutions that solve real business problems.
+                </p>
+                <p className="text-muted-foreground">
+                  My expertise in React, Next.js, and AI integration allows me to create cutting-edge applications that deliver exceptional user experiences.
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
       {/* About Me CTA Section */}
       <motion.section 
         className="py-16 mb-16"
@@ -342,7 +432,7 @@ export default function Home() {
           >
             <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">Want to know more about me?</h2>
             <p className="mb-8 text-muted-foreground md:text-lg">
-              Check out my about page to learn more about my experience, skills, and journey as a developer.
+              Check out my about page to learn more about my experience, skills, journey as a developer, and my work with Melro.io.
             </p>
             <Button 
               asChild 

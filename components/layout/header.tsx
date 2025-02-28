@@ -41,7 +41,7 @@ export function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container flex h-16 items-center mx-auto">
+      <div className="container flex h-16 items-center px-4">
         <div className="flex w-full justify-between items-center">
           <Link href="/" className="flex items-center">
             <motion.div
@@ -78,6 +78,16 @@ export function Header() {
               </NavigationMenuList>
             </NavigationMenu>
 
+            <a
+              href="https://melro.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 flex items-center gap-1 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              <span className="rounded-full bg-primary/10 p-1">🐦‍⬛</span>
+              <span>Melro.io</span>
+            </a>
+
             <ThemeToggle />
           </div>
 
@@ -101,6 +111,24 @@ export function Header() {
                     transition={{ delay: 0.1, duration: 0.3 }}
                   >
                     pedrosantos.dev
+                  </motion.div>
+                  <motion.div
+                    className="mb-6 text-xs flex items-center gap-1"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.3 }}
+                  >
+                    <span className="text-muted-foreground">Founder of</span>
+                    <a
+                      href="https://melro.io"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 rounded-full border border-border px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span className="rounded-full bg-primary/10 p-1">🐦‍⬛</span>
+                      <span>Melro.io</span>
+                    </a>
                   </motion.div>
                   <nav className="flex flex-col items-center gap-4">
                     {navItems.map((item, index) => (

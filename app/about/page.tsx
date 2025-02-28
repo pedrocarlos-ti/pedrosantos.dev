@@ -295,10 +295,11 @@ export default function AboutPage() {
                 <p className="text-base md:text-lg">
                   I&apos;m a passionate Software Engineer with over a decade of
                   experience in the tech industry, specializing in React,
-                  Next.js, and AI integration. Currently, I&apos;m developing
-                  innovative applications at{" "}
-                  <span className="font-medium text-foreground">Melro.io</span>{" "}
-                  🐦‍⬛.
+                  Next.js, and AI integration. I&apos;m the founder of{" "}
+                  <Link href="https://melro.io" className="font-medium text-foreground hover:text-primary transition-colors" target="_blank">
+                    Melro.io
+                  </Link>{" "}
+                  🐦‍⬛, where I lead the development of innovative AI-powered solutions for businesses.
                 </p>
                 <p>
                   With a degree in Information Systems and a postgraduate degree
@@ -553,6 +554,90 @@ export default function AboutPage() {
                 </span>
               </div>
             </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Melro.io Founder Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mb-20"
+        >
+          <h2 className="mb-6 text-center text-3xl font-bold">
+            Melro.io - My Company
+          </h2>
+          <p className="mb-10 text-center text-muted-foreground">
+            Innovative AI-powered solutions for businesses
+          </p>
+          
+          <div className="rounded-xl overflow-hidden bg-gradient-to-br from-muted/50 to-transparent p-8 backdrop-blur-sm mb-8">
+            <div className="grid gap-8 md:grid-cols-2">
+              <div>
+                <h3 className="text-2xl font-bold mb-4">About Melro.io</h3>
+                <p className="mb-4 text-muted-foreground">
+                  I founded Melro.io to bring innovative technological solutions to businesses, combining my expertise in web development and AI integration.
+                </p>
+                <p className="mb-4 text-muted-foreground">
+                  Our mission is to help companies leverage cutting-edge technology to solve real-world problems and achieve their business goals.
+                </p>
+                <Button 
+                  asChild 
+                  className="rounded-full mt-2"
+                >
+                  <Link href="https://melro.io" target="_blank">
+                    Visit Melro.io Website
+                  </Link>
+                </Button>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold mb-4">Services We Offer</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <div className="mr-2 mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary/20">
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                    </div>
+                    <div>
+                      <span className="font-medium">AI-powered MVPs</span>
+                      <p className="text-sm text-muted-foreground">Rapid development of AI-enhanced minimum viable products</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="mr-2 mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary/20">
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                    </div>
+                    <div>
+                      <span className="font-medium">Custom Software Development</span>
+                      <p className="text-sm text-muted-foreground">Tailored applications built with modern technologies</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="mr-2 mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary/20">
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                    </div>
+                    <div>
+                      <span className="font-medium">Technology Consulting</span>
+                      <p className="text-sm text-muted-foreground">Strategic guidance on technology implementation</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-muted-foreground mb-6">
+              While Melro.io represents my business endeavors, this portfolio showcases my personal skills and experience as a software engineer.
+            </p>
+            <Button 
+              variant="outline" 
+              asChild 
+              className="rounded-full"
+            >
+              <Link href="/contact">
+                Contact Me for Business Inquiries
+              </Link>
+            </Button>
           </div>
         </motion.div>
       </div>

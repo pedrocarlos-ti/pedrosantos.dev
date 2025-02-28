@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pedro Santos | Frontend Developer",
-  description: "Frontend Developer specializing in React and AI",
+  title: "Pedro Santos | Frontend Developer & Melro.io Founder",
+  description: "Frontend Developer specializing in React, Next.js, and AI. Founder of Melro.io, providing AI-powered solutions for businesses.",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",

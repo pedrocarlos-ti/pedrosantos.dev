@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
-import { AtSign, MapPin, Phone, Send } from "lucide-react";
+import { AtSign, Send } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -75,16 +75,16 @@ export default function ContactPage() {
       link: "mailto:hello@pedrosantos.dev",
     },
     {
-      icon: <Phone className="h-5 w-5 text-primary" />,
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>,
+      title: "LinkedIn",
+      value: "Connect with me",
+      link: "https://linkedin.com/in/your-profile",
     },
     {
-      icon: <MapPin className="h-5 w-5 text-primary" />,
-      title: "Location",
-      value: "San Francisco, CA",
-      link: "https://maps.google.com/?q=San+Francisco,+CA",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>,
+      title: "GitHub",
+      value: "See my projects",
+      link: "https://github.com/your-username",
     },
   ];
 
@@ -106,8 +106,9 @@ export default function ContactPage() {
               Get in Touch
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Have a project in mind or want to collaborate? I'd love to hear from you!
-              Fill out the form below, and I'll get back to you as soon as possible.
+              Whether you're interested in my personal work, looking to collaborate, or inquiring about 
+              <a href="https://melro.io" target="_blank" rel="noopener noreferrer" className="mx-1 font-medium text-primary hover:underline">Melro.io</a>
+              services, I'd love to hear from you.
             </p>
           </motion.div>
 
@@ -155,20 +156,23 @@ export default function ContactPage() {
                   </div>
 
                   <div className="rounded-lg bg-muted/50 p-6">
-                    <h3 className="mb-3 text-lg font-medium">Office Hours</h3>
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="font-medium">Monday - Friday</span>
-                        <span className="text-muted-foreground">9:00 AM - 5:00 PM PST</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="font-medium">Saturday - Sunday</span>
-                        <span className="text-muted-foreground">Closed</span>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-muted-foreground">
-                      I typically respond to inquiries within 24-48 business hours.
+                    <h3 className="mb-3 text-lg font-medium">Founder of Melro.io</h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      I'm the founder of Melro.io, where we provide AI-powered MVPs, custom software development, 
+                      and technology consulting for businesses looking to innovate and grow in the digital space.
                     </p>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      For business inquiries related to Melro.io services, you can also reach out at:
+                      <a href="mailto:hello@melro.io" className="block mt-1 text-primary hover:underline">hello@melro.io</a>
+                    </p>
+                    <a 
+                      href="https://www.melro.io" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary hover:underline"
+                    >
+                      Visit Melro.io →
+                    </a>
                   </div>
                 </CardContent>
               </Card>
@@ -180,6 +184,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
+              id="contact-form"
             >
               <Card className="border bg-card shadow-sm">
                 <CardHeader>
@@ -232,6 +237,12 @@ export default function ContactPage() {
                           </FormItem>
                         )}
                       />
+                      <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
+                        <p className="flex items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-primary"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                          For Melro.io business inquiries, please mention "Melro.io" in your subject.
+                        </p>
+                      </div>
                       <FormField
                         control={form.control}
                         name="message"
@@ -294,29 +305,107 @@ export default function ContactPage() {
         </div>
       </section>
       
-      {/* Map Section */}
-      <section className="py-12 md:py-16 mb-20">
+      {/* My Company Section with gradient background */}
+      <motion.section 
+        className="bg-gradient-to-b from-muted/50 to-transparent py-20 mb-16"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true, margin: "-100px" }}
+      >
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
-            className="overflow-hidden rounded-xl border shadow-sm"
+            className="mx-auto w-full max-w-6xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.50764017948547!3d37.75781499657369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1623875115931!5m2!1sen!2sus"
-              width="100%"
-              height="450"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Map of San Francisco"
-            ></iframe>
+            <h2 className="mb-4 text-center text-2xl font-bold md:text-3xl lg:text-4xl">
+              About Melro.io
+            </h2>
+            <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">
+              As the founder of Melro.io, I lead a team dedicated to creating innovative AI-powered solutions that help businesses leverage cutting-edge technology to solve real-world problems.
+            </p>
+            
+            <Card className="border bg-card/50 shadow-sm backdrop-blur-sm">
+              <CardContent className="p-6 md:p-8">
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-medium">What We Do at Melro.io</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        AI-Powered MVPs in 10 Days
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Custom Software Development
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        AI Integration & Strategy
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Digital Growth Solutions
+                      </li>
+                    </ul>
+                    <p className="text-muted-foreground mt-4">
+                      For business inquiries specific to Melro.io services, please contact us directly:
+                    </p>
+                    <div className="flex flex-col gap-2 mt-2">
+                      <a 
+                        href="mailto:hello@melro.io" 
+                        className="inline-flex items-center gap-2 text-primary hover:underline"
+                      >
+                        <AtSign className="h-4 w-4" />
+                        hello@melro.io
+                      </a>
+                      <a 
+                        href="https://www.melro.io" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-primary hover:underline"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        www.melro.io
+                      </a>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-medium">My Role as Founder</h3>
+                    <p className="text-muted-foreground">
+                      At Melro.io, I combine my technical expertise in AI and software development with my passion for helping businesses innovate through technology.
+                    </p>
+                    <p className="text-muted-foreground">
+                      My experience building Melro.io has enhanced my skills in:
+                    </p>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        AI strategy and implementation
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Rapid MVP development
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Technical team leadership
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Business technology consulting
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

@@ -53,8 +53,9 @@ export function Footer() {
               Pedro Santos
             </Link>
             <p className="max-w-md text-sm text-muted-foreground">
-              Frontend Developer specializing in React and AI. Creating modern,
-              responsive, and user-friendly web applications.
+              Frontend Developer specializing in React, Next.js, and AI. 
+              Founder of <a href="https://melro.io" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Melro.io</a>, 
+              delivering AI-powered solutions and custom software development.
             </p>
           </div>
 
@@ -70,6 +71,29 @@ export function Footer() {
                   {link.name}
                 </Link>
               ))}
+              <a
+                href="https://melro.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary"
+              >
+                <span>Melro.io</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-3 w-3"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </a>
             </nav>
           </div>
 
@@ -91,13 +115,13 @@ export function Footer() {
               ))}
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
-              Available for freelance projects and full-time opportunities.
+              Available for select consulting and AI integration projects through Melro.io.
             </p>
           </div>
         </div>
 
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p> {new Date().getFullYear()} Pedro Santos. All rights reserved.</p>
+          <p> {new Date().getFullYear()} Pedro Santos & Melro.io. All rights reserved.</p>
           <p className="mt-2">
             Built with{" "}
             <Link

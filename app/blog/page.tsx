@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { BlogPreview, BlogPost } from "@/components/sections/BlogPreview";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import Link from "next/link";
 
 // Sample blog posts data
 const blogPosts: BlogPost[] = [
@@ -151,6 +152,42 @@ const blogPosts: BlogPost[] = [
     image: "/images/placeholder.svg",
     tags: ["React", "Hooks", "JavaScript", "Web Development"],
   },
+  {
+    id: "9",
+    title: "Getting Started with TypeScript in React Projects",
+    excerpt:
+      "A comprehensive guide to setting up and using TypeScript in your React applications.",
+    content:
+      "TypeScript has become an essential tool for many React developers, offering type safety and improved developer experience. In this guide, I'll walk through the process of setting up TypeScript in a new or existing React project, explaining key concepts and best practices along the way. We'll cover type definitions for props, state, and context, as well as how to handle common TypeScript challenges in React applications. By the end of this article, you'll have a solid understanding of how to leverage TypeScript to build more robust React applications with fewer runtime errors.",
+    slug: "typescript-in-react-projects",
+    date: "2024-02-15",
+    readTime: "10 min read",
+    author: {
+      name: "Pedro Santos",
+      avatar: "/images/avatar-placeholder.svg",
+    },
+    category: "TypeScript",
+    image: "/images/placeholder.svg",
+    tags: ["TypeScript", "React", "JavaScript", "Web Development"],
+  },
+  {
+    id: "10",
+    title: "Building Desktop Applications with Electron and React",
+    excerpt:
+      "Learn how to create cross-platform desktop applications using Electron and React.",
+    content:
+      "Electron provides a powerful framework for building cross-platform desktop applications using web technologies. In this detailed tutorial, I'll show you how to combine Electron with React to create feature-rich desktop applications that run on Windows, macOS, and Linux. We'll start with setting up the development environment, then move on to creating a basic application structure, implementing IPC communication between the main and renderer processes, and finally packaging the application for distribution. Along the way, I'll share practical tips and best practices based on my experience developing desktop applications like Electron Draw.",
+    slug: "electron-react-desktop-applications",
+    date: "2024-01-30",
+    readTime: "12 min read",
+    author: {
+      name: "Pedro Santos",
+      avatar: "/images/avatar-placeholder.svg",
+    },
+    category: "React",
+    image: "/images/placeholder.svg",
+    tags: ["Electron", "React", "Desktop", "JavaScript", "UI/UX"],
+  },
 ];
 
 const categories = [
@@ -185,7 +222,7 @@ export default function BlogPage() {
         >
           <h1 className="mb-4 text-4xl font-bold">Blog</h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Thoughts, tutorials, and insights on web development, design, and technology
+            Thoughts, tutorials, and insights on web development, React, TypeScript, and AI integration.
           </p>
         </motion.div>
 

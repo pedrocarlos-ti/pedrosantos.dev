@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ProjectCard, Project } from "@/components/sections/ProjectCard";
+import Link from "next/link";
 
 // Sample project data
 const projects: Project[] = [
@@ -162,6 +163,83 @@ const projects: Project[] = [
       "/images/placeholder.svg"
     ]
   },
+  {
+    id: 7,
+    title: "Select Script",
+    description:
+      "A quick and intuitive dropdown selector for your package.json scripts in VS Code.",
+    longDescription:
+      "Select Script is a VS Code extension that provides a fast and user-friendly way to run npm, yarn, or pnpm scripts directly from your editor. It automatically detects your package manager and presents your scripts in an intuitive dropdown interface.",
+    image: "/images/placeholder.svg",
+    tags: ["TypeScript", "VS Code Extension", "Developer Tools", "Node.js"],
+    category: "web",
+    demoUrl: "",
+    githubUrl: "https://github.com/pedrocarlos-ti/select-script",
+    features: [
+      "Smart package manager detection (npm, yarn, pnpm)",
+      "Dedicated terminal for script execution",
+      "Keyboard shortcut integration",
+      "Native VS Code selection experience",
+      "Frequently used scripts tracking",
+      "Automatic package.json detection"
+    ],
+    techDetails: "Built with TypeScript and the VS Code Extension API. Implements a smart detection algorithm to identify the appropriate package manager and provides a native VS Code UI experience.",
+    screenshots: [
+      "/images/placeholder.svg",
+      "/images/placeholder.svg"
+    ]
+  },
+  {
+    id: 8,
+    title: "AI Tree",
+    description:
+      "A platform for learning and sharing knowledge about artificial intelligence.",
+    longDescription:
+      "AI Tree is a community-driven platform designed to help users create, share, and explore AI knowledge. It features an interactive knowledge tree visualization, personalized learning paths, and collaboration tools.",
+    image: "/images/placeholder.svg",
+    tags: ["Next.js", "React", "TypeScript", "Supabase", "TailwindCSS"],
+    category: "ai",
+    demoUrl: "",
+    githubUrl: "https://github.com/pedrocarlos-ti/ai-tree",
+    features: [
+      "Create and share AI knowledge branches",
+      "Learn and explore AI knowledge from other users",
+      "Upvote and comment on favorite branches",
+      "Interactive knowledge tree visualization",
+      "User-friendly content creation tools",
+      "Community-driven learning paths"
+    ],
+    techDetails: "Built with Next.js, React, and TypeScript on the frontend. Uses Tailwind CSS and Mantine UI for styling. Backend powered by Supabase with PostgreSQL database and Edge Functions.",
+    screenshots: [
+      "/images/placeholder.svg",
+      "/images/placeholder.svg"
+    ]
+  },
+  {
+    id: 9,
+    title: "Electron Draw",
+    description:
+      "Professional screen annotation tool built with Electron.",
+    longDescription:
+      "Electron Draw is a desktop application that allows users to annotate their screen with professional drawing tools. It features a transparent window overlay, customizable drawing tools, and global shortcuts for quick access.",
+    image: "/images/placeholder.svg",
+    tags: ["Electron", "TypeScript", "Desktop App", "UI/UX"],
+    category: "web",
+    demoUrl: "",
+    githubUrl: "https://github.com/pedrocarlos-ti/electron-draw",
+    features: [
+      "Transparent window overlay for screen annotation",
+      "Professional drawing tools (pen, shapes, text)",
+      "Customizable colors and line thickness",
+      "Global shortcuts for quick access",
+      "Multi-monitor support"
+    ],
+    techDetails: "Built with Electron and TypeScript. Implements custom drawing tools and transparent window management. Designed for both casual and professional use cases.",
+    screenshots: [
+      "/images/placeholder.svg",
+      "/images/placeholder.svg"
+    ]
+  }
 ];
 
 const categories = [
@@ -193,7 +271,7 @@ export default function ProjectsPage() {
         >
           <h1 className="mb-4 text-4xl font-bold">My Projects</h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            A showcase of my recent work, side projects, and experiments
+            A showcase of my personal work and open source projects focusing on web development, TypeScript, and AI integration.
           </p>
         </motion.div>
 
