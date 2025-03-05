@@ -214,9 +214,8 @@ export function AboutSection() {
 
                   <h3 className="text-2xl font-bold mb-2">Pedro Santos</h3>
                   <p className="text-muted-foreground mb-4 text-center">
-                    Frontend Developer at Aubay Portugal, specializing in React,
-                    Next.js, and AI integration with 8+ years of experience in
-                    technology
+                    Software Engineer specializing in React, Next.js, and AI
+                    integration with 8+ years of experience in technology
                   </p>
 
                   <div className="grid grid-cols-1 gap-3 w-full">
