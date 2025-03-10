@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -18,7 +19,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Pedro Santos | Frontend Developer & Melro.io Founder",
-  description: "Frontend Developer specializing in React, Next.js, and AI. Founder of Melro.io, providing AI-powered solutions for businesses.",
+  description:
+    "Frontend Developer specializing in React, Next.js, and AI. Founder of Melro.io, providing AI-powered solutions for businesses.",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
@@ -43,6 +45,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <Toaster />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
