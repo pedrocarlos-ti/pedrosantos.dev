@@ -73,7 +73,7 @@ export default function Home() {
       </motion.section>
 
       {/* Featured Projects Section */}
-      <ProjectsSection projects={featuredProjects} />
+      {/* <ProjectsSection projects={featuredProjects} /> */}
 
       {/* About Me Section */}
       <AboutSection />
