@@ -3,40 +3,9 @@
 import { motion } from "framer-motion";
 import { TechCarousel } from "@/components/sections/TechCarousel";
 import { HeroSection } from "@/components/sections/home/HeroSection";
-import { ProjectsSection } from "@/components/sections/home/ProjectsSection";
+
 import { AboutSection } from "@/components/sections/home/AboutSection";
 import { ContactSection } from "@/components/sections/home/ContactSection";
-
-// Sample project data
-const featuredProjects = [
-  {
-    id: 1,
-    title: "Select Script",
-    description:
-      "A VS Code extension providing a quick and intuitive dropdown selector for your package.json scripts.",
-    image: "/images/placeholder.svg",
-    tags: ["TypeScript", "VS Code Extension", "Developer Tools"],
-    link: "/projects",
-  },
-  {
-    id: 2,
-    title: "AI Tree",
-    description:
-      "A platform for learning and sharing knowledge about AI with interactive visualizations and community features.",
-    image: "/images/placeholder.svg",
-    tags: ["Next.js", "React", "TypeScript", "Supabase"],
-    link: "/projects",
-  },
-  {
-    id: 3,
-    title: "Electron Draw",
-    description:
-      "Professional screen annotation tool built with Electron featuring transparent window overlay and drawing tools.",
-    image: "/images/placeholder.svg",
-    tags: ["Electron", "TypeScript", "Desktop App", "UI/UX"],
-    link: "/projects",
-  },
-];
 
 export default function Home() {
   return (
@@ -71,9 +40,6 @@ export default function Home() {
           </div>
         </div>
       </motion.section>
-
-      {/* Featured Projects Section */}
-      {/* <ProjectsSection projects={featuredProjects} /> */}
 
       {/* About Me Section */}
       <AboutSection />
