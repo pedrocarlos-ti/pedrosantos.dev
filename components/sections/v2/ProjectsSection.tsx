@@ -54,12 +54,17 @@ export function V2ProjectsSection({ projects }: V2ProjectsSectionProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 * i }}
+              whileHover={{ 
+                y: -8,
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}
               className="group relative"
+              style={{ transformStyle: "preserve-3d" }}
             >
-              {/* Gradient border on hover */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 via-cyan-400/50 to-primary/50 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+              {/* Subtle glow border on hover */}
+              <div className="absolute -inset-[1px] bg-gradient-to-r from-primary/30 to-cyan-400/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              <div className="relative overflow-hidden rounded-2xl bg-card border border-border/50 hover:border-transparent transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+              <div className="relative overflow-hidden rounded-2xl bg-card border border-border/50 group-hover:border-primary/20 transition-all duration-500 hover:shadow-xl hover:shadow-primary/10">
                 {/* Project number indicator */}
                 <div className="absolute top-4 left-4 z-10">
                   <span className="text-4xl font-bold text-white/20 group-hover:text-white/40 transition-colors duration-300">
