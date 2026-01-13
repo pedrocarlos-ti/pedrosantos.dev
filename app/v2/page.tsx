@@ -349,12 +349,12 @@ export default function V2LandingPage() {
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-40 right-20 w-3 h-3 rounded-full bg-purple-500/30"
+          className="absolute top-40 right-20 w-3 h-3 rounded-full bg-cyan-500/30"
           animate={{ y: [0, 15, 0], opacity: [0.3, 0.8, 0.3] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
         <motion.div
-          className="absolute bottom-32 left-1/4 w-1.5 h-1.5 rounded-full bg-blue-500/40"
+          className="absolute bottom-32 left-1/4 w-1.5 h-1.5 rounded-full bg-teal-500/40"
           animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
@@ -426,7 +426,36 @@ export default function V2LandingPage() {
                   </Button>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-border/50">
+                {/* Animated Stats */}
+                <div className="mt-6 pt-6 border-t border-border/50 grid grid-cols-3 gap-4">
+                  {[
+                    { value: "8+", label: "Years" },
+                    { value: "50+", label: "Projects" },
+                    { value: "12+", label: "Technologies" },
+                  ].map((stat, i) => (
+                    <motion.div
+                      key={stat.label}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * i }}
+                      className="text-center"
+                    >
+                      <motion.span 
+                        className="text-2xl font-bold text-primary block"
+                        initial={{ scale: 0.5 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 * i, type: "spring", stiffness: 200 }}
+                      >
+                        {stat.value}
+                      </motion.span>
+                      <span className="text-xs text-muted-foreground">{stat.label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-border/50">
                   <p className="text-xs text-muted-foreground">
                     Based in Covilhã, Portugal
                   </p>
