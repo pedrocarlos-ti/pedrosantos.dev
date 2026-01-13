@@ -147,7 +147,7 @@ export default function V2LandingPage() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-purple-500/8 blur-[120px]"
+          className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-cyan-500/8 blur-[120px]"
           animate={{ 
             x: [0, -40, 0], 
             y: [0, 30, 0],
@@ -156,7 +156,7 @@ export default function V2LandingPage() {
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
         <motion.div
-          className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full bg-blue-500/8 blur-[80px]"
+          className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full bg-teal-500/8 blur-[80px]"
           animate={{ 
             x: [0, 20, 0], 
             y: [0, 40, 0],
@@ -234,7 +234,7 @@ export default function V2LandingPage() {
               className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
             >
               <div className="group relative">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-purple-500 to-primary rounded-full opacity-60 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-cyan-400 to-primary rounded-full opacity-60 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
                 <Button
                   size="lg"
                   className="relative rounded-full px-8 h-12 text-base font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all bg-primary"

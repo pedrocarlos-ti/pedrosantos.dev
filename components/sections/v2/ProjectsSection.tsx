@@ -57,7 +57,7 @@ export function V2ProjectsSection({ projects }: V2ProjectsSectionProps) {
               className="group relative"
             >
               {/* Gradient border on hover */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 via-purple-500/50 to-primary/50 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 via-cyan-400/50 to-primary/50 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
               
               <div className="relative overflow-hidden rounded-2xl bg-card border border-border/50 hover:border-transparent transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
                 {/* Project number indicator */}
