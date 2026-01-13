@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 import { Github, Linkedin, Mail, Twitter, ArrowRight, ChevronDown, Download } from "lucide-react";
 import Link from "next/link";
 import { TechGrid } from "@/components/sections/v2/TechGrid";
@@ -236,25 +237,22 @@ export default function V2LandingPage() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
             >
-              <div className="group relative">
+              <MagneticButton
+                onClick={() => scrollToSection("about")}
+                className="group relative"
+              >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-cyan-400 to-primary rounded-full opacity-60 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-                <Button
-                  size="lg"
-                  className="relative rounded-full px-8 h-12 text-base font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all bg-primary"
-                  onClick={() => scrollToSection("about")}
-                >
+                <span className="relative inline-flex items-center rounded-full px-8 h-12 text-base font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all bg-primary text-primary-foreground">
                   About Me
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-full px-8 h-12 text-base font-medium hover:bg-accent transition-all"
+                </span>
+              </MagneticButton>
+              <MagneticButton
                 onClick={() => scrollToSection("contact")}
+                className="rounded-full px-8 h-12 text-base font-medium border border-border hover:bg-accent transition-all"
               >
                 Get in Touch
-              </Button>
+              </MagneticButton>
             </motion.div>
 
             {/* Social Links */}
