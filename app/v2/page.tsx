@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Twitter, ArrowRight, ChevronDown } from "lucide-react";
+import { Github, Linkedin, Mail, Twitter, ArrowRight, ChevronDown, Download } from "lucide-react";
 import Link from "next/link";
 import { TechCarousel } from "@/components/sections/TechCarousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -136,6 +136,34 @@ export default function V2LandingPage() {
         {/* Subtle gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
         
+        {/* Floating decorative blurred circles */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-primary/10 blur-[100px]"
+          animate={{ 
+            x: [0, 30, 0], 
+            y: [0, -20, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-purple-500/8 blur-[120px]"
+          animate={{ 
+            x: [0, -40, 0], 
+            y: [0, 30, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full bg-blue-500/8 blur-[80px]"
+          animate={{ 
+            x: [0, 20, 0], 
+            y: [0, 40, 0],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+        
         {/* Animated grid pattern */}
         <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
           <div 
@@ -176,7 +204,7 @@ export default function V2LandingPage() {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6"
             >
               <span className="block">Frontend Developer</span>
-              <span className="block text-muted-foreground/70">specializing in React & AI</span>
+              <span className="block bg-gradient-to-r from-muted-foreground/70 via-primary/60 to-muted-foreground/70 bg-clip-text text-transparent">specializing in React & AI</span>
             </motion.h1>
 
             {/* Description */}
@@ -205,14 +233,17 @@ export default function V2LandingPage() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
             >
-              <Button
-                size="lg"
-                className="rounded-full px-8 h-12 text-base font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
-                onClick={() => scrollToSection("about")}
-              >
-                About Me
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <div className="group relative">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-purple-500 to-primary rounded-full opacity-60 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+                <Button
+                  size="lg"
+                  className="relative rounded-full px-8 h-12 text-base font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all bg-primary"
+                  onClick={() => scrollToSection("about")}
+                >
+                  About Me
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
               <Button
                 variant="outline"
                 size="lg"
@@ -288,9 +319,12 @@ export default function V2LandingPage() {
             <span className="text-sm font-medium text-primary uppercase tracking-widest mb-4 block">
               Technologies
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              Technical Expertise
-            </h2>
+            <div className="relative inline-block">
+              <div className="absolute -inset-x-8 -inset-y-4 bg-gradient-to-r from-transparent via-primary/10 to-transparent blur-2xl" />
+              <h2 className="relative text-3xl md:text-4xl lg:text-5xl font-bold">
+                Technical Expertise
+              </h2>
+            </div>
           </motion.div>
           <TechCarousel />
         </div>
@@ -302,12 +336,28 @@ export default function V2LandingPage() {
       {/* About Section */}
       <motion.section
         id="about"
-        className="py-24 md:py-32"
+        className="py-24 md:py-32 relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
+        {/* Decorative animated elements */}
+        <motion.div
+          className="absolute top-20 left-10 w-2 h-2 rounded-full bg-primary/40"
+          animate={{ y: [0, -20, 0], opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-40 right-20 w-3 h-3 rounded-full bg-purple-500/30"
+          animate={{ y: [0, 15, 0], opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.div
+          className="absolute bottom-32 left-1/4 w-1.5 h-1.5 rounded-full bg-blue-500/40"
+          animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -327,7 +377,7 @@ export default function V2LandingPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start max-w-6xl mx-auto">
             {/* Profile Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -335,7 +385,7 @@ export default function V2LandingPage() {
               viewport={{ once: true }}
               className="lg:col-span-4"
             >
-              <div className="sticky top-24 p-8 rounded-3xl bg-card border border-border/50 text-center">
+              <div className="sticky top-24 p-6 md:p-8 rounded-2xl bg-card border border-border/50 text-center">
                 <motion.div
                   className="relative mb-6 inline-block"
                   whileHover={{ scale: 1.02 }}
@@ -356,13 +406,25 @@ export default function V2LandingPage() {
                   Software Engineer specializing in React, Next.js, and AI integration
                 </p>
 
-                <Button 
-                  className="w-full rounded-full" 
-                  onClick={() => scrollToSection("contact")}
-                >
-                  <Mail className="mr-2 h-4 w-4" />
-                  Contact Me
-                </Button>
+                <div className="flex flex-col gap-3">
+                  <Button 
+                    className="w-full rounded-full" 
+                    onClick={() => scrollToSection("contact")}
+                  >
+                    <Mail className="mr-2 h-4 w-4" />
+                    Contact Me
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    className="w-full rounded-full" 
+                    asChild
+                  >
+                    <Link href="/resume.pdf" target="_blank">
+                      <Download className="mr-2 h-4 w-4" />
+                      Download Resume
+                    </Link>
+                  </Button>
+                </div>
 
                 <div className="mt-6 pt-6 border-t border-border/50">
                   <p className="text-xs text-muted-foreground">
@@ -380,7 +442,7 @@ export default function V2LandingPage() {
               transition={{ delay: 0.1 }}
               className="lg:col-span-8"
             >
-              <div className="rounded-3xl bg-card border border-border/50 p-6 md:p-8">
+              <div className="rounded-2xl bg-card border border-border/50 p-6 md:p-8">
                 <Tabs defaultValue="skills" className="w-full">
                   <TabsList className="grid w-full grid-cols-4 mb-8 bg-muted/50 p-1 rounded-full">
                     <TabsTrigger value="skills" className="rounded-full text-sm">Skills</TabsTrigger>

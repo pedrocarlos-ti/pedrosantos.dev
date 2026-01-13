@@ -1,6 +1,5 @@
 "use client";
 
-import { ThemeToggle } from "@/components/theme-toggle";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -114,14 +113,11 @@ export function Header() {
               <span>Melro.io</span>
             </a>
 
-            <ThemeToggle />
           </div>
 
           {/* Mobile Navigation */}
           <div className="md:hidden">
-            <div className="flex items-center">
-              <ThemeToggle />
-              <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
                   <Button
                     variant="ghost"
@@ -215,8 +211,7 @@ export function Header() {
                     </div>
                   </div>
                 </SheetContent>
-              </Sheet>
-            </div>
+            </Sheet>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -56,7 +56,17 @@ export function V2ProjectsSection({ projects }: V2ProjectsSectionProps) {
               transition={{ duration: 0.5, delay: 0.1 * i }}
               className="group relative"
             >
-              <div className="relative overflow-hidden rounded-2xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+              {/* Gradient border on hover */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 via-purple-500/50 to-primary/50 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+              
+              <div className="relative overflow-hidden rounded-2xl bg-card border border-border/50 hover:border-transparent transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+                {/* Project number indicator */}
+                <div className="absolute top-4 left-4 z-10">
+                  <span className="text-4xl font-bold text-white/20 group-hover:text-white/40 transition-colors duration-300">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                
                 {/* Image */}
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <Image
@@ -67,23 +77,34 @@ export function V2ProjectsSection({ projects }: V2ProjectsSectionProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  {/* Hover overlay button */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  {/* Hover overlay with split buttons */}
+                  <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <Button
                       size="sm"
                       className="rounded-full bg-white text-black hover:bg-white/90 shadow-lg"
                       asChild
                     >
                       <Link href={project.link}>
-                        View Project
-                        <ArrowUpRight className="ml-1 h-4 w-4" />
+                        <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
+                        Live Demo
+                      </Link>
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="rounded-full bg-black/50 text-white border-white/30 hover:bg-black/70 hover:text-white shadow-lg backdrop-blur-sm"
+                      asChild
+                    >
+                      <Link href="https://github.com/pedrocarlos-ti" target="_blank" rel="noopener noreferrer">
+                        <Github className="mr-1.5 h-3.5 w-3.5" />
+                        Source
                       </Link>
                     </Button>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-6 md:p-8">
                   <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
                     {project.title}
                   </h3>

@@ -104,13 +104,31 @@ export function V2ContactSection() {
   return (
     <motion.section
       id="contact"
-      className="py-24 md:py-32 bg-muted/30"
+      className="py-24 md:py-32 bg-muted/30 relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      <div className="container mx-auto px-4 md:px-6">
+      {/* Decorative gradient mesh background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/3 rounded-full blur-[150px]" />
+      </div>
+      
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 1px)`,
+            backgroundSize: '40px 40px',
+          }}
+        />
+      </div>
+      
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -128,7 +146,7 @@ export function V2ContactSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 max-w-6xl mx-auto">
           {/* Contact Info */}
           <motion.div
             className="lg:col-span-2"
@@ -136,10 +154,10 @@ export function V2ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="rounded-3xl bg-card border border-border/50 p-8 h-full">
+            <div className="rounded-2xl bg-card border border-border/50 p-6 md:p-8 h-full">
               <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
               
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {contactInfo.map((item, i) => (
                   <motion.div
                     key={item.label}
@@ -147,9 +165,9 @@ export function V2ContactSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex items-start gap-4"
+                    className="group flex items-start gap-4 p-3 -mx-3 rounded-xl hover:bg-primary/5 transition-all duration-300 cursor-pointer"
                   >
-                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary shrink-0">
+                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                       {item.icon}
                     </div>
                     <div>
@@ -193,7 +211,7 @@ export function V2ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="rounded-3xl bg-card border border-border/50 p-8">
+            <div className="rounded-2xl bg-card border border-border/50 p-6 md:p-8">
               <h3 className="text-xl font-semibold mb-2">Send a Message</h3>
               <p className="text-sm text-muted-foreground mb-6">
                 Fill out the form and I&apos;ll get back to you as soon as possible.
@@ -211,7 +229,7 @@ export function V2ContactSection() {
                           <FormControl>
                             <Input
                               placeholder="Your name"
-                              className="rounded-xl h-11 bg-background/50"
+                              className="rounded-2xl h-11 bg-background/50"
                               {...field}
                             />
                           </FormControl>
@@ -228,7 +246,7 @@ export function V2ContactSection() {
                           <FormControl>
                             <Input
                               placeholder="your@email.com"
-                              className="rounded-xl h-11 bg-background/50"
+                              className="rounded-2xl h-11 bg-background/50"
                               {...field}
                             />
                           </FormControl>
@@ -246,7 +264,7 @@ export function V2ContactSection() {
                         <FormControl>
                           <Input
                             placeholder="What's this about?"
-                            className="rounded-xl h-11 bg-background/50"
+                            className="rounded-2xl h-11 bg-background/50"
                             {...field}
                           />
                         </FormControl>
@@ -263,7 +281,7 @@ export function V2ContactSection() {
                         <FormControl>
                           <Textarea
                             placeholder="Tell me about your project, questions, or feedback..."
-                            className="min-h-32 resize-none rounded-xl bg-background/50"
+                            className="min-h-32 resize-none rounded-2xl bg-background/50"
                             {...field}
                           />
                         </FormControl>
@@ -296,7 +314,7 @@ export function V2ContactSection() {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`mt-6 p-4 rounded-xl flex items-center gap-3 ${
+                  className={`mt-6 p-4 rounded-2xl flex items-center gap-3 ${
                     formStatus.type === "success"
                       ? "bg-green-500/10 text-green-600 dark:text-green-400"
                       : "bg-red-500/10 text-red-600 dark:text-red-400"
