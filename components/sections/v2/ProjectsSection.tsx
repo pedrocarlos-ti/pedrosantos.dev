@@ -13,6 +13,7 @@ interface Project {
   image: string;
   tags: string[];
   link: string;
+  gradient?: string;
 }
 
 interface V2ProjectsSectionProps {
@@ -73,12 +74,12 @@ export function V2ProjectsSection({ projects }: V2ProjectsSectionProps) {
                 </div>
                 
                 {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                <div className={`relative aspect-[4/3] overflow-hidden bg-gradient-to-br ${project.gradient || 'from-muted to-muted'}`}>
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105 mix-blend-overlay opacity-50"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   

@@ -22,6 +22,7 @@ const featuredProjects = [
     image: "/images/placeholder.svg",
     tags: ["TypeScript", "VS Code Extension", "Developer Tools"],
     link: "/projects",
+    gradient: "from-cyan-500/20 via-teal-500/10 to-emerald-500/20",
   },
   {
     id: 2,
@@ -30,6 +31,7 @@ const featuredProjects = [
     image: "/images/placeholder.svg",
     tags: ["Next.js", "React", "TypeScript", "Supabase"],
     link: "/projects",
+    gradient: "from-blue-500/20 via-indigo-500/10 to-violet-500/20",
   },
   {
     id: 3,
@@ -38,6 +40,7 @@ const featuredProjects = [
     image: "/images/placeholder.svg",
     tags: ["Electron", "TypeScript", "Desktop App", "UI/UX"],
     link: "/projects",
+    gradient: "from-orange-500/20 via-rose-500/10 to-pink-500/20",
   },
 ];
 
