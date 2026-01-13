@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Twitter, ArrowRight, ChevronDown, Download } from "lucide-react";
 import Link from "next/link";
-import { TechCarousel } from "@/components/sections/TechCarousel";
+import { TechGrid } from "@/components/sections/v2/TechGrid";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TechStack } from "@/components/sections/TechStack";
@@ -329,7 +329,7 @@ export default function V2LandingPage() {
               </h2>
             </div>
           </motion.div>
-          <TechCarousel />
+          <TechGrid />
         </div>
       </motion.section>
 
