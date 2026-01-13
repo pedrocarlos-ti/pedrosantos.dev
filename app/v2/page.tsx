@@ -200,16 +200,43 @@ export default function V2LandingPage() {
               </span>
             </motion.div>
 
-            {/* Main headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6"
-            >
-              <span className="block">Frontend Developer</span>
-              <span className="block bg-gradient-to-r from-muted-foreground/70 via-primary/60 to-muted-foreground/70 bg-clip-text text-transparent">specializing in React & AI</span>
-            </motion.h1>
+            {/* Main headline with letter animation */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
+              <span className="block overflow-hidden">
+                {"Frontend Developer".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ y: 100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.1 + i * 0.03,
+                      ease: [0.215, 0.61, 0.355, 1],
+                    }}
+                    className="inline-block"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </span>
+              <span className="block overflow-hidden mt-2">
+                {"specializing in React & AI".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ y: 100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.6 + i * 0.02,
+                      ease: [0.215, 0.61, 0.355, 1],
+                    }}
+                    className="inline-block text-muted-foreground/70"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </span>
+            </h1>
 
             {/* Description */}
             <motion.p
