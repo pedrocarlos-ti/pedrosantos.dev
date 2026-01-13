@@ -328,33 +328,59 @@ export default function V2LandingPage() {
         </motion.button>
       </section>
 
-      {/* Tech Carousel Section */}
+      {/* Tech Section with dramatic entrance */}
       <motion.section
         id="tech"
-        className="py-24 md:py-32 overflow-hidden"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
+        className="py-24 md:py-32 overflow-hidden relative"
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+        viewport={{ once: true, margin: "-100px" }}
       >
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center mb-16"
           >
-            <span className="text-sm font-medium text-primary uppercase tracking-widest mb-4 block">
+            <motion.span 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-sm font-medium text-primary uppercase tracking-widest mb-4 block"
+            >
               Technologies
-            </span>
+            </motion.span>
             <div className="relative inline-block">
-              <div className="absolute -inset-x-8 -inset-y-4 bg-gradient-to-r from-transparent via-primary/10 to-transparent blur-2xl" />
-              <h2 className="relative text-3xl md:text-4xl lg:text-5xl font-bold">
+              <motion.div 
+                className="absolute -inset-x-8 -inset-y-4 bg-gradient-to-r from-transparent via-primary/10 to-transparent blur-2xl"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              />
+              <motion.h2 
+                className="relative text-3xl md:text-4xl lg:text-5xl font-bold"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
                 Technical Expertise
-              </h2>
+              </motion.h2>
             </div>
           </motion.div>
-          <TechGrid />
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            <TechGrid />
+          </motion.div>
         </div>
       </motion.section>
 
