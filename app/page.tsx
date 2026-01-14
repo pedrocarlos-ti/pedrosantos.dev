@@ -127,7 +127,7 @@ const certificationItems = [
   },
 ];
 
-export default function V2LandingPage() {
+export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
