@@ -92,12 +92,12 @@ export function V2ContactSection() {
       icon: <Twitter className="h-5 w-5" />,
       label: "Twitter",
       value: "@pcsantos_dev",
-      href: "https://twitter.com/pcsantos_dev",
+      href: "https://x.com/pcgs_tsx",
     },
     {
       icon: <MapPin className="h-5 w-5" />,
       label: "Location",
-      value: "Covilhã, Portugal",
+      value: "Belmonte, Portugal",
     },
   ];
 

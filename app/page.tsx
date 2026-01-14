@@ -60,7 +60,7 @@ const featuredProjects = [
 
 const experienceItems = [
   {
-    title: "Founder & Frontend Developer",
+    title: "Founder & Software Engineer",
     subtitle: "Melro.io",
     date: "2023 - Present",
     icon: <Briefcase className="h-4 w-4" />,
@@ -68,7 +68,7 @@ const experienceItems = [
       "Founded Melro.io, a technology company focused on providing customized software solutions for local businesses.",
   },
   {
-    title: "Frontend Developer",
+    title: "Software Engineer",
     subtitle: "Aubay Portugal",
     date: "2021 - Present",
     icon: <Briefcase className="h-4 w-4" />,
@@ -234,7 +234,7 @@ export default function HomePage() {
             {/* Main headline with letter animation */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
               <span className="block overflow-hidden">
-                {"Frontend Developer".split("").map((char, i) => (
+                {"Software Engineer".split("").map((char, i) => (
                   <motion.span
                     key={i}
                     initial={{ y: 100, opacity: 0 }}
@@ -251,7 +251,7 @@ export default function HomePage() {
                 ))}
               </span>
               <span className="block overflow-hidden mt-2">
-                {"specializing in React & AI".split("").map((char, i) => (
+                {"building AI-powered web ".split("").map((char, i) => (
                   <motion.span
                     key={i}
                     initial={{ y: 100, opacity: 0 }}
@@ -266,6 +266,32 @@ export default function HomePage() {
                     {char === " " ? "\u00A0" : char}
                   </motion.span>
                 ))}
+                <motion.span
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.6 + "building AI-powered web ".length * 0.02,
+                    ease: [0.215, 0.61, 0.355, 1],
+                  }}
+                  className="inline-block text-muted-foreground/70 whitespace-nowrap"
+                >
+                  {"experiences".split("").map((char, i) => (
+                    <motion.span
+                      key={`exp-${i}`}
+                      initial={{ y: 100, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: 0.6 + ("building AI-powered web ".length + i) * 0.02,
+                        ease: [0.215, 0.61, 0.355, 1],
+                      }}
+                      className="inline-block"
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </motion.span>
               </span>
             </h1>
 
@@ -280,8 +306,8 @@ export default function HomePage() {
               <span className="text-foreground font-semibold">
                 Pedro Santos
               </span>
-              , crafting exceptional digital experiences with modern web
-              technologies. Founder of{" "}
+              , a software engineer crafting exceptional digital experiences with modern web
+              technologies and AI integration. Also founder of{" "}
               <Link
                 href="https://melro.io"
                 target="_blank"
@@ -543,8 +569,7 @@ export default function HomePage() {
 
                 <h3 className="text-2xl font-bold mb-2">Pedro Santos</h3>
                 <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
-                  Software Engineer specializing in React, Next.js, and AI
-                  integration
+                  Software Engineer building AI-powered web experiences with React, Next.js, and modern technologies
                 </p>
 
                 <div className="flex flex-col gap-3">
@@ -604,7 +629,7 @@ export default function HomePage() {
 
                 <div className="mt-4 pt-4 border-t border-border/50">
                   <p className="text-xs text-muted-foreground">
-                    Based in Covilhã, Portugal
+                    Based in Belmonte, Portugal
                   </p>
                 </div>
               </div>
