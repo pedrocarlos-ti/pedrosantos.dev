@@ -66,7 +66,7 @@ export function V2ProjectsSection({ projects }: V2ProjectsSectionProps) {
           </motion.p>
         </motion.div>
 
-        <div className="grid gap-6 md:gap-8 md:grid-cols-3 max-w-6xl mx-auto">
+        <div className="grid gap-6 md:gap-8 md:grid-cols-3 max-w-6xl mx-auto items-stretch">
           {projects.map((project, i) => (
             <motion.article
               key={project.id}
@@ -84,7 +84,7 @@ export function V2ProjectsSection({ projects }: V2ProjectsSectionProps) {
               {/* Subtle glow border on hover */}
               <div className="absolute -inset-[1px] bg-gradient-to-r from-primary/30 to-cyan-400/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              <div className="relative overflow-hidden rounded-2xl bg-card border border-border/50 group-hover:border-primary/20 transition-all duration-500 hover:shadow-xl hover:shadow-primary/10">
+              <div className="relative overflow-hidden rounded-2xl bg-card border border-border/50 group-hover:border-primary/20 transition-all duration-500 hover:shadow-xl hover:shadow-primary/10 h-full flex flex-col">
                 {/* Project number indicator */}
                 <div className="absolute top-4 left-4 z-10">
                   <span className="text-4xl font-bold text-white/20 group-hover:text-white/40 transition-colors duration-300">
@@ -129,17 +129,17 @@ export function V2ProjectsSection({ projects }: V2ProjectsSectionProps) {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 md:p-8">
+                <div className="p-6 md:p-8 flex flex-col flex-1">
                   <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2 flex-1">
                     {project.description}
                   </p>
                   
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.slice(0, 3).map((tag) => (
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.tags.slice(0, 2).map((tag) => (
                       <span
                         key={tag}
                         className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary"
