@@ -1,0 +1,64 @@
+export function generatePersonStructuredData() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Pedro Santos",
+    jobTitle: "Software Engineer",
+    url: "https://pedrosantos.dev",
+    sameAs: [
+      "https://github.com/pedrocarlos-ti",
+      "https://linkedin.com/in/pedro-santos",
+      "https://x.com/pcgs_tsx",
+    ],
+    email: "pedrocarlos.ti@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Belmonte",
+      addressCountry: "PT",
+    },
+    worksFor: {
+      "@type": "Organization",
+      name: "Melro.io",
+      url: "https://melro.io",
+    },
+    alumniOf: [
+      {
+        "@type": "EducationalOrganization",
+        name: "Rocketseat",
+      },
+      {
+        "@type": "EducationalOrganization",
+        name: "Coursera",
+      },
+      {
+        "@type": "EducationalOrganization",
+        name: "Unibratec",
+      },
+    ],
+    knowsAbout: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Web Development",
+      "AI Integration",
+      "Frontend Development",
+      "Software Engineering",
+    ],
+  };
+}
+
+export function generateWebSiteStructuredData() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Pedro Santos - Portfolio",
+    url: "https://pedrosantos.dev",
+    description:
+      "Software Engineer building AI-powered web experiences with React, Next.js, and modern technologies.",
+    author: {
+      "@type": "Person",
+      name: "Pedro Santos",
+    },
+  };
+}
