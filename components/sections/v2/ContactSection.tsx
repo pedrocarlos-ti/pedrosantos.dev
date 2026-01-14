@@ -13,7 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { Send, MapPin, Mail, Linkedin, Twitter, CheckCircle2, XCircle } from "lucide-react";
+import { Send, MapPin, Mail, Linkedin, CheckCircle2, XCircle } from "lucide-react";
+import { XIcon } from "@/components/ui/x-icon";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -85,13 +86,13 @@ export function V2ContactSection() {
     {
       icon: <Linkedin className="h-5 w-5" />,
       label: "LinkedIn",
-      value: "pedrocarlos-santos",
-      href: "https://linkedin.com/in/pedrocarlos-santos",
+      value: "pedro-santos",
+      href: "https://linkedin.com/in/pedro-santos",
     },
     {
-      icon: <Twitter className="h-5 w-5" />,
-      label: "Twitter",
-      value: "@pcsantos_dev",
+      icon: <XIcon className="h-5 w-5" />,
+      label: "X",
+      value: "@pcgs_tsx",
       href: "https://x.com/pcgs_tsx",
     },
     {
@@ -185,35 +186,42 @@ export function V2ContactSection() {
               <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
               
               <div className="space-y-4">
-                {contactInfo.map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="group flex items-start gap-4 p-3 -mx-3 rounded-xl hover:bg-primary/5 transition-all duration-300 cursor-pointer"
-                  >
-                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">{item.label}</p>
-                      {item.href ? (
-                        <Link
-                          href={item.href}
-                          target={item.href.startsWith("http") ? "_blank" : undefined}
-                          rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                          className="font-medium hover:text-primary transition-colors"
-                        >
-                          {item.value}
-                        </Link>
-                      ) : (
+                {contactInfo.map((item, i) => {
+                  const content = (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="group flex items-start gap-4 p-3 -mx-3 rounded-xl hover:bg-primary/5 transition-all duration-300"
+                    >
+                      <div className="p-2.5 rounded-xl bg-primary/10 text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">{item.label}</p>
                         <p className="font-medium">{item.value}</p>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
+                      </div>
+                    </motion.div>
+                  );
+
+                  if (item.href) {
+                    return (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        target={item.href.startsWith("http") ? "_blank" : undefined}
+                        rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                        className="block"
+                      >
+                        {content}
+                      </Link>
+                    );
+                  }
+
+                  return content;
+                })}
               </div>
 
               <div className="mt-8 pt-8 border-t border-border/50">

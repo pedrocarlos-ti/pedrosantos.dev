@@ -9,11 +9,11 @@ import {
   Github,
   Linkedin,
   Mail,
-  Twitter,
   ArrowRight,
   ChevronDown,
   Download,
 } from "lucide-react";
+import { XIcon } from "@/components/ui/x-icon";
 import Link from "next/link";
 import { TechGrid } from "@/components/sections/v2/TechGrid";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -357,13 +357,13 @@ export default function HomePage() {
                 },
                 {
                   icon: <Linkedin className="h-5 w-5" />,
-                  href: "https://linkedin.com/in/pedrocarlos-santos",
+                  href: "https://linkedin.com/in/pedro-santos",
                   label: "LinkedIn",
                 },
                 {
-                  icon: <Twitter className="h-5 w-5" />,
-                  href: "https://twitter.com/pcsantos_dev",
-                  label: "Twitter",
+                  icon: <XIcon className="h-5 w-5" />,
+                  href: "https://x.com/pcgs_tsx",
+                  label: "X",
                 },
                 {
                   icon: <Mail className="h-5 w-5" />,
