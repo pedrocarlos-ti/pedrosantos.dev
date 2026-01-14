@@ -30,6 +30,136 @@ function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
+// Generate HTML email template
+function generateEmailTemplate(
+  name: string,
+  email: string,
+  subject: string,
+  message: string,
+  timestamp: string
+): string {
+  const escapedName = escapeHtml(name);
+  const escapedEmail = escapeHtml(email);
+  const escapedSubject = escapeHtml(subject);
+  const escapedMessage = escapeHtml(message);
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Contact Form Submission</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f8fafc; padding: 48px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); overflow: hidden;">
+          <!-- Header -->
+          <tr>
+            <td style="background-color: #0f172a; padding: 32px 40px; text-align: left;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 20px; font-weight: 600; letter-spacing: -0.3px;">
+                New Contact Form Message
+              </h1>
+            </td>
+          </tr>
+          
+          <!-- Content -->
+          <tr>
+            <td style="padding: 40px;">
+              <!-- Sender Info -->
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td style="padding-bottom: 32px;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td style="width: 56px; vertical-align: top;">
+                          <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border-radius: 12px; display: inline-block; text-align: center; line-height: 56px; color: #ffffff; font-size: 22px; font-weight: 600;">
+                            ${escapedName.charAt(0).toUpperCase()}
+                          </div>
+                        </td>
+                        <td style="vertical-align: top; padding-left: 16px;">
+                          <h2 style="margin: 0 0 6px 0; color: #0f172a; font-size: 18px; font-weight: 600; line-height: 1.4;">
+                            ${escapedName}
+                          </h2>
+                          <p style="margin: 0; color: #64748b; font-size: 14px; line-height: 1.5;">
+                            <a href="mailto:${escapedEmail}" style="color: #6366f1; text-decoration: none; font-weight: 500;">
+                              ${escapedEmail}
+                            </a>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                
+                <!-- Subject -->
+                <tr>
+                  <td style="padding-bottom: 24px;">
+                    <p style="margin: 0 0 8px 0; color: #94a3b8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                      Subject
+                    </p>
+                    <p style="margin: 0; color: #0f172a; font-size: 16px; font-weight: 500; line-height: 1.5;">
+                      ${escapedSubject}
+                    </p>
+                  </td>
+                </tr>
+                
+                <!-- Message -->
+                <tr>
+                  <td style="padding-top: 24px; border-top: 1px solid #e2e8f0;">
+                    <p style="margin: 0 0 12px 0; color: #94a3b8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                      Message
+                    </p>
+                    <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-top: 8px;">
+                      <p style="margin: 0; color: #1e293b; font-size: 15px; line-height: 1.7; white-space: pre-wrap; word-wrap: break-word;">
+                        ${escapedMessage}
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #f8fafc; padding: 24px 40px; border-top: 1px solid #e2e8f0;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td>
+                    <p style="margin: 0 0 12px 0; color: #64748b; font-size: 13px; line-height: 1.5;">
+                      <span style="color: #94a3b8; font-weight: 500;">Received:</span> ${timestamp}
+                    </p>
+                    <p style="margin: 0; color: #64748b; font-size: 13px; line-height: 1.5;">
+                      You can reply directly to this email to respond to ${escapedName}.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        
+        <!-- Bottom Spacing -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px;">
+          <tr>
+            <td style="padding-top: 24px; text-align: center;">
+              <p style="margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.5;">
+                This email was sent from your portfolio contact form at pedrosantos.dev
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+}
+
 export async function POST(request: NextRequest) {
   try {
     // Check if API key is configured
@@ -79,13 +209,16 @@ export async function POST(request: NextRequest) {
       timeZone: "UTC",
     });
 
-    // Send email using Resend
-    const { data, error } = await resend.emails.send({
-      from: RESEND_FROM_EMAIL,
-      to: [RESEND_TO_EMAIL],
-      subject: `New Contact Form Message: ${trimmedSubject}`,
-      replyTo: trimmedEmail,
-      text: `
+    // Generate email templates
+    const emailHtml = generateEmailTemplate(
+      trimmedName,
+      trimmedEmail,
+      trimmedSubject,
+      trimmedMessage,
+      timestamp
+    );
+
+    const emailText = `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 NEW CONTACT FORM SUBMISSION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -101,122 +234,16 @@ ${trimmedMessage}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 You can reply directly to this email to respond to ${trimmedName}.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      `,
-      html: `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Contact Form Submission</title>
-</head>
-<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
-  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f5f5; padding: 40px 20px;">
-    <tr>
-      <td align="center">
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
-          <!-- Header -->
-          <tr>
-            <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 32px 40px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600; letter-spacing: -0.5px;">
-                New Contact Form Submission
-              </h1>
-            </td>
-          </tr>
-          
-          <!-- Content -->
-          <tr>
-            <td style="padding: 40px;">
-              <!-- Sender Info -->
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                <tr>
-                  <td style="padding-bottom: 24px;">
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                      <tr>
-                        <td style="width: 100px; vertical-align: top;">
-                          <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 24px; font-weight: 600;">
-                            ${escapeHtml(trimmedName.charAt(0).toUpperCase())}
-                          </div>
-                        </td>
-                        <td style="vertical-align: top; padding-left: 20px;">
-                          <h2 style="margin: 0 0 8px 0; color: #1a1a1a; font-size: 20px; font-weight: 600;">
-                            ${escapeHtml(trimmedName)}
-                          </h2>
-                          <p style="margin: 0; color: #666666; font-size: 14px;">
-                            <a href="mailto:${escapeHtml(trimmedEmail)}" style="color: #667eea; text-decoration: none;">
-                              ${escapeHtml(trimmedEmail)}
-                            </a>
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-                
-                <!-- Subject -->
-                <tr>
-                  <td style="padding-bottom: 24px; border-bottom: 1px solid #e5e5e5;">
-                    <p style="margin: 0 0 8px 0; color: #999999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">
-                      Subject
-                    </p>
-                    <p style="margin: 0; color: #1a1a1a; font-size: 16px; font-weight: 500;">
-                      ${escapeHtml(trimmedSubject)}
-                    </p>
-                  </td>
-                </tr>
-                
-                <!-- Message -->
-                <tr>
-                  <td style="padding-top: 24px;">
-                    <p style="margin: 0 0 12px 0; color: #999999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">
-                      Message
-                    </p>
-                    <div style="background-color: #f9fafb; border-left: 4px solid #667eea; padding: 20px; border-radius: 4px; margin-top: 12px;">
-                      <p style="margin: 0; color: #1a1a1a; font-size: 15px; line-height: 1.6; white-space: pre-wrap; word-wrap: break-word;">
-                        ${escapeHtml(trimmedMessage)}
-                      </p>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          
-          <!-- Footer -->
-          <tr>
-            <td style="background-color: #f9fafb; padding: 24px 40px; border-top: 1px solid #e5e5e5;">
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                <tr>
-                  <td>
-                    <p style="margin: 0 0 8px 0; color: #666666; font-size: 12px;">
-                      <strong>Received:</strong> ${timestamp}
-                    </p>
-                    <p style="margin: 0; color: #999999; font-size: 12px; line-height: 1.5;">
-                      You can reply directly to this email to respond to ${escapeHtml(trimmedName)}.
-                    </p>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-        
-        <!-- Bottom Spacing -->
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600">
-          <tr>
-            <td style="padding-top: 20px; text-align: center;">
-              <p style="margin: 0; color: #999999; font-size: 12px;">
-                This email was sent from your portfolio contact form.
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-      `,
+    `.trim();
+
+    // Send email using Resend
+    const { data, error } = await resend.emails.send({
+      from: RESEND_FROM_EMAIL,
+      to: [RESEND_TO_EMAIL],
+      subject: `New Contact Form Message: ${trimmedSubject}`,
+      replyTo: trimmedEmail,
+      text: emailText,
+      html: emailHtml,
     });
 
     if (error) {
