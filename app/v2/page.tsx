@@ -23,6 +23,7 @@ import { Timeline } from "@/components/sections/Timeline";
 import { Briefcase, GraduationCap, Award } from "lucide-react";
 import { V2ContactSection } from "@/components/sections/v2/ContactSection";
 import { V2ProjectsSection } from "@/components/sections/v2/ProjectsSection";
+import { HeaderV2 } from "@/components/layout/header-v2";
 
 const featuredProjects = [
   {
@@ -149,8 +150,11 @@ export default function V2LandingPage() {
 
   return (
     <main className="relative">
+      <HeaderV2 />
+      
       {/* Hero Section - Full viewport with parallax */}
       <section
+        id="hero"
         ref={heroRef}
         className="relative min-h-[100svh] flex items-center justify-center overflow-hidden"
       >

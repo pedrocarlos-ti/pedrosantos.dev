@@ -23,6 +23,7 @@ interface V2ProjectsSectionProps {
 export function V2ProjectsSection({ projects }: V2ProjectsSectionProps) {
   return (
     <motion.section
+      id="projects"
       className="py-24 md:py-32 bg-muted/30 relative overflow-hidden"
       initial={{ opacity: 0, y: 80 }}
       whileInView={{ opacity: 1, y: 0 }}
