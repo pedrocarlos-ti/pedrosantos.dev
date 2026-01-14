@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 import {
   Github,
   Linkedin,
@@ -147,7 +148,9 @@ export default function V2LandingPage() {
   };
 
   return (
-    <main className="relative">
+    <main className="relative cursor-none">
+      <CustomCursor />
+      
       {/* Hero Section - Full viewport with parallax */}
       <section
         ref={heroRef}
