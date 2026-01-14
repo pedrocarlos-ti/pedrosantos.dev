@@ -105,16 +105,23 @@ export function V2ContactSection() {
     <motion.section
       id="contact"
       className="py-24 md:py-32 bg-muted/30 relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+      viewport={{ once: true, margin: "-100px" }}
     >
       {/* Decorative gradient mesh background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-cyan-500/5 rounded-full blur-[100px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/3 rounded-full blur-[150px]" />
+        <motion.div 
+          className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-[100px]"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
       </div>
       
       {/* Subtle grid pattern */}
@@ -130,31 +137,51 @@ export function V2ContactSection() {
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-medium text-primary uppercase tracking-widest mb-4 block">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-sm font-medium text-primary uppercase tracking-widest mb-4 block"
+          >
             Contact
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
+          >
             Get In Touch
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+          >
             Have a question or want to work together? Feel free to reach out!
-          </p>
+          </motion.p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 max-w-6xl mx-auto">
           {/* Contact Info */}
           <motion.div
             className="lg:col-span-2"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -40, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="rounded-2xl bg-card border border-border/50 p-6 md:p-8 h-full">
+            <div className="rounded-2xl bg-card/80 backdrop-blur-sm border border-border/50 p-6 md:p-8 h-full hover:border-primary/20 transition-colors duration-300">
               <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
               
               <div className="space-y-4">
@@ -207,11 +234,12 @@ export function V2ContactSection() {
           {/* Contact Form */}
           <motion.div
             className="lg:col-span-3"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="rounded-2xl bg-card border border-border/50 p-6 md:p-8">
+            <div className="rounded-2xl bg-card/80 backdrop-blur-sm border border-border/50 p-6 md:p-8 hover:border-primary/20 transition-colors duration-300">
               <h3 className="text-xl font-semibold mb-2">Send a Message</h3>
               <p className="text-sm text-muted-foreground mb-6">
                 Fill out the form and I&apos;ll get back to you as soon as possible.
