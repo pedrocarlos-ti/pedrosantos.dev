@@ -52,13 +52,17 @@ A modern, responsive portfolio website built with Next.js 15, TailwindCSS, and S
    bun install
    ```
 
-3. Create a `.env.local` file in the root directory with your Resend API key:
+3. Create a `.env.local` file in the root directory with your Resend configuration:
 
    ```
    RESEND_API_KEY=your_resend_api_key
+   RESEND_FROM_EMAIL=Contact Form <contact@mail.pedrosantos.dev>
+   RESEND_TO_EMAIL=your-email@gmail.com
    ```
 
-   You can get an API key by signing up at [Resend.com](https://resend.com)
+   - `RESEND_API_KEY`: Your Resend API key (get one at [Resend.com](https://resend.com))
+   - `RESEND_FROM_EMAIL`: The email address to send from (must use your verified domain in Resend)
+   - `RESEND_TO_EMAIL`: Your email address where contact form submissions will be sent (optional, defaults to pedrocarlos.ti@gmail.com)
 
 4. Start the development server:
 

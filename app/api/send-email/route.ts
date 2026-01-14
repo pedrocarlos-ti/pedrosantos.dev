@@ -3,7 +3,7 @@ import { Resend } from "resend";
 
 // Validate environment variables
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "Contact Form <onboarding@resend.dev>";
+const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "Contact Form <contact@mail.pedrosantos.dev>";
 const RESEND_TO_EMAIL = process.env.RESEND_TO_EMAIL || "pedrocarlos.ti@gmail.com";
 
 if (!RESEND_API_KEY) {
