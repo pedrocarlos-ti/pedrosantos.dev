@@ -117,11 +117,26 @@
       transform: translateY(0);
     }
   }
+  /* Terminal-style block cursor — thin, fast, block-blink pattern */
+  .cursor-blink {
+    animation: cursor-blink 1.1s steps(1) infinite;
+  }
+  @keyframes cursor-blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .fade-up {
       animation: none;
     }
-    .animate-pulse {
+    .animate-pulse,
+    .cursor-blink {
       animation: none;
     }
     html {

@@ -40,7 +40,7 @@ export default function HomePage() {
             {profile.name}
             <span
               aria-hidden
-              className="ml-2 inline-block h-[0.7em] w-[0.5ch] translate-y-[0.04em] animate-pulse rounded-[1px] bg-brand align-baseline"
+              className="cursor-blink ml-1 inline-block h-[0.5em] w-[0.08em] translate-y-[0.05em] rounded-[0.5px] bg-brand align-baseline"
             />
           </h1>
           <p className="mt-5 max-w-2xl text-xl leading-snug text-foreground/90 md:text-2xl">

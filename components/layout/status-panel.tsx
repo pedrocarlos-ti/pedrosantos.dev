@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { profile } from "@/content/profile";
-import { nowItems } from "@/content/now";
+import { nowItems, nowUpdated } from "@/content/now";
 import type { NowItem } from "@/lib/types";
 
 function firstNow(kind: NowItem["kind"]): NowItem | undefined {
   return nowItems.find((n) => n.kind === kind);
 }
 
-function shortFocus(text: string, max = 64) {
+function shortFocus(text: string, max = 60) {
   return text.length > max ? text.slice(0, max - 1).trimEnd() + "…" : text;
 }
 
@@ -19,11 +19,12 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[68px_1fr] items-baseline gap-3 border-t border-border/60 px-4 py-2.5 first:border-t-0">
-      <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground/70">
+    <div className="group/grid grid grid-cols-[64px_1fr] items-baseline gap-3 px-4 py-2 transition-colors hover:bg-brand/[0.04]">
+      <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground/60">
         {label}
+        <span className="text-muted-foreground/30">:</span>
       </span>
-      <span className="font-mono text-[12.5px] leading-snug text-foreground">
+      <span className="font-mono text-[12px] leading-snug text-foreground">
         {children}
       </span>
     </div>
@@ -33,22 +34,28 @@ function Row({
 export function StatusPanel() {
   const focus = firstNow("working");
   const side = firstNow("building");
+  const updated = new Date(nowUpdated).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
 
   return (
     <aside
       aria-label="Current status"
-      className="relative w-full overflow-hidden rounded-lg border border-border bg-card/60"
+      className="relative w-full overflow-hidden rounded-lg border border-border bg-card/40"
     >
-      {/* Brand corner mark — the one place the accent shows structurally */}
+      {/* Brand edge — structural accent */}
       <span
         aria-hidden
-        className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-brand via-brand/40 to-transparent"
+        className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-brand via-brand/30 to-transparent"
       />
 
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-          {"// status"}
+      {/* Header — terminal-style path bar */}
+      <div className="flex items-center justify-between border-b border-border px-4 py-2">
+        <span className="font-mono text-[11px] text-muted-foreground/80">
+          <span className="text-brand">~</span>
+          <span className="text-muted-foreground/40">/</span>
+          pedrosantos.dev
         </span>
         <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-brand">
           <span className="relative flex h-1.5 w-1.5">
@@ -60,12 +67,12 @@ export function StatusPanel() {
       </div>
 
       {/* Rows */}
-      <div className="divide-y divide-border/60">
-        <div className="grid grid-cols-[68px_1fr] items-baseline gap-3 px-4 py-2.5">
-          <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground/70">
-            avail
+      <div>
+        <div className="group/grid grid grid grid-cols-[64px_1fr] items-baseline gap-3 px-4 py-2 transition-colors hover:bg-brand/[0.04]">
+          <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground/60">
+            avail<span className="text-muted-foreground/30">:</span>
           </span>
-          <span className="font-mono text-[12.5px] leading-snug text-foreground">
+          <span className="font-mono text-[12px] leading-snug text-foreground">
             <span className="text-brand">●</span>{" "}
             {profile.availability.types
               .map((t) => (t === "full-time" ? "full-time" : "contract"))
@@ -95,6 +102,16 @@ export function StatusPanel() {
           </Row>
         )}
         <Row label="stack">{profile.stack.slice(0, 5).join(" · ")}</Row>
+      </div>
+
+      {/* Footer — last sync timestamp */}
+      <div className="flex items-center justify-between border-t border-border px-4 py-1.5">
+        <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40">
+          synced {updated}
+        </span>
+        <span className="font-mono text-[10px] text-muted-foreground/40">
+          v1.0
+        </span>
       </div>
     </aside>
   );
