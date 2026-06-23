@@ -1,132 +1,205 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { Sparkles } from "lucide-react";
 import { profile } from "@/content/profile";
 import { nowItems, nowUpdated } from "@/content/now";
-import type { NowItem } from "@/lib/types";
 
-function firstNow(kind: NowItem["kind"]): NowItem | undefined {
-  return nowItems.find((n) => n.kind === kind);
-}
+type Exchange = { prompt: string; answer: string };
+type Phase = "typing-prompt" | "thinking" | "streaming-answer" | "resting";
 
-function shortFocus(text: string, max = 58) {
+function short(text: string, max = 90) {
   return text.length > max ? text.slice(0, max - 1).trimEnd() + "…" : text;
 }
-
-function Row({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="grid grid-cols-[64px_1fr] items-baseline gap-3 border-t border-border/50 px-4 py-2.5">
-      <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground/60">
-        {label}
-      </span>
-      <span className="font-mono text-[12px] leading-snug text-foreground">
-        {children}
-      </span>
-    </div>
-  );
+function lower(s: string) {
+  return s.charAt(0).toLowerCase() + s.slice(1);
 }
 
+function buildExchanges(): Exchange[] {
+  const focus = nowItems.find((n) => n.kind === "working");
+  const side = nowItems.find((n) => n.kind === "building");
+
+  return [
+    {
+      prompt: "what are you up to right now?",
+      answer: focus
+        ? short(focus.text) + (side ? ` On the side, ${lower(short(side.text, 70))}.` : "")
+        : "Shipping production work and building on the side.",
+    },
+    {
+      prompt: "open to work?",
+      answer: `${profile.availability.types
+        .map((t) => (t === "full-time" ? "Full-time" : "Contract"))
+        .join(" + ")}. ${short(profile.availability.note ?? "", 90)}`,
+    },
+    {
+      prompt: "what's your stack?",
+      answer: `${profile.stack.join(" · ")}. Web, mobile, and desktop — Tauri made the last one feel like a web app.`,
+    },
+    {
+      prompt: "based where?",
+      answer: `${profile.location}. Remote-friendly, EU timezones.`,
+    },
+  ];
+}
+
+const PROMPT_SPEED = 34;
+const ANSWER_SPEED = 16;
+const THINK_MS = 680;
+const REST_MS = 2400;
+const GAP_MS = 500;
+
 export function StatusPanel() {
-  const focus = firstNow("working");
-  const side = firstNow("building");
+  const exchanges = useRef<Exchange[]>(buildExchanges());
+  const [i, setI] = useState(0);
+  const [phase, setPhase] = useState<Phase>("typing-prompt");
+  const [prompt, setPrompt] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [visible, setVisible] = useState(true);
+  const reduced = useRef(false);
+
+  // Pause when offscreen (battery + doesn't animate when you can't see it)
+  useEffect(() => {
+    const el = document.getElementById("status-panel");
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const obs = new IntersectionObserver(
+      ([e]) => setVisible(e.isIntersecting),
+      { threshold: 0.2 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // Respect reduced motion
+  useEffect(() => {
+    reduced.current =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
+  const exchange = exchanges.current[i];
+
+  useEffect(() => {
+    if (!visible) return;
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (phase === "typing-prompt") {
+      if (reduced.current) {
+        setPrompt(exchange.prompt);
+        timer = setTimeout(() => setPhase("thinking"), 200);
+      } else if (prompt.length < exchange.prompt.length) {
+        timer = setTimeout(
+          () => setPrompt(exchange.prompt.slice(0, prompt.length + 1)),
+          PROMPT_SPEED,
+        );
+      } else {
+        timer = setTimeout(() => setPhase("thinking"), 360);
+      }
+    } else if (phase === "thinking") {
+      timer = setTimeout(() => setPhase("streaming-answer"), THINK_MS);
+    } else if (phase === "streaming-answer") {
+      if (reduced.current) {
+        setAnswer(exchange.answer);
+        timer = setTimeout(() => setPhase("resting"), 600);
+      } else if (answer.length < exchange.answer.length) {
+        timer = setTimeout(
+          () => setAnswer(exchange.answer.slice(0, answer.length + 1)),
+          ANSWER_SPEED,
+        );
+      } else {
+        timer = setTimeout(() => setPhase("resting"), REST_MS);
+      }
+    } else {
+      timer = setTimeout(() => {
+        setI((i + 1) % exchanges.current.length);
+        setPrompt("");
+        setAnswer("");
+        setPhase("typing-prompt");
+      }, GAP_MS);
+    }
+    return () => clearTimeout(timer);
+  }, [phase, prompt, answer, i, exchange, visible]);
+
   const updated = new Date(nowUpdated).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
   });
 
+  const showPromptCursor =
+    !reduced.current && phase === "typing-prompt" && prompt.length < exchange.prompt.length;
+  const showAnswerCursor =
+    !reduced.current &&
+    (phase === "streaming-answer" || phase === "thinking" || phase === "resting");
+
   return (
     <aside
-      aria-label="Current status"
+      id="status-panel"
+      aria-label="About Pedro, streamed"
       className="relative w-full overflow-hidden rounded-lg border border-border bg-card/40"
     >
-      {/* Brand edge — the one structural accent */}
+      {/* Brand edge */}
       <span
         aria-hidden
         className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-brand via-brand/30 to-transparent"
       />
 
-      {/* Header bar */}
+      {/* Header — AI-product surface feel */}
       <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-          status
+        <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+          <Sparkles className="h-3 w-3 text-brand" />
+          ask pedro
         </span>
         <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-brand">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />
           </span>
-          live
+          streaming
         </span>
       </div>
 
-      {/* Availability — the headline row, with an uptime-style indicator */}
-      <div className="border-b border-border/50 px-4 py-4">
-        <div className="flex items-center justify-between">
-          <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground/60">
-            availability
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-wider text-brand">
-            open
-          </span>
-        </div>
-        <p className="mt-2 text-sm font-medium leading-snug text-foreground">
-          {profile.availability.types
-            .map((t) => (t === "full-time" ? "Full-time" : "Contract"))
-            .join(" + ")}
+      {/* Body — the scripted exchange */}
+      <div className="min-h-[180px] px-4 py-4">
+        {/* Prompt */}
+        <p className="font-mono text-[12px] leading-relaxed text-muted-foreground">
+          <span className="text-brand">{"→ "}</span>
+          {prompt}
+          {showPromptCursor && (
+            <span className="ml-px inline-block h-[1em] w-[2px] translate-y-[0.1em] bg-brand/70 align-baseline" />
+          )}
         </p>
-        {/* Uptime-style bar — 12 segments, all lit = fully available */}
-        <div className="mt-3 flex gap-[3px]" aria-hidden>
-          {Array.from({ length: 12 }).map((_, i) => (
-            <span
-              key={i}
-              className="h-1 flex-1 rounded-full bg-brand"
-              style={{ opacity: 1 - i * 0.05 }}
-            />
-          ))}
+
+        {/* Thinking / answer */}
+        <div className="mt-3">
+          {phase === "thinking" ? (
+            <p className="font-mono text-[12px] text-muted-foreground/60">
+              thinking
+              <span className="inline-flex">
+                <span className="animate-bounce [animation-delay:-0.3s]">.</span>
+                <span className="animate-bounce [animation-delay:-0.15s]">.</span>
+                <span className="animate-bounce">.</span>
+              </span>
+            </p>
+          ) : (
+            (answer || phase === "streaming-answer") && (
+              <p className="text-[13.5px] leading-relaxed text-foreground">
+                {answer}
+                {showAnswerCursor && (
+                  <span className="ml-px inline-block h-[1em] w-[2px] translate-y-[0.1em] bg-brand/70 align-baseline" />
+                )}
+              </p>
+            )
+          )}
         </div>
-        <p className="mt-2 font-mono text-[10px] text-muted-foreground/50">
-          {profile.availability.note}
-        </p>
       </div>
 
-      {/* Spec rows */}
-      <div>
-        <Row label="based">{profile.location}</Row>
-        {focus && <Row label="focus">{shortFocus(focus.text)}</Row>}
-        {side && (
-          <Row label="side">
-            {side.href && side.href.startsWith("/") ? (
-              <Link href={side.href} className="hover:text-brand transition-colors">
-                {shortFocus(side.text)}
-              </Link>
-            ) : side.href ? (
-              <a
-                href={side.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-brand transition-colors"
-              >
-                {shortFocus(side.text)}
-              </a>
-            ) : (
-              shortFocus(side.text)
-            )}
-          </Row>
-        )}
-        <Row label="stack">{profile.stack.slice(0, 5).join(" · ")}</Row>
-      </div>
-
-      {/* Footer — last sync */}
+      {/* Footer — honest + status-bar feel */}
       <div className="flex items-center justify-between border-t border-border px-4 py-2">
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40">
-          last sync {updated}
+          synced {updated}
         </span>
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40">
-          all systems go
+          scripted · no llm
         </span>
       </div>
     </aside>
