@@ -1,4 +1,17 @@
-import type { NowItem } from "@/lib/types";
+import type { NowItem, NowKind } from "@/lib/types";
+
+/**
+ * Human-voiced labels for each Now row, so the section reads like prose
+ * ("Now working on…", "Building…") instead of leaking the data-model key.
+ */
+export const nowKindLabel: Record<NowKind, string> = {
+  working: "Now working on",
+  building: "Building",
+  learning: "Exploring",
+  reading: "Reading",
+  writing: "Writing",
+  exploring: "Exploring",
+};
 
 export const nowItems: NowItem[] = [
   {

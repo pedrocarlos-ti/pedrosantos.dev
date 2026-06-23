@@ -183,6 +183,16 @@
   @apply my-10 border-border;
 }
 
+/* ── Skip-to-content link (a11y) ────────────────────────────────────────── */
+.skip-link {
+  @apply sr-only;
+}
+.skip-link:focus {
+  @apply not-sr-only fixed left-4 top-4 z-[100] rounded-md border border-border bg-background px-3 py-2 font-mono text-sm text-foreground shadow-lg;
+  outline: 2px solid hsl(var(--brand));
+  outline-offset: 2px;
+}
+
 /* ── View Transitions (page-to-page fades) ─────────────────────────────── */
 /* Uses the native View Transitions API via next-view-transitions. The lib's
    <Link> wraps navigation in document.startViewTransition(). We tune the

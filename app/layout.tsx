@@ -126,13 +126,18 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background font-sans antialiased`}
         >
           <ThemeProvider>
-            <SmoothScroll>
-              <div className="flex min-h-screen flex-col">
-                <SiteHeader />
-                <div className="flex-1">{children}</div>
-                <SiteFooter />
+<SmoothScroll>
+            <div className="flex min-h-screen flex-col">
+              <a href="#main" className="skip-link">
+                Skip to content
+              </a>
+              <SiteHeader />
+              <div className="flex-1">
+                <div id="main">{children}</div>
               </div>
-            </SmoothScroll>
+              <SiteFooter />
+            </div>
+          </SmoothScroll>
             <Toaster />
             <Analytics />
           </ThemeProvider>

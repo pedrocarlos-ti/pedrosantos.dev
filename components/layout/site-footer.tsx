@@ -80,7 +80,7 @@ export function SiteFooter() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-border pt-6 font-mono text-[12px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Pedro Santos — Belmonte, Portugal</p>
-          <p>Built with Next.js · Tailwind · no analytics on you</p>
+          <p>Built with Next.js · Tailwind · privacy-friendly analytics</p>
         </div>
       </div>
     </footer>
