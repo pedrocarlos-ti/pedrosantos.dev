@@ -1,12 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { profile } from "@/content/profile";
 import { nowItems, nowUpdated } from "@/content/now";
 
 type Exchange = { prompt: string; answer: string };
 type Phase = "typing-prompt" | "thinking" | "streaming-answer" | "resting";
+
+type Msg = {
+  id: number;
+  prompt: string;
+  answer: string;
+  state: "done" | "typing" | "thinking" | "streaming";
+};
 
 function short(text: string, max = 90) {
   return text.length > max ? text.slice(0, max - 1).trimEnd() + "…" : text;
@@ -40,27 +47,68 @@ function buildExchanges(): Exchange[] {
       prompt: "based where?",
       answer: `${profile.location}. Remote-friendly, EU timezones.`,
     },
+    {
+      prompt: "anything else to share?",
+      answer: `${profile.founded.name} — ${short(profile.founded.blurb, 100)} Going slow on purpose.`,
+    },
   ];
 }
 
-const PROMPT_SPEED = 34;
-const ANSWER_SPEED = 16;
-const THINK_MS = 680;
-const REST_MS = 2400;
-const GAP_MS = 500;
+const PROMPT_SPEED = 55;
+const ANSWER_SPEED = 28;
+const THINK_MS = 1400;
+const REST_MS = 2200;
+const GAP_MS = 700;
+
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
+  return reduced;
+}
 
 export function StatusPanel() {
-  const exchanges = useRef<Exchange[]>(buildExchanges());
-  const [i, setI] = useState(0);
-  const [phase, setPhase] = useState<Phase>("typing-prompt");
-  const [prompt, setPrompt] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [visible, setVisible] = useState(true);
-  const reduced = useRef(false);
+  const exchanges = useMemo(() => buildExchanges(), []);
+  const reduced = useReducedMotion();
 
-  // Pause when offscreen (battery + doesn't animate when you can't see it)
+  const rootRef = useRef<HTMLElement>(null);
+
+  // Full transcript as stacked messages; the last is the live one.
+  const [msgs, setMsgs] = useState<Msg[]>([]);
+  const [live, setLive] = useState(0); // index of the live exchange
+  const [phase, setPhase] = useState<Phase>("typing-prompt");
+  const [partial, setPartial] = useState(""); // current typed text (prompt or answer)
+  const [visible, setVisible] = useState(true);
+  const [atBottom, setAtBottom] = useState(true);
+  const [done, setDone] = useState(false);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  // Reduced motion: render the full transcript statically, nothing animated.
   useEffect(() => {
-    const el = document.getElementById("status-panel");
+    if (!reduced) return;
+    setMsgs(
+      exchanges.map((e, id) => ({
+        id,
+        prompt: e.prompt,
+        answer: e.answer,
+        state: "done",
+      })),
+    );
+    setLive(exchanges.length);
+    setDone(true);
+  }, [reduced, exchanges]);
+
+  // Pause when the panel isn't on screen — battery + doesn't animate on its own.
+  useEffect(() => {
+    const el = rootRef.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
     const obs = new IntersectionObserver(
       ([e]) => setVisible(e.isIntersecting),
@@ -70,72 +118,107 @@ export function StatusPanel() {
     return () => obs.disconnect();
   }, []);
 
-  // Respect reduced motion
+  const exchange = exchanges[live];
+
+  // Track whether the body is scrolled to the bottom — auto-scroll only then.
   useEffect(() => {
-    reduced.current =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const distance = el.scrollHeight - el.scrollTop - el.clientHeight;
+      setAtBottom(distance < 24);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
-  const exchange = exchanges.current[i];
-
+  // Auto-scroll to bottom when content grows — but only if the user is there.
   useEffect(() => {
-    if (!visible) return;
+    if (atBottom) bottomRef.current?.scrollIntoView({ block: "end" });
+  }, [msgs, partial, phase, atBottom]);
+
+  // Inject the live message slot when moving to a new exchange.
+  useEffect(() => {
+    if (reduced || done) return;
+    setMsgs((prev) => {
+      if (prev.some((m) => m.id === live)) return prev;
+      return [
+        ...prev,
+        { id: live, prompt: "", answer: "", state: "typing" },
+      ];
+    });
+  }, [live, reduced, done]);
+
+  // Drive the scripted build-up.
+  useEffect(() => {
+    if (!visible || reduced || done) return;
     let timer: ReturnType<typeof setTimeout>;
 
     if (phase === "typing-prompt") {
-      if (reduced.current) {
-        setPrompt(exchange.prompt);
-        timer = setTimeout(() => setPhase("thinking"), 200);
-      } else if (prompt.length < exchange.prompt.length) {
+      if (partial.length < exchange.prompt.length) {
         timer = setTimeout(
-          () => setPrompt(exchange.prompt.slice(0, prompt.length + 1)),
+          () => setPartial(exchange.prompt.slice(0, partial.length + 1)),
           PROMPT_SPEED,
         );
       } else {
-        timer = setTimeout(() => setPhase("thinking"), 360);
+        setMsgs((prev) =>
+          prev.map((m) =>
+            m.id === live ? { ...m, prompt: exchange.prompt, state: "thinking" } : m,
+          ),
+        );
+        timer = setTimeout(() => setPhase("thinking"), 320);
       }
     } else if (phase === "thinking") {
-      timer = setTimeout(() => setPhase("streaming-answer"), THINK_MS);
+      timer = setTimeout(() => {
+        setMsgs((prev) =>
+          prev.map((m) => (m.id === live ? { ...m, state: "streaming" } : m)),
+        );
+        setPartial("");
+        setPhase("streaming-answer");
+      }, THINK_MS);
     } else if (phase === "streaming-answer") {
-      if (reduced.current) {
-        setAnswer(exchange.answer);
-        timer = setTimeout(() => setPhase("resting"), 600);
-      } else if (answer.length < exchange.answer.length) {
+      if (partial.length < exchange.answer.length) {
         timer = setTimeout(
-          () => setAnswer(exchange.answer.slice(0, answer.length + 1)),
+          () => setPartial(exchange.answer.slice(0, partial.length + 1)),
           ANSWER_SPEED,
         );
       } else {
+        setMsgs((prev) =>
+          prev.map((m) =>
+            m.id === live ? { ...m, answer: exchange.answer, state: "done" } : m,
+          ),
+        );
         timer = setTimeout(() => setPhase("resting"), REST_MS);
       }
     } else {
       timer = setTimeout(() => {
-        setI((i + 1) % exchanges.current.length);
-        setPrompt("");
-        setAnswer("");
-        setPhase("typing-prompt");
+        if (live + 1 < exchanges.length) {
+          setPartial("");
+          setLive((p) => p + 1);
+          setPhase("typing-prompt");
+        } else {
+          setDone(true);
+        }
       }, GAP_MS);
     }
     return () => clearTimeout(timer);
-  }, [phase, prompt, answer, i, exchange, visible]);
+  }, [phase, partial, live, exchange, visible, reduced, done, exchanges]);
 
-  const updated = new Date(nowUpdated).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
-
-  const showPromptCursor =
-    !reduced.current && phase === "typing-prompt" && prompt.length < exchange.prompt.length;
-  const showAnswerCursor =
-    !reduced.current &&
-    (phase === "streaming-answer" || phase === "thinking" || phase === "resting");
+  const bottleneck = useMemo(
+    () =>
+      new Date(nowUpdated).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      }),
+    [],
+  );
 
   return (
     <aside
-      id="status-panel"
+      ref={rootRef}
       aria-label="About Pedro, streamed"
-      className="relative w-full overflow-hidden rounded-lg border border-border bg-card/40"
+      className="relative flex w-full flex-col overflow-hidden rounded-lg border border-border bg-card/40"
     >
       {/* Brand edge */}
       <span
@@ -143,7 +226,7 @@ export function StatusPanel() {
         className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-brand via-brand/30 to-transparent"
       />
 
-      {/* Header — AI-product surface feel */}
+      {/* Header */}
       <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
         <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
           <Sparkles className="h-3 w-3 text-brand" />
@@ -151,55 +234,94 @@ export function StatusPanel() {
         </span>
         <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-brand">
           <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60 motion-reduce:animate-none" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />
           </span>
-          streaming
+          {done ? "done" : "streaming"}
         </span>
       </div>
 
-      {/* Body — the scripted exchange */}
-      <div className="min-h-[180px] px-4 py-4">
-        {/* Prompt */}
-        <p className="font-mono text-[12px] leading-relaxed text-muted-foreground">
-          <span className="text-brand">{"→ "}</span>
-          {prompt}
-          {showPromptCursor && (
-            <span className="ml-px inline-block h-[1em] w-[2px] translate-y-[0.1em] bg-brand/70 align-baseline" />
-          )}
-        </p>
+      {/* Screen-reader transcript — static, live-announced. */}
+      <div className="sr-only" aria-live="polite">
+        {exchanges.map((e, id) => (
+          <p key={id}>
+            Q: {e.prompt} A: {e.answer}
+          </p>
+        ))}
+      </div>
 
-        {/* Thinking / answer */}
-        <div className="mt-3">
-          {phase === "thinking" ? (
-            <p className="font-mono text-[12px] text-muted-foreground/60">
-              thinking
-              <span className="inline-flex">
-                <span className="animate-bounce [animation-delay:-0.3s]">.</span>
-                <span className="animate-bounce [animation-delay:-0.15s]">.</span>
-                <span className="animate-bounce">.</span>
-              </span>
+      {/* Body — the stacked transcript, scrollable like a chat. */}
+      <div
+        ref={scrollRef}
+        aria-hidden
+        className="h-72 overflow-y-auto px-4 py-3 [scrollbar-width:thin]"
+      >
+        <div className="flex flex-col gap-3">
+          {msgs.map((m) => {
+            const isLive = m.id === live && !done;
+            const isTypingPrompt = isLive && phase === "typing-prompt";
+            const isStreaming = isLive && phase === "streaming-answer";
+            const renderedPrompt = isTypingPrompt ? partial : m.prompt;
+            const renderedAnswer = isStreaming ? partial : m.answer;
+
+            return (
+              <div key={m.id} className="flex flex-col gap-2">
+                {/* User prompt — aligned right like a chat bubble */}
+                <div className="flex justify-end">
+                  <p className="max-w-[85%] rounded-[10px] rounded-br-sm border border-border bg-muted/40 px-3 py-1.5 font-mono text-[12px] leading-relaxed text-foreground">
+                    {renderedPrompt}
+                    {isTypingPrompt && partial.length < exchange.prompt.length && (
+                      <span className="ml-px inline-block h-[1em] w-[2px] translate-y-[0.1em] bg-brand/70 align-baseline motion-reduce:hidden" />
+                    )}
+                  </p>
+                </div>
+
+                {/* Answer / thinking */}
+                <div className="min-h-[1.25rem] pl-1">
+                  {isLive && m.state === "thinking" ? (
+                    <p className="font-mono text-[12px] text-muted-foreground/70">
+                      <span>thinking</span>
+                      <span className="inline-flex motion-reduce:hidden">
+                        <span className="animate-bounce [animation-delay:-0.3s]">.</span>
+                        <span className="animate-bounce [animation-delay:-0.15s]">.</span>
+                        <span className="animate-bounce">.</span>
+                      </span>
+                    </p>
+                  ) : (
+                    (renderedAnswer || isStreaming) && (
+                      <p className="max-w-[92%] text-[13.5px] leading-relaxed text-foreground/90">
+                        {renderedAnswer}
+                        {isStreaming &&
+                          partial.length < exchange.answer.length &&
+                          !reduced && (
+                            <span className="ml-px inline-block h-[1em] w-[2px] translate-y-[0.1em] bg-brand/70 align-baseline" />
+                          )}
+                      </p>
+                    )
+                  )}
+                </div>
+              </div>
+            );
+          })}
+
+          {/* End of transcript */}
+          {done && !reduced && (
+            <p className="mt-1 text-center font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40">
+              end of transcript
             </p>
-          ) : (
-            (answer || phase === "streaming-answer") && (
-              <p className="text-[13.5px] leading-relaxed text-foreground">
-                {answer}
-                {showAnswerCursor && (
-                  <span className="ml-px inline-block h-[1em] w-[2px] translate-y-[0.1em] bg-brand/70 align-baseline" />
-                )}
-              </p>
-            )
           )}
+
+          <div ref={bottomRef} />
         </div>
       </div>
 
-      {/* Footer — honest + status-bar feel */}
+      {/* Footer — simple */}
       <div className="flex items-center justify-between border-t border-border px-4 py-2">
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40">
-          synced {updated}
+          synced {bottleneck}
         </span>
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40">
-          scripted · no llm
+          runs locally · no llm
         </span>
       </div>
     </aside>
