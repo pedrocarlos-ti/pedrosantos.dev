@@ -4,6 +4,8 @@ export function generatePersonStructuredData() {
     "@type": "Person",
     name: "Pedro Santos",
     jobTitle: "Software Engineer",
+    description:
+      "Software engineer shipping production React and Next.js by day, building Melro.io on the side. Open to full-time and contract work.",
     url: "https://pedrosantos.dev",
     sameAs: [
       "https://github.com/pedrocarlos-ti",
@@ -21,29 +23,17 @@ export function generatePersonStructuredData() {
       name: "Melro.io",
       url: "https://melro.io",
     },
-    alumniOf: [
-      {
-        "@type": "EducationalOrganization",
-        name: "Rocketseat",
-      },
-      {
-        "@type": "EducationalOrganization",
-        name: "Coursera",
-      },
-      {
-        "@type": "EducationalOrganization",
-        name: "Unibratec",
-      },
-    ],
     knowsAbout: [
       "React",
       "Next.js",
       "TypeScript",
       "JavaScript",
       "Web Development",
-      "AI Integration",
       "Frontend Development",
+      "Developer Experience",
       "Software Engineering",
+      "React Native",
+      "Node.js",
     ],
   };
 }
@@ -52,10 +42,10 @@ export function generateWebSiteStructuredData() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Pedro Santos - Portfolio",
+    name: "pedrosantos.dev",
     url: "https://pedrosantos.dev",
     description:
-      "Software Engineer building AI-powered web experiences with React, Next.js, and modern technologies.",
+      "Software engineer shipping production React and Next.js by day, building Melro.io on the side. Open to full-time and contract work.",
     author: {
       "@type": "Person",
       name: "Pedro Santos",

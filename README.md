@@ -13,11 +13,12 @@ A modern, responsive portfolio website built with Next.js 15, TailwindCSS, and S
 
 ## Pages
 
-- **Home** - Introduction and featured projects
-- **About** - Personal information, skills, and experience
-- **Projects** - Showcase of projects with filtering
-- **Blog** - Articles and tutorials
-- **Contact** - Contact form and information
+- **Home** (`/`) — Tight builder hero, a living "Now" section, selected work that links out to case studies, latest writing, and a contact teaser.
+- **Work** (`/projects`) — All projects as a scannable list, each linking to a case study.
+- **Project case study** (`/projects/[slug]`) — Problem → approach → outcome → learnings, with metadata, links, and prev/next.
+- **About** (`/about`) — Narrative-driven: how I think, experience as stories, education kept minimal at the bottom.
+- **Writing** (`/blog`) — Post listing. **Post** (`/blog/[slug]`) — Markdown rendered from `content/blog/`.
+- **Contact** (`/contact`) — Simple working form (Resend) with clear full-time + contract availability.
 
 ## Tech Stack
 
@@ -77,20 +78,30 @@ A modern, responsive portfolio website built with Next.js 15, TailwindCSS, and S
 ```
 pedrosantos.dev/
 ├── app/                  # Next.js App Router pages
-│   ├── about/            # About page
-│   ├── blog/             # Blog pages
-│   ├── contact/          # Contact page
-│   ├── projects/         # Projects page
-│   ├── globals.css       # Global styles
-│   ├── layout.tsx        # Root layout
-│   └── page.tsx          # Home page
-├── components/           # Reusable components
-│   ├── layout/           # Layout components (header, footer)
-│   ├── sections/         # Page section components
-│   ├── three/            # Three.js/canvas components
-│   └── ui/               # UI components from shadcn/ui
-├── lib/                  # Utility functions and helpers
-├── public/               # Static assets
+│   ├── about/            # /about
+│   ├── blog/             # /blog + /blog/[slug]
+│   ├── contact/          # /contact
+│   ├── projects/         # /projects + /projects/[slug]
+│   ├── api/send-email/   # Contact form API route (Resend)
+│   ├── globals.css       # Theme tokens + prose styles
+│   ├── layout.tsx        # Root layout (header + footer shell, fonts, SEO)
+│   └── page.tsx          # Home
+├── content/              # ← EDIT HERE to update the site
+│   ├── blog/             # Blog posts as *.md (frontmatter + markdown)
+│   ├── profile.ts        # Name, role, tagline, socials, availability
+│   ├── projects.ts       # Projects + case studies (problem/approach/outcome)
+│   ├── now.ts            # "Now" section items + last-updated date
+│   ├── experience.ts     # Work history as narrative stories
+│   └── education.ts      # Minimal education/study list
+├── components/
+│   ├── layout/           # Header, footer, section heading, socials, status
+│   ├── sections/         # Page-specific sections (contact form, project status)
+│   └── ui/               # shadcn/ui primitives
+├── lib/
+│   ├── types.ts          # TypeScript types for all content
+│   ├── blog.ts           # Markdown loader (gray-matter + marked)
+│   ├── markdown.ts       # renderMarkdown helper
+│   └── structured-data.ts
 └── ...                   # Config files
 ```
 
@@ -116,13 +127,13 @@ The project follows a modular component architecture:
 
 ## Styling Conventions
 
-- Use TailwindCSS for styling
-- Follow consistent container styling with `mx-auto` and proper padding (`px-4 md:px-6`)
-- Use proper spacing between sections (`mb-20`)
-- Use background gradients for visual interest (`from-muted/50 to-transparent`)
-- Use clean, bold headings without gradient text effects
-- Use card-based layouts for skills and projects
-- Use Framer Motion for hover animations
+- Dark mode first, high-contrast, tool-like (think Linear / Vercel dashboard, not a 2018 portfolio).
+- One accent color (`brand`, electric blue/cyan) for links, status, and key CTAs only — otherwise contrast does the work.
+- Monospace (`--font-geist-mono`) for all metadata: dates, tags, status, labels, keyboard hints. Use the `.label` / `.label-brand` utilities.
+- Information-dense but scannable. Prefer content over decoration. Borders + whitespace over shadows and gradients.
+- Motion is subtle and purposeful only (gentle `.fade-up` on the hero, hover color transitions). No scroll-triggered everything, no floating orbs, no parallax.
+- Long-form text uses the `.prose` classes (blog posts + case-study sections). Case studies are structured (Problem / Approach / Outcome / Learnings), not image-heavy.
+- No generic stat walls ("8+ years", "50+ projects") or tech-logo walls. Real work with real depth only.
 
 ## Customization
 
@@ -130,13 +141,41 @@ The project follows a modular component architecture:
 
 The site uses next-themes for theme management. You can customize the theme colors in `tailwind.config.ts`.
 
-### Content
+### Content — what to edit monthly
 
-Update your personal information, projects, and blog posts in their respective components:
+All content lives in `content/` and `lib/types.ts`. No page code needs touching for routine updates.
 
-- Update personal info in `app/page.tsx` and `app/about/page.tsx`
-- Update projects in the `featuredProjects` array in `app/page.tsx`
-- Update blog posts in the `defaultPosts` array in `components/sections/BlogPreview.tsx`
+| To change… | Edit this |
+| --- | --- |
+| Your bio, tagline, socials, availability | `content/profile.ts` |
+| The "Now" section + its "updated" date | `content/now.ts` |
+| Projects & case studies (problem/approach/outcome) | `content/projects.ts` |
+| Work history (narrative stories) | `content/experience.ts` |
+| Education / study list | `content/education.ts` |
+| Blog posts | Add a new `*.md` file in `content/blog/` |
+| Content shapes / new fields | `lib/types.ts` |
+
+### Adding a blog post
+
+Create `content/blog/my-post.md` with frontmatter:
+
+```md
+---
+title: "My post title"
+description: "One-line summary for listings and SEO."
+date: "2026-07-01"
+tags: ["meta", "design"]
+draft: false
+---
+
+Body in standard markdown — headings, lists, code blocks, links.
+```
+
+The loader (`lib/blog.ts`) picks it up automatically. `draft: true` hides a post in production but shows it in dev. Reading time is auto-calculated.
+
+### Theme
+
+Dark mode is default. The one intentional accent color (electric blue/cyan) and all neutral tokens live as HSL CSS variables in `app/globals.css` (`:root` for light, `.dark` for dark). Monospace metadata uses the `.label` / `.label-brand` utility classes.
 
 ## Deployment
 

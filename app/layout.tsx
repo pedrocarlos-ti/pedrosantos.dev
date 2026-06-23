@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { SiteHeader } from "@/components/layout/header-v2";
+import { SiteFooter } from "@/components/layout/site-footer";
 import {
   generatePersonStructuredData,
   generateWebSiteStructuredData,
@@ -21,24 +23,23 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Pedro Santos | Software Engineer & Melro.io Founder",
-    template: "%s | Pedro Santos",
+    default: "Pedro Santos — Software Engineer & founder of Melro.io",
+    template: "%s — Pedro Santos",
   },
   description:
-    "Software Engineer building AI-powered web experiences with React, Next.js, and modern technologies. Founder of Melro.io, providing AI-powered solutions for businesses. Available for new projects.",
+    "Software engineer shipping production React and Next.js by day, building Melro.io on the side. Open to full-time and contract work. Here's what I'm working on right now.",
   keywords: [
     "Pedro Santos",
     "Software Engineer",
     "Frontend Developer",
     "React Developer",
     "Next.js Developer",
-    "AI Integration",
+    "TypeScript",
     "Web Development",
     "Portugal",
     "Melro.io",
-    "Portfolio",
     "Full Stack Developer",
-    "TypeScript",
+    "Contract Developer",
   ],
   authors: [{ name: "Pedro Santos" }],
   creator: "Pedro Santos",
@@ -51,24 +52,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://pedrosantos.dev",
-    siteName: "Pedro Santos - Portfolio",
-    title: "Pedro Santos | Software Engineer & Melro.io Founder",
+    siteName: "pedrosantos.dev",
+    title: "Pedro Santos — Software Engineer & founder of Melro.io",
     description:
-      "Software Engineer building AI-powered web experiences with React, Next.js, and modern technologies. Founder of Melro.io.",
+      "Software engineer shipping production React and Next.js by day, building Melro.io on the side. Open to full-time and contract work.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Pedro Santos - Software Engineer Portfolio",
+        alt: "pedrosantos.dev — Software Engineer & founder of Melro.io",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pedro Santos | Software Engineer & Melro.io Founder",
+    title: "Pedro Santos — Software Engineer & founder of Melro.io",
     description:
-      "Software Engineer building AI-powered web experiences with React, Next.js, and modern technologies.",
+      "Shipping production React/Next.js by day, building Melro.io on the side. Open to full-time and contract work.",
     creator: "@pcgs_tsx",
     images: ["/og-image.png"],
   },
@@ -87,10 +88,6 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
-  },
-  verification: {
-    // Add Google Search Console verification when available
-    // google: "your-google-verification-code",
   },
 };
 
@@ -123,7 +120,9 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
-            {children}
+            <SiteHeader />
+            <div className="flex-1">{children}</div>
+            <SiteFooter />
           </div>
           <Toaster />
           <Analytics />

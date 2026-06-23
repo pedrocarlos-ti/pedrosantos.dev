@@ -1,31 +1,24 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { Home } from "lucide-react";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="container flex min-h-[calc(100vh-200px)] flex-col items-center justify-center py-12 md:py-20">
-      <motion.div
-        className="text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+    <main className="container flex min-h-[60vh] flex-col items-start justify-center py-24">
+      <p className="label-brand mb-4">404</p>
+      <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+        This page doesn&apos;t exist.
+      </h1>
+      <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+        It may have been moved or never built. The rest of the site is still
+        here.
+      </p>
+      <Link
+        href="/"
+        className="mt-8 inline-flex h-11 items-center gap-2 rounded-md border border-border px-5 font-mono text-sm font-medium text-foreground transition-colors hover:border-brand hover:text-brand"
       >
-        <h1 className="mb-4 text-8xl font-bold text-primary">404</h1>
-        <h2 className="mb-4 text-4xl font-bold">Page Not Found</h2>
-        <p className="mb-8 text-lg text-muted-foreground">
-          The page you are looking for doesn&apos;t exist or has been moved.
-        </p>
-        <Link href="/">
-          <Button className="flex items-center gap-2">
-            <Home className="h-4 w-4" />
-            Back to Home
-          </Button>
-        </Link>
-      </motion.div>
-    </div>
+        <ArrowLeft className="h-4 w-4" />
+        back home
+      </Link>
+    </main>
   );
 }
