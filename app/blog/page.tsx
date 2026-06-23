@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
+import { formatDate } from "@/lib/date";
 
 export const metadata: Metadata = {
   title: "Writing",
@@ -8,16 +9,6 @@ export const metadata: Metadata = {
     "Notes from rebuilding and building — design trade-offs, developer experience, and the thinking behind a builder's home base.",
   alternates: { canonical: "/blog" },
 };
-
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
 
 export default function BlogPage() {
   const posts = getAllPosts();

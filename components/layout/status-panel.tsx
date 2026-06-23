@@ -89,7 +89,6 @@ export function StatusPanel() {
   const [done, setDone] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
 
   // Reduced motion: render the full transcript statically, nothing animated.
   useEffect(() => {
@@ -133,10 +132,21 @@ export function StatusPanel() {
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Auto-scroll to bottom when content grows — but only if the user is there.
+  // Auto-scroll only the chat container — never the window. (scrollIntoView
+  // would also scroll all ancestor scroll containers, fighting page scroll.)
+  // Per-keystroke updates scroll instantly; structural changes (new message /
+  // phase transition) scroll smoothly. Reduced motion forces instant always.
   useEffect(() => {
-    if (atBottom) bottomRef.current?.scrollIntoView({ block: "end" });
-  }, [msgs, partial, phase, atBottom]);
+    const el = scrollRef.current;
+    if (!el || !atBottom) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: reduced ? "auto" : "auto" });
+  }, [partial, atBottom, reduced]);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || !atBottom) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: reduced ? "auto" : "smooth" });
+  }, [msgs, phase, atBottom, reduced]);
 
   // Inject the live message slot when moving to a new exchange.
   useEffect(() => {
@@ -310,8 +320,6 @@ export function StatusPanel() {
               end of transcript
             </p>
           )}
-
-          <div ref={bottomRef} />
         </div>
       </div>
 

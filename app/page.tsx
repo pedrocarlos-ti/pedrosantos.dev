@@ -4,25 +4,17 @@ import { profile } from "@/content/profile";
 import { getFeaturedProjects } from "@/content/projects";
 import { nowItems, nowUpdated } from "@/content/now";
 import { getAllPosts } from "@/lib/blog";
+import { formatDate } from "@/lib/date";
 import { SectionHeading } from "@/components/layout/section";
 import { SocialRow } from "@/components/layout/social-row";
 import { StatusPanel } from "@/components/layout/status-panel";
 import { projectStatusMeta } from "@/components/sections/projects/project-status";
+import { SmartLink } from "@/components/layout/smart-link";
 
-const nowKindLabel: Record<string, string> = {
-  working: "working",
-  building: "building",
-  learning: "learning",
-  reading: "reading",
-  writing: "writing",
-  exploring: "exploring",
+const NOW_DATE_FORMAT: Intl.DateTimeFormatOptions = {
+  month: "short",
+  year: "numeric",
 };
-
-function formatDate(iso: string) {
-  const d = new Date(iso + (iso.length === 7 ? "-01" : ""));
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-}
 
 export default function HomePage() {
   const featured = getFeaturedProjects().slice(0, 3);
@@ -82,7 +74,7 @@ export default function HomePage() {
           description="A living snapshot. Updated when things actually change, not on a schedule."
           action={
             <span className="label hidden sm:inline">
-              updated {formatDate(nowUpdated)}
+              updated {formatDate(nowUpdated, NOW_DATE_FORMAT)}
             </span>
           }
         />
@@ -92,33 +84,24 @@ export default function HomePage() {
               key={item.id}
               className="grid grid-cols-1 gap-2 py-5 md:grid-cols-[140px_1fr] md:items-baseline md:gap-6"
             >
-              <span className="label-brand">{nowKindLabel[item.kind]}</span>
+              <span className="label-brand">{item.kind}</span>
               <div>
                 {item.href ? (
-                  item.href.startsWith("/") ? (
-                    <Link
-                      href={item.href}
-                      className="text-[1.0625rem] leading-relaxed text-foreground transition-colors hover:text-brand"
-                    >
-                      {item.text}
-                    </Link>
-                  ) : (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[1.0625rem] leading-relaxed text-foreground transition-colors hover:text-brand"
-                    >
-                      {item.text}
+                  <SmartLink
+                    href={item.href}
+                    className="text-[1.0625rem] leading-relaxed text-foreground transition-colors hover:text-brand"
+                  >
+                    {item.text}
+                    {!item.href.startsWith("/") && (
                       <ArrowUpRight className="ml-1 inline h-3.5 w-3.5 text-muted-foreground" />
-                    </a>
-                  )
+                    )}
+                  </SmartLink>
                 ) : (
                   <p className="text-[1.0625rem] leading-relaxed text-foreground">
                     {item.text}
                   </p>
                 )}
-                <p className="mt-1 label">{formatDate(item.date)}</p>
+                <p className="mt-1 label">{formatDate(item.date, NOW_DATE_FORMAT)}</p>
               </div>
             </li>
           ))}
@@ -169,8 +152,9 @@ export default function HomePage() {
                       {project.stack.slice(0, 4).join(" · ")}
                     </p>
                   </div>
-                  <span className="hidden shrink-0 font-mono text-[13px] text-muted-foreground transition-colors group-hover:text-brand md:inline">
-                    read the case study →
+                  <span className="shrink-0 font-mono text-[13px] text-muted-foreground/70 transition-colors group-hover:text-brand">
+                    <span className="hidden md:inline">read the case study →</span>
+                    <ArrowRight className="h-4 w-4 md:hidden" />
                   </span>
                 </Link>
               </li>

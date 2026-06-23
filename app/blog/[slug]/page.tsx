@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getAllPosts, getPostBySlug, getAllPostSlugs } from "@/lib/blog";
+import { formatDate } from "@/lib/date";
 import { profile } from "@/content/profile";
 
 export const dynamicParams = false;
@@ -35,16 +36,6 @@ export function generateMetadata({
   });
 }
 
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-}
-
 export default async function BlogPostPage({
   params,
 }: {
@@ -72,7 +63,13 @@ export default async function BlogPostPage({
 
         <header className="mt-8 border-b border-border pb-8">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="label">{formatDate(post.date)}</span>
+            <span className="label">
+                {formatDate(post.date, {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </span>
             <span className="label text-muted-foreground/60">·</span>
             <span className="label">{post.readingTime}</span>
           </div>
