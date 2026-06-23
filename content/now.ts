@@ -17,7 +17,7 @@ export const nowItems: NowItem[] = [
   {
     id: "react-native",
     kind: "learning",
-    text: "Going deeper on React Native — animations, gestures, and shipping to both platforms from one codebase.",
+    text: "Exploring Tauri for desktop and going deeper on React Native — web skills translating to every surface.",
     date: "2026-05",
   },
   {

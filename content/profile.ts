@@ -4,13 +4,13 @@ export const profile: Profile = {
   name: "Pedro Santos",
   role: "Software Engineer",
   tagline:
-    "Shipping production React/Next.js by day, building Melro.io on the side.",
+    "Shipping production React/Next.js by day, building Melro.io on the side — across web, mobile, and desktop.",
   intro:
-    "Hey — I'm Pedro Santos. I ship production React and Next.js work during the day and build my own things on the side. Here's what I'm working on right now. If something resonates, let's talk.",
+    "Hey — I'm Pedro Santos. I ship production React and Next.js work during the day and build my own things on the side. These days I work across web, mobile, and desktop — Tauri made the last one feel like a web app. Here's what I'm working on right now. If something resonates, let's talk.",
   location: "Belmonte, Portugal",
   email: "pedrocarlos.ti@gmail.com",
   avatarUrl: "https://avatars.githubusercontent.com/u/18473317?v=4",
-  stack: ["React", "Next.js", "TypeScript", "React Native", "Node.js"],
+  stack: ["React", "Next.js", "TypeScript", "React Native", "Tauri"],
   socials: [
     { name: "GitHub", href: "https://github.com/pedrocarlos-ti", icon: "github" },
     { name: "LinkedIn", href: "https://linkedin.com/in/pedro-santos", icon: "linkedin" },

@@ -38,6 +38,10 @@ export default function HomePage() {
           </p>
           <h1 className="max-w-3xl text-4xl font-semibold leading-[1.06] tracking-tight text-foreground sm:text-5xl md:text-6xl">
             {profile.name}
+            <span
+              aria-hidden
+              className="ml-2 inline-block h-[0.7em] w-[0.5ch] translate-y-[0.04em] animate-pulse rounded-[1px] bg-brand align-baseline"
+            />
           </h1>
           <p className="mt-5 max-w-2xl text-xl leading-snug text-foreground/90 md:text-2xl">
             {profile.tagline}
@@ -231,11 +235,11 @@ export default function HomePage() {
                 Open to full-time roles and contract work.
               </h2>
               <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-                {profile.availability.note} If something here resonates, the
-                fastest way is the form — or just email.
+                {profile.availability.note} If something here resonates, the form
+                is the fastest way.
               </p>
             </div>
-            <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+            <div className="flex shrink-0">
               <Link
                 href="/contact"
                 className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-foreground px-5 font-mono text-sm font-medium text-background transition-opacity hover:opacity-90"
@@ -243,12 +247,6 @@ export default function HomePage() {
                 Start a conversation
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
-                href={`mailto:${profile.email}`}
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-border px-5 font-mono text-sm font-medium text-foreground transition-colors hover:border-brand hover:text-brand"
-              >
-                {profile.email}
-              </a>
             </div>
           </div>
         </div>

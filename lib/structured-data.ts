@@ -33,7 +33,9 @@ export function generatePersonStructuredData() {
       "Developer Experience",
       "Software Engineering",
       "React Native",
-      "Node.js",
+      "Tauri",
+      "Cross-platform Development",
+      "Desktop Applications",
     ],
   };
 }

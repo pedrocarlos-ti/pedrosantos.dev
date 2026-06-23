@@ -121,6 +121,9 @@
     .fade-up {
       animation: none;
     }
+    .animate-pulse {
+      animation: none;
+    }
     html {
       scroll-behavior: auto;
     }
