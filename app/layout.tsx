@@ -1,6 +1,7 @@
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
@@ -105,36 +106,38 @@ export default function RootLayout({
   const websiteStructuredData = generateWebSiteStructuredData();
 
   return (
-    <html lang="en" className="dark">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(personStructuredData),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteStructuredData),
-          }}
-        />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background font-sans antialiased`}
-      >
-        <ThemeProvider>
-          <SmoothScroll>
-            <div className="flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1">{children}</div>
-              <SiteFooter />
-            </div>
-          </SmoothScroll>
-          <Toaster />
-          <Analytics />
-        </ThemeProvider>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en" className="dark">
+        <head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(personStructuredData),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(websiteStructuredData),
+            }}
+          />
+        </head>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background font-sans antialiased`}
+        >
+          <ThemeProvider>
+            <SmoothScroll>
+              <div className="flex min-h-screen flex-col">
+                <SiteHeader />
+                <div className="flex-1">{children}</div>
+                <SiteFooter />
+              </div>
+            </SmoothScroll>
+            <Toaster />
+            <Analytics />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

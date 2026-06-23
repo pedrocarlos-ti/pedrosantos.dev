@@ -1,9 +1,10 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 /**
- * Renders a Next `<Link>` for internal paths (starting with "/") and a plain
- * `<a>` for external URLs — so callers don't branch on `startsWith` everywhere.
- * External links get `target="_blank"` + `rel="noopener noreferrer"`.
+ * Renders a Next view-transitions `<Link>` for internal paths (starting with
+ * "/") and a plain `<a>` for external URLs — so callers don't branch on
+ * `startsWith` everywhere. External links get `target="_blank"` +
+ * `rel="noopener noreferrer"`.
  */
 export function SmartLink({
   href,

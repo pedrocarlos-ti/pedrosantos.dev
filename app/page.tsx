@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { profile } from "@/content/profile";
 import { getFeaturedProjects } from "@/content/projects";

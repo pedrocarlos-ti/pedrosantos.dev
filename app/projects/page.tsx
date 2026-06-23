@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ArrowRight } from "lucide-react";
 import { getAllProjects } from "@/content/projects";
 import { projectStatusMeta } from "@/components/sections/projects/project-status";

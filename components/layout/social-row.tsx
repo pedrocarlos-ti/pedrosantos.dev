@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { XIcon } from "@/components/ui/x-icon";
 import type { SocialLink } from "@/lib/types";
