@@ -6,10 +6,16 @@ export type ProjectLink = {
   kind?: "live" | "source" | "docs" | "other";
 };
 
+export type CaseStudySection = {
+  thesis: string;
+  body: string;
+};
+
 export type CaseStudy = {
-  problem: string;
-  approach: string;
-  outcome: string;
+  tldr: string;
+  problem: CaseStudySection;
+  approach: CaseStudySection;
+  outcome: CaseStudySection;
   learnings?: string[];
 };
 
@@ -99,6 +105,7 @@ export type Profile = {
   location: string;
   email: string;
   avatarUrl: string;
+  stack: string[];
   socials: SocialLink[];
   availability: Availability;
   founded: { name: string; url: string; role: string; blurb: string };

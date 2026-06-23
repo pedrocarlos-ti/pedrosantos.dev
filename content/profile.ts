@@ -10,6 +10,7 @@ export const profile: Profile = {
   location: "Belmonte, Portugal",
   email: "pedrocarlos.ti@gmail.com",
   avatarUrl: "https://avatars.githubusercontent.com/u/18473317?v=4",
+  stack: ["React", "Next.js", "TypeScript", "React Native", "Node.js"],
   socials: [
     { name: "GitHub", href: "https://github.com/pedrocarlos-ti", icon: "github" },
     { name: "LinkedIn", href: "https://linkedin.com/in/pedro-santos", icon: "linkedin" },

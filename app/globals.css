@@ -23,12 +23,14 @@
     --destructive-foreground: 0 0% 100%;
     --border: 220 13% 90%;
     --input: 220 13% 90%;
-    --ring: 199 89% 42%;
+    --ring: 215 60% 48%;
 
-    /* The one intentional accent — electric blue/cyan */
-    --brand: 199 89% 42%;
+    /* The one intentional accent — crisp steel blue.
+       More blue than cyan, grounded saturation so it reads as steel
+       rather than neon. Deepened on light backgrounds for legibility. */
+    --brand: 215 60% 46%;
     --brand-foreground: 0 0% 100%;
-    --brand-muted: 199 89% 42%;
+    --brand-muted: 215 50% 40%;
 
     --radius: 0.5rem;
   }
@@ -53,11 +55,12 @@
     --destructive-foreground: 0 0% 100%;
     --border: 220 13% 14%;
     --input: 220 13% 16%;
-    --ring: 199 89% 52%;
+    --ring: 210 80% 66%;
 
-    --brand: 199 89% 52%;
-    --brand-foreground: 0 0% 100%;
-    --brand-muted: 199 80% 38%;
+    /* Crisp steel blue — vivid enough on near-black, grounded not neon. */
+    --brand: 210 80% 66%;
+    --brand-foreground: 215 50% 10%;
+    --brand-muted: 215 60% 56%;
   }
 }
 

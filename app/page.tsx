@@ -6,7 +6,7 @@ import { nowItems, nowUpdated } from "@/content/now";
 import { getAllPosts } from "@/lib/blog";
 import { SectionHeading } from "@/components/layout/section";
 import { SocialRow } from "@/components/layout/social-row";
-import { StatusDot } from "@/components/layout/status-dot";
+import { StatusPanel } from "@/components/layout/status-panel";
 import { projectStatusMeta } from "@/components/sections/projects/project-status";
 
 const nowKindLabel: Record<string, string> = {
@@ -31,39 +31,45 @@ export default function HomePage() {
   return (
     <main className="container py-16 md:py-24">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="fade-up">
-        <p className="label mb-5">
-          {profile.role} · {profile.location}
-        </p>
-        <h1 className="max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-5xl md:text-6xl">
-          {profile.name}
-        </h1>
-        <p className="mt-5 max-w-2xl text-xl leading-snug text-foreground/90 md:text-2xl">
-          {profile.tagline}
-        </p>
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-          {profile.intro}
-        </p>
+      <section className="fade-up grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-14">
+        <div className="min-w-0">
+          <p className="label-brand mb-5">
+            {profile.role} · {profile.location}
+          </p>
+          <h1 className="max-w-3xl text-4xl font-semibold leading-[1.06] tracking-tight text-foreground sm:text-5xl md:text-6xl">
+            {profile.name}
+          </h1>
+          <p className="mt-5 max-w-2xl text-xl leading-snug text-foreground/90 md:text-2xl">
+            {profile.tagline}
+          </p>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
+            {profile.intro}
+          </p>
 
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <Link
-            href="/projects"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-foreground px-5 font-mono text-sm font-medium text-background transition-opacity hover:opacity-90"
-          >
-            See selected work
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/contact"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-border px-5 font-mono text-sm font-medium text-foreground transition-colors hover:border-brand hover:text-brand"
-          >
-            Get in touch
-          </Link>
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <Link
+              href="/projects"
+              className="group inline-flex h-11 items-center justify-center gap-2 rounded-md bg-foreground px-5 font-mono text-sm font-medium text-background transition-opacity hover:opacity-90"
+            >
+              See selected work
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-border px-5 font-mono text-sm font-medium text-foreground transition-colors hover:border-brand hover:text-brand"
+            >
+              Get in touch
+            </Link>
+          </div>
+
+          <div className="mt-8">
+            <SocialRow />
+          </div>
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <StatusDot label="Open to full-time & contract work" />
-          <SocialRow />
+        {/* Status panel — the hero's signature, dashboard widget not a card */}
+        <div className="lg:pt-2">
+          <StatusPanel />
         </div>
       </section>
 
@@ -143,8 +149,12 @@ export default function HomePage() {
               <li key={project.slug}>
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="group grid grid-cols-1 gap-3 py-6 md:grid-cols-[1fr_auto] md:items-center md:gap-8"
+                  className="group relative grid grid-cols-1 gap-3 py-6 pl-4 md:grid-cols-[1fr_auto] md:items-center md:gap-8 md:pl-5"
                 >
+                  <span
+                    aria-hidden
+                    className="absolute left-0 top-1/2 hidden h-0 w-px -translate-y-1/2 bg-brand transition-all duration-300 group-hover:h-[calc(100%-1rem)] md:block"
+                  />
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-3">
                       <h3 className="text-lg font-semibold tracking-tight text-foreground transition-colors group-hover:text-brand">

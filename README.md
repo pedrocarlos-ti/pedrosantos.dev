@@ -128,7 +128,7 @@ The project follows a modular component architecture:
 ## Styling Conventions
 
 - Dark mode first, high-contrast, tool-like (think Linear / Vercel dashboard, not a 2018 portfolio).
-- One accent color (`brand`, electric blue/cyan) for links, status, and key CTAs only — otherwise contrast does the work.
+- One accent color (`brand`, crisp steel blue) for links, status, and key CTAs only — otherwise contrast does the work.
 - Monospace (`--font-geist-mono`) for all metadata: dates, tags, status, labels, keyboard hints. Use the `.label` / `.label-brand` utilities.
 - Information-dense but scannable. Prefer content over decoration. Borders + whitespace over shadows and gradients.
 - Motion is subtle and purposeful only (gentle `.fade-up` on the hero, hover color transitions). No scroll-triggered everything, no floating orbs, no parallax.
@@ -175,7 +175,7 @@ The loader (`lib/blog.ts`) picks it up automatically. `draft: true` hides a post
 
 ### Theme
 
-Dark mode is default. The one intentional accent color (electric blue/cyan) and all neutral tokens live as HSL CSS variables in `app/globals.css` (`:root` for light, `.dark` for dark). Monospace metadata uses the `.label` / `.label-brand` utility classes.
+Dark mode is default. The one intentional accent color is **crisp steel blue** — more blue than cyan and with grounded saturation so it reads as steel rather than neon, harmonizing with the cool near-black body of the dark UI. All tokens live as HSL CSS variables in `app/globals.css` (`:root` for light, `.dark` for dark); the accent is deepened on light backgrounds for legibility. Monospace metadata uses the `.label` / `.label-brand` utility classes.
 
 ## Deployment
 

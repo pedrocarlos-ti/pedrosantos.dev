@@ -37,11 +37,13 @@ export function generateMetadata({
 function CaseStudySection({
   index,
   label,
-  html,
+  thesis,
+  bodyHtml,
 }: {
   index: string;
   label: string;
-  html: string;
+  thesis: string;
+  bodyHtml: string;
 }) {
   return (
     <section className="mt-12 first:mt-0">
@@ -49,9 +51,12 @@ function CaseStudySection({
         <span className="label-brand">{index}</span>
         <span className="label">{label}</span>
       </div>
+      <p className="measure-narrow text-lg font-semibold leading-snug tracking-tight text-foreground">
+        {thesis}
+      </p>
       <div
-        className="prose measure"
-        dangerouslySetInnerHTML={{ __html: html }}
+        className="prose measure mt-4"
+        dangerouslySetInnerHTML={{ __html: bodyHtml }}
       />
     </section>
   );
@@ -146,22 +151,35 @@ export default async function ProjectDetailPage({
         </section>
       )}
 
+      {/* TL;DR — the one line a recruiter can quote without reading further */}
+      <section className="mt-12 overflow-hidden rounded-lg border border-border bg-card">
+        <div className="flex items-center gap-2 border-b border-border px-5 py-2.5">
+          <span className="label-brand">tl;dr</span>
+        </div>
+        <p className="px-5 py-4 text-base leading-relaxed text-foreground md:text-[1.0625rem]">
+          {project.caseStudy.tldr}
+        </p>
+      </section>
+
       {/* Case study body */}
       <div className="mt-16">
         <CaseStudySection
           index="01"
           label="Problem"
-          html={renderMarkdown(project.caseStudy.problem)}
+          thesis={project.caseStudy.problem.thesis}
+          bodyHtml={renderMarkdown(project.caseStudy.problem.body)}
         />
         <CaseStudySection
           index="02"
           label="Approach"
-          html={renderMarkdown(project.caseStudy.approach)}
+          thesis={project.caseStudy.approach.thesis}
+          bodyHtml={renderMarkdown(project.caseStudy.approach.body)}
         />
         <CaseStudySection
           index="03"
           label="Outcome"
-          html={renderMarkdown(project.caseStudy.outcome)}
+          thesis={project.caseStudy.outcome.thesis}
+          bodyHtml={renderMarkdown(project.caseStudy.outcome.body)}
         />
 
         {project.caseStudy.learnings && project.caseStudy.learnings.length > 0 && (
