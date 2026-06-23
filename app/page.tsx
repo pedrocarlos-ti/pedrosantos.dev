@@ -38,10 +38,6 @@ export default function HomePage() {
           </p>
           <h1 className="max-w-3xl text-4xl font-semibold leading-[1.06] tracking-tight text-foreground sm:text-5xl md:text-6xl">
             {profile.name}
-            <span
-              aria-hidden
-              className="cursor-blink ml-1 inline-block h-[0.5em] w-[0.08em] translate-y-[0.05em] rounded-[0.5px] bg-brand align-baseline"
-            />
           </h1>
           <p className="mt-5 max-w-2xl text-xl leading-snug text-foreground/90 md:text-2xl">
             {profile.tagline}
